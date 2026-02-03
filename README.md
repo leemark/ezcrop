@@ -1,73 +1,90 @@
-# React + TypeScript + Vite
+# EZCrop
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A fast, lightweight image cropper and resizer that runs entirely in your browser. No server uploads, no installation required—just open it and start cropping.
 
-Currently, two official plugins are available:
+**Live app:** https://leemark.github.io/ezcrop/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## React Compiler
+- **Drag-and-drop upload** — Drop an image anywhere or click to browse
+- **Interactive crop editor** — Pan and zoom to frame your shot
+- **Preset dimensions** — Quick buttons for OG Image, Square, Hero Banner, Twitter Header, IG Story, Favicon, or custom size
+- **Multiple formats** — Export as WebP, JPEG, or AVIF
+- **Quality control** — Adjust compression from 60–100%
+- **File size preview** — See estimated output size before exporting
+- **Privacy-first** — All processing happens in your browser; nothing is uploaded
+- **Dark mode** — Automatically respects your system preference
+- **Responsive** — Works on mobile and desktop
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## How to Use
 
-## Expanding the ESLint configuration
+### 1. Upload an Image
+Open the app and either:
+- Click the upload zone to open your file browser
+- Drag and drop an image onto the screen
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Supported formats: JPEG, PNG, WebP, AVIF, GIF, BMP, TIFF
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### 2. Crop Your Image
+The cropper will display your image with a crop box overlay:
+- **Pan** — Click and drag the image to reposition
+- **Zoom** — Use the zoom slider at the bottom to zoom in and out
+- **Adjust crop** — Drag the edges or corners of the crop box to resize it
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+The aspect ratio will lock to your selected preset (e.g., 16:9 for hero banners).
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### 3. Choose a Preset (or Custom Size)
+In the sidebar on the right, click a preset button to snap the crop to that aspect ratio:
+- **OG Image** — 1200×630 (Facebook/Twitter cards)
+- **Square** — 800×800
+- **Hero Banner** — 1920×1080
+- **Twitter Header** — 1500×500
+- **IG Story** — 1080×1920
+- **Favicon** — 512×512
+- **Custom** — Enter your own width and height
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 4. Select Format & Quality
+- **Format** — Choose WebP (smallest), JPEG (best compatibility), or AVIF (smallest + newer)
+- **Quality** — Drag the slider from 60% (smallest file) to 100% (highest quality)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+The estimated file size updates as you adjust these settings.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### 5. Export
+Click the **Export** button to download your cropped and resized image. The filename will be `{original-name}_{width}x{height}.{format}`.
+
+For example: `photo_1200x630.webp`
+
+## Tips
+
+- **If the export hangs on a zoomed crop** — You're upscaling a very small cropped region to a large output size. The app will still complete, just takes a moment. For best results, crop at least ~25% of the original image.
+- **WebP vs AVIF** — WebP works in most modern browsers and produces files 20–30% smaller than JPEG. AVIF is even smaller but less compatible. Use WebP for maximum compatibility, AVIF for absolute smallest file size.
+- **Quality slider** — Start at 80–85 for most use cases. Drop to 70 if file size is critical; go to 95+ only if quality is paramount.
+- **Rotating images** — If your image is rotated (common with phone photos), the app automatically corrects it on upload.
+
+## Privacy
+
+All image processing (cropping, resizing, encoding) happens entirely in your browser. Your image is never sent to any server. This app works 100% offline after it loads.
+
+## Browser Support
+
+Works on all modern browsers:
+- Chrome/Edge 90+
+- Firefox 88+
+- Safari 15+
+- Mobile browsers (iOS Safari, Chrome Mobile)
+
+Older browsers may work but with reduced performance.
+
+## Credits
+
+Built with:
+- [React](https://react.dev)
+- [react-easy-crop](https://github.com/ValentinH/react-easy-crop) — Crop UI
+- [pica](https://github.com/nodeca/pica) — High-quality image resizing
+- [exifr](https://github.com/MikeKovarik/exifr) — EXIF metadata reading
+- [Tailwind CSS](https://tailwindcss.com) — Styling
+- [@jsquash/avif](https://github.com/jamsinclair/jSquash) — AVIF encoding
+
+## License
+
+MIT
