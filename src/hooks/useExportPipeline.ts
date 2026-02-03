@@ -135,8 +135,8 @@ function cleanupExport(canvas: HTMLCanvasElement): void {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   }
   // Force GC hint (not guaranteed but helps)
-  (canvas as any).width = 0;
-  (canvas as any).height = 0;
+  canvas.width = 0;
+  canvas.height = 0;
 }
 
 async function mainThreadExport(
@@ -169,5 +169,6 @@ async function mainThreadExport(
   }
 
   const blob = await encodeCanvas(resizedCanvas, format, quality);
+  cleanupExport(resizedCanvas);
   return { blob, width: targetWidth, height: targetHeight };
 }

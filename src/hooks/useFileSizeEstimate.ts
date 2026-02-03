@@ -1,23 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import type { CropArea, OutputFormat } from "../types";
-import { getCroppedCanvas } from "../lib/cropUtils";
 import { encodeCanvas } from "../lib/encoding";
-import Pica from "pica";
 
-let picaInstance = new Pica();
-let picaUsageCount = 0;
-const PICA_RESET_INTERVAL = 3; // Reset more frequently during estimation
 const PREVIEW_MAX_DIM = 256;
 const DEBOUNCE_MS = 500;
-
-function getPicaInstance() {
-  picaUsageCount++;
-  if (picaUsageCount >= PICA_RESET_INTERVAL) {
-    picaInstance = new Pica();
-    picaUsageCount = 0;
-  }
-  return picaInstance;
-}
 
 export function useFileSizeEstimate(
   imageUrl: string | null,
@@ -41,6 +27,7 @@ export function useFileSizeEstimate(
     setEstimating(true);
 
     const timer = setTimeout(async () => {
+      let previewCanvas: HTMLCanvasElement | null = null;
       try {
         const img = new Image();
         await new Promise<void>((resolve, reject) => {
@@ -51,8 +38,6 @@ export function useFileSizeEstimate(
 
         if (abortRef.current !== id) return;
 
-        const cropped = getCroppedCanvas(img, croppedAreaPixels);
-
         // Scale down for preview estimate
         const scale = Math.min(
           PREVIEW_MAX_DIM / targetWidth,
@@ -62,26 +47,27 @@ export function useFileSizeEstimate(
         const previewW = Math.max(1, Math.round(targetWidth * scale));
         const previewH = Math.max(1, Math.round(targetHeight * scale));
 
-        const previewCanvas = document.createElement("canvas");
+        previewCanvas = document.createElement("canvas");
         previewCanvas.width = previewW;
         previewCanvas.height = previewH;
 
-        const isDownscale =
-          previewW <= cropped.width && previewH <= cropped.height;
-
-        if (isDownscale) {
-          const pica = getPicaInstance();
-          await pica.resize(cropped, previewCanvas);
-        } else {
-          const pCtx = previewCanvas.getContext("2d");
-          if (!pCtx) throw new Error("Failed to get canvas context");
-          pCtx.imageSmoothingEnabled = true;
-          pCtx.imageSmoothingQuality = "high";
-          pCtx.drawImage(cropped, 0, 0, previewW, previewH);
-        }
+        const pCtx = previewCanvas.getContext("2d");
+        if (!pCtx) throw new Error("Failed to get canvas context");
+        pCtx.imageSmoothingEnabled = true;
+        pCtx.imageSmoothingQuality = "high";
+        pCtx.drawImage(
+          img,
+          croppedAreaPixels.x,
+          croppedAreaPixels.y,
+          croppedAreaPixels.width,
+          croppedAreaPixels.height,
+          0,
+          0,
+          previewW,
+          previewH,
+        );
 
         if (abortRef.current !== id) {
-          cleanupCanvas(cropped);
           cleanupCanvas(previewCanvas);
           return;
         }
@@ -89,7 +75,6 @@ export function useFileSizeEstimate(
         const blob = await encodeCanvas(previewCanvas, format, quality);
 
         if (abortRef.current !== id) {
-          cleanupCanvas(cropped);
           cleanupCanvas(previewCanvas);
           return;
         }
@@ -100,10 +85,6 @@ export function useFileSizeEstimate(
         const estimated = Math.round(blob.size * (fullPixels / previewPixels));
 
         setEstimatedSize(estimated);
-
-        // Clean up after estimate
-        cleanupCanvas(cropped);
-        cleanupCanvas(previewCanvas);
       } catch {
         if (abortRef.current === id) {
           setEstimatedSize(null);
@@ -111,6 +92,9 @@ export function useFileSizeEstimate(
       } finally {
         if (abortRef.current === id) {
           setEstimating(false);
+        }
+        if (previewCanvas) {
+          cleanupCanvas(previewCanvas);
         }
       }
     }, DEBOUNCE_MS);
@@ -126,6 +110,6 @@ function cleanupCanvas(canvas: HTMLCanvasElement): void {
   if (ctx) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   }
-  (canvas as any).width = 0;
-  (canvas as any).height = 0;
+  canvas.width = 0;
+  canvas.height = 0;
 }
