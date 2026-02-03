@@ -125,11 +125,22 @@ async function mainThreadExport(
   resizedCanvas.width = targetWidth;
   resizedCanvas.height = targetHeight;
 
-  await pica.resize(croppedCanvas, resizedCanvas, {
-    unsharpAmount: 80,
-    unsharpRadius: 0.6,
-    unsharpThreshold: 2,
-  });
+  const isDownscale =
+    targetWidth <= croppedCanvas.width && targetHeight <= croppedCanvas.height;
+
+  if (isDownscale) {
+    await pica.resize(croppedCanvas, resizedCanvas, {
+      unsharpAmount: 80,
+      unsharpRadius: 0.6,
+      unsharpThreshold: 2,
+    });
+  } else {
+    const ctx = resizedCanvas.getContext("2d");
+    if (!ctx) throw new Error("Failed to get canvas context");
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = "high";
+    ctx.drawImage(croppedCanvas, 0, 0, targetWidth, targetHeight);
+  }
 
   const blob = await encodeCanvas(resizedCanvas, format, quality);
   return { blob, width: targetWidth, height: targetHeight };

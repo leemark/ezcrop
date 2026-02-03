@@ -54,7 +54,19 @@ export function useFileSizeEstimate(
         const previewCanvas = document.createElement("canvas");
         previewCanvas.width = previewW;
         previewCanvas.height = previewH;
-        await pica.resize(cropped, previewCanvas);
+
+        const isDownscale =
+          previewW <= cropped.width && previewH <= cropped.height;
+
+        if (isDownscale) {
+          await pica.resize(cropped, previewCanvas);
+        } else {
+          const pCtx = previewCanvas.getContext("2d");
+          if (!pCtx) throw new Error("Failed to get canvas context");
+          pCtx.imageSmoothingEnabled = true;
+          pCtx.imageSmoothingQuality = "high";
+          pCtx.drawImage(cropped, 0, 0, previewW, previewH);
+        }
 
         if (abortRef.current !== id) return;
 

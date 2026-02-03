@@ -17,12 +17,22 @@ async function resizeAndEncode(req: EncodeRequest): Promise<EncodeResult> {
   // Create target OffscreenCanvas
   const dstCanvas = new OffscreenCanvas(targetWidth, targetHeight);
 
-  // Pica resize
-  await pica.resize(srcCanvas as unknown as HTMLCanvasElement, dstCanvas as unknown as HTMLCanvasElement, {
-    unsharpAmount: 80,
-    unsharpRadius: 0.6,
-    unsharpThreshold: 2,
-  });
+  const isDownscale =
+    targetWidth <= imageData.width && targetHeight <= imageData.height;
+
+  if (isDownscale) {
+    // Pica Lanczos for downscaling
+    await pica.resize(srcCanvas as unknown as HTMLCanvasElement, dstCanvas as unknown as HTMLCanvasElement, {
+      unsharpAmount: 80,
+      unsharpRadius: 0.6,
+      unsharpThreshold: 2,
+    });
+  } else {
+    // Native drawImage for upscaling (pica is extremely slow at upscaling)
+    const dstCtx2 = dstCanvas.getContext("2d");
+    if (!dstCtx2) throw new Error("Failed to get dest canvas context");
+    dstCtx2.drawImage(srcCanvas, 0, 0, targetWidth, targetHeight);
+  }
 
   // Get resized ImageData
   const dstCtx = dstCanvas.getContext("2d");
