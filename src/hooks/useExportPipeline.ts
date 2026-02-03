@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import * as Comlink from "comlink";
 import type { CropArea, OutputFormat, EncodeResult } from "../types";
 import type { EncodeWorkerApi } from "../workers/encode.worker";
@@ -11,6 +11,8 @@ import Pica from "pica";
 let picaInstance = new Pica();
 let picaUsageCount = 0;
 const PICA_RESET_INTERVAL = 5; // Reset pica every 5 exports
+const WORKER_TIMEOUT_MS = 20000;
+const WORKER_RESET_INTERVAL = 2;
 
 function supportsOffscreenCanvas(): boolean {
   try {
@@ -33,6 +35,19 @@ export function useExportPipeline() {
   const [exporting, setExporting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const workerRef = useRef<Worker | null>(null);
+  const workerUseCountRef = useRef(0);
+
+  const resetWorker = useCallback(() => {
+    if (workerRef.current) {
+      workerRef.current.terminate();
+      workerRef.current = null;
+    }
+    workerUseCountRef.current = 0;
+  }, []);
+
+  useEffect(() => {
+    return () => resetWorker();
+  }, [resetWorker]);
 
   const exportImage = useCallback(
     async (
@@ -44,6 +59,7 @@ export function useExportPipeline() {
       format: OutputFormat,
       quality: number,
     ) => {
+      let croppedCanvas: HTMLCanvasElement | null = null;
       setExporting(true);
       setError(null);
 
@@ -57,7 +73,7 @@ export function useExportPipeline() {
         });
 
         // Get cropped canvas
-        const croppedCanvas = getCroppedCanvas(img, cropArea);
+        croppedCanvas = getCroppedCanvas(img, cropArea);
 
         let result: EncodeResult;
 
@@ -70,23 +86,30 @@ export function useExportPipeline() {
                 { type: "module" },
               );
             }
-            const api =
-              Comlink.wrap<EncodeWorkerApi>(workerRef.current);
+            const api = Comlink.wrap<EncodeWorkerApi>(workerRef.current);
             const imageData = canvasToImageData(croppedCanvas);
 
-            result = await api.resizeAndEncode(
-              Comlink.transfer(
-                {
-                  imageData,
-                  targetWidth,
-                  targetHeight,
-                  format,
-                  quality,
-                },
-                [imageData.data.buffer],
+            result = await withTimeout(
+              api.resizeAndEncode(
+                Comlink.transfer(
+                  {
+                    imageData,
+                    targetWidth,
+                    targetHeight,
+                    format,
+                    quality,
+                  },
+                  [imageData.data.buffer],
+                ),
               ),
+              WORKER_TIMEOUT_MS,
             );
+            workerUseCountRef.current += 1;
+            if (workerUseCountRef.current >= WORKER_RESET_INTERVAL) {
+              resetWorker();
+            }
           } catch {
+            resetWorker();
             // Fallback to main thread
             result = await mainThreadExport(
               croppedCanvas,
@@ -113,16 +136,16 @@ export function useExportPipeline() {
           format,
         );
         downloadBlob(result.blob, filename);
-
-        // Clean up
-        cleanupExport(croppedCanvas);
       } catch (e) {
         setError(e instanceof Error ? e.message : "Export failed");
       } finally {
         setExporting(false);
+        if (croppedCanvas) {
+          cleanupExport(croppedCanvas);
+        }
       }
     },
-    [],
+    [resetWorker],
   );
 
   return { exporting, error, exportImage };
@@ -171,4 +194,17 @@ async function mainThreadExport(
   const blob = await encodeCanvas(resizedCanvas, format, quality);
   cleanupExport(resizedCanvas);
   return { blob, width: targetWidth, height: targetHeight };
+}
+
+function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
+  let timeoutId: ReturnType<typeof setTimeout> | undefined;
+  const timeout = new Promise<T>((_, reject) => {
+    timeoutId = setTimeout(
+      () => reject(new Error("Worker timed out")),
+      ms,
+    );
+  });
+  return Promise.race([promise, timeout]).finally(() => {
+    if (timeoutId) clearTimeout(timeoutId);
+  });
 }
