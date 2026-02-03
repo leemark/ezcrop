@@ -35,20 +35,42 @@ export function useCropState() {
   const targetHeight =
     activePreset.id === "custom" ? customHeight : activePreset.height;
 
-  const updateCroppedPixels = useCallback((percentCrop: PercentCrop) => {
+  const updateCroppedPixels = useCallback((pixelCrop: PixelCrop) => {
     const img = imageRef.current;
-    if (!img || percentCrop.width <= 0 || percentCrop.height <= 0) {
+    if (!img || pixelCrop.width <= 0 || pixelCrop.height <= 0) {
       setCroppedAreaPixels(null);
       return;
     }
 
-    const x = Math.round((percentCrop.x / 100) * img.naturalWidth);
-    const y = Math.round((percentCrop.y / 100) * img.naturalHeight);
-    const width = Math.round((percentCrop.width / 100) * img.naturalWidth);
-    const height = Math.round((percentCrop.height / 100) * img.naturalHeight);
+    const renderedWidth = img.width || img.naturalWidth;
+    const renderedHeight = img.height || img.naturalHeight;
+    const scaleX = img.naturalWidth / renderedWidth;
+    const scaleY = img.naturalHeight / renderedHeight;
+
+    const x = Math.round(pixelCrop.x * scaleX);
+    const y = Math.round(pixelCrop.y * scaleY);
+    const width = Math.round(pixelCrop.width * scaleX);
+    const height = Math.round(pixelCrop.height * scaleY);
 
     setCroppedAreaPixels({ x, y, width, height });
   }, []);
+
+  const pixelCropFromPercent = useCallback(
+    (percentCrop: PercentCrop) => {
+      const img = imageRef.current;
+      if (!img) return null;
+      const renderedWidth = img.width || img.naturalWidth;
+      const renderedHeight = img.height || img.naturalHeight;
+      return {
+        unit: "px",
+        x: (percentCrop.x / 100) * renderedWidth,
+        y: (percentCrop.y / 100) * renderedHeight,
+        width: (percentCrop.width / 100) * renderedWidth,
+        height: (percentCrop.height / 100) * renderedHeight,
+      } satisfies PixelCrop;
+    },
+    [],
+  );
 
   const createCenteredCrop = useCallback(
     (image: HTMLImageElement, aspectValue: number) => {
@@ -95,23 +117,26 @@ export function useCropState() {
       };
 
       setCrop(nextCrop);
-      updateCroppedPixels(nextCrop);
+      const pixelCrop = pixelCropFromPercent(nextCrop);
+      if (pixelCrop) {
+        updateCroppedPixels(pixelCrop);
+      }
     },
-    [aspect, crop, createCenteredCrop, updateCroppedPixels],
+    [aspect, crop, createCenteredCrop, pixelCropFromPercent, updateCroppedPixels],
   );
 
   const onCropChange = useCallback(
     (_pixelCrop: PixelCrop, percentCrop: PercentCrop) => {
       setCrop(percentCrop);
-      updateCroppedPixels(percentCrop);
+      updateCroppedPixels(_pixelCrop);
       setZoom(zoomFromCrop(percentCrop));
     },
     [updateCroppedPixels],
   );
 
   const onCropComplete = useCallback(
-    (_pixelCrop: PixelCrop, percentCrop: PercentCrop) => {
-      updateCroppedPixels(percentCrop);
+    (pixelCrop: PixelCrop) => {
+      updateCroppedPixels(pixelCrop);
     },
     [updateCroppedPixels],
   );
@@ -121,10 +146,13 @@ export function useCropState() {
       imageRef.current = image;
       const nextCrop = createCenteredCrop(image, aspect);
       setCrop(nextCrop);
-      updateCroppedPixels(nextCrop);
+      const pixelCrop = pixelCropFromPercent(nextCrop);
+      if (pixelCrop) {
+        updateCroppedPixels(pixelCrop);
+      }
       setZoom(zoomFromCrop(nextCrop));
     },
-    [aspect, createCenteredCrop, updateCroppedPixels],
+    [aspect, createCenteredCrop, pixelCropFromPercent, updateCroppedPixels],
   );
 
   const selectPreset = useCallback(
@@ -157,9 +185,12 @@ export function useCropState() {
     if (!imageRef.current) return;
     const nextCrop = createCenteredCrop(imageRef.current, aspect);
     setCrop(nextCrop);
-    updateCroppedPixels(nextCrop);
+    const pixelCrop = pixelCropFromPercent(nextCrop);
+    if (pixelCrop) {
+      updateCroppedPixels(pixelCrop);
+    }
     setZoom(zoomFromCrop(nextCrop));
-  }, [aspect, createCenteredCrop, updateCroppedPixels]);
+  }, [aspect, createCenteredCrop, pixelCropFromPercent, updateCroppedPixels]);
 
   const setZoomWithCrop = useCallback(
     (nextZoom: number) => {
