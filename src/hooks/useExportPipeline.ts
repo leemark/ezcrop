@@ -8,7 +8,9 @@ import { downloadBlob } from "../lib/download";
 import { encodeCanvas } from "../lib/encoding";
 import Pica from "pica";
 
-const pica = new Pica();
+let picaInstance = new Pica();
+let picaUsageCount = 0;
+const PICA_RESET_INTERVAL = 5; // Reset pica every 5 exports
 
 function supportsOffscreenCanvas(): boolean {
   try {
@@ -16,6 +18,15 @@ function supportsOffscreenCanvas(): boolean {
   } catch {
     return false;
   }
+}
+
+function getPicaInstance() {
+  picaUsageCount++;
+  if (picaUsageCount >= PICA_RESET_INTERVAL) {
+    picaInstance = new Pica();
+    picaUsageCount = 0;
+  }
+  return picaInstance;
 }
 
 export function useExportPipeline() {
@@ -102,6 +113,9 @@ export function useExportPipeline() {
           format,
         );
         downloadBlob(result.blob, filename);
+
+        // Clean up
+        cleanupExport(croppedCanvas);
       } catch (e) {
         setError(e instanceof Error ? e.message : "Export failed");
       } finally {
@@ -112,6 +126,17 @@ export function useExportPipeline() {
   );
 
   return { exporting, error, exportImage };
+}
+
+function cleanupExport(canvas: HTMLCanvasElement): void {
+  // Release canvas memory
+  const ctx = canvas.getContext("2d");
+  if (ctx) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+  // Force GC hint (not guaranteed but helps)
+  (canvas as any).width = 0;
+  (canvas as any).height = 0;
 }
 
 async function mainThreadExport(
@@ -129,6 +154,7 @@ async function mainThreadExport(
     targetWidth <= croppedCanvas.width && targetHeight <= croppedCanvas.height;
 
   if (isDownscale) {
+    const pica = getPicaInstance();
     await pica.resize(croppedCanvas, resizedCanvas, {
       unsharpAmount: 80,
       unsharpRadius: 0.6,

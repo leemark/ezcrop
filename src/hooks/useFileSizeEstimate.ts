@@ -4,9 +4,20 @@ import { getCroppedCanvas } from "../lib/cropUtils";
 import { encodeCanvas } from "../lib/encoding";
 import Pica from "pica";
 
-const pica = new Pica();
+let picaInstance = new Pica();
+let picaUsageCount = 0;
+const PICA_RESET_INTERVAL = 3; // Reset more frequently during estimation
 const PREVIEW_MAX_DIM = 256;
 const DEBOUNCE_MS = 500;
+
+function getPicaInstance() {
+  picaUsageCount++;
+  if (picaUsageCount >= PICA_RESET_INTERVAL) {
+    picaInstance = new Pica();
+    picaUsageCount = 0;
+  }
+  return picaInstance;
+}
 
 export function useFileSizeEstimate(
   imageUrl: string | null,
@@ -59,6 +70,7 @@ export function useFileSizeEstimate(
           previewW <= cropped.width && previewH <= cropped.height;
 
         if (isDownscale) {
+          const pica = getPicaInstance();
           await pica.resize(cropped, previewCanvas);
         } else {
           const pCtx = previewCanvas.getContext("2d");
@@ -68,11 +80,19 @@ export function useFileSizeEstimate(
           pCtx.drawImage(cropped, 0, 0, previewW, previewH);
         }
 
-        if (abortRef.current !== id) return;
+        if (abortRef.current !== id) {
+          cleanupCanvas(cropped);
+          cleanupCanvas(previewCanvas);
+          return;
+        }
 
         const blob = await encodeCanvas(previewCanvas, format, quality);
 
-        if (abortRef.current !== id) return;
+        if (abortRef.current !== id) {
+          cleanupCanvas(cropped);
+          cleanupCanvas(previewCanvas);
+          return;
+        }
 
         // Scale estimate up proportionally
         const fullPixels = targetWidth * targetHeight;
@@ -80,6 +100,10 @@ export function useFileSizeEstimate(
         const estimated = Math.round(blob.size * (fullPixels / previewPixels));
 
         setEstimatedSize(estimated);
+
+        // Clean up after estimate
+        cleanupCanvas(cropped);
+        cleanupCanvas(previewCanvas);
       } catch {
         if (abortRef.current === id) {
           setEstimatedSize(null);
@@ -95,4 +119,13 @@ export function useFileSizeEstimate(
   }, [imageUrl, croppedAreaPixels, targetWidth, targetHeight, format, quality]);
 
   return { estimatedSize, estimating };
+}
+
+function cleanupCanvas(canvas: HTMLCanvasElement): void {
+  const ctx = canvas.getContext("2d");
+  if (ctx) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+  (canvas as any).width = 0;
+  (canvas as any).height = 0;
 }
