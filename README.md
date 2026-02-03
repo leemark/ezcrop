@@ -8,7 +8,7 @@ A fast, lightweight image cropper and resizer that runs entirely in your browser
 
 - **Drag-and-drop upload** — Drop an image anywhere or click to browse
 - **Interactive crop editor** — Pan and zoom to frame your shot
-- **Preset dimensions** — Quick buttons for OG Image, Square, Hero Banner, Twitter Header, IG Story, Favicon, or custom size
+- **Preset dimensions** — Quick buttons for OG Image, Square, Hero Banner, Hero Tall, Twitter Header, IG Story, Favicon, or custom size
 - **Multiple formats** — Export as WebP, JPEG, or AVIF
 - **Quality control** — Adjust compression from 60–100%
 - **File size preview** — See estimated output size before exporting
@@ -38,6 +38,7 @@ In the sidebar on the right, click a preset button to snap the crop to that aspe
 - **OG Image** — 1200×630 (Facebook/Twitter cards)
 - **Square** — 800×800
 - **Hero Banner** — 1920×1080
+- **Hero Tall** — 1920×1280
 - **Twitter Header** — 1500×500
 - **IG Story** — 1080×1920
 - **Favicon** — 512×512

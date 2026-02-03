@@ -5,6 +5,12 @@ export const presets: Preset[] = [
   { id: "square", label: "Square (800\u00d7800)", width: 800, height: 800 },
   { id: "hero", label: "Hero Banner (1920\u00d71080)", width: 1920, height: 1080 },
   {
+    id: "hero-tall",
+    label: "Hero Tall (1920\u00d71280)",
+    width: 1920,
+    height: 1280,
+  },
+  {
     id: "twitter-header",
     label: "Twitter Header (1500\u00d7500)",
     width: 1500,
