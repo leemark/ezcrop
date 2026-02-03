@@ -1,16 +1,14 @@
-import ReactCrop from "react-image-crop";
-import type { Crop, PercentCrop, PixelCrop } from "react-image-crop";
-import "react-image-crop/dist/ReactCrop.css";
+import Cropper from "react-easy-crop";
+import type { CropArea, CropPoint } from "../types";
 
 interface CropEditorProps {
   imageUrl: string;
-  crop?: Crop;
+  crop: CropPoint;
   zoom: number;
   aspect: number;
-  onCropChange: (pixelCrop: PixelCrop, percentCrop: PercentCrop) => void;
+  onCropChange: (crop: CropPoint) => void;
   onZoomChange: (zoom: number) => void;
-  onCropComplete: (pixelCrop: PixelCrop, percentCrop: PercentCrop) => void;
-  onImageLoad: (image: HTMLImageElement) => void;
+  onCropComplete: (croppedArea: CropArea, croppedAreaPixels: CropArea) => void;
 }
 
 export function CropEditor({
@@ -21,27 +19,22 @@ export function CropEditor({
   onCropChange,
   onZoomChange,
   onCropComplete,
-  onImageLoad,
 }: CropEditorProps) {
   return (
     <div className="relative flex flex-1 flex-col">
-      <div className="relative flex-1 p-2" style={{ minHeight: 300 }}>
-        <ReactCrop
+      <div className="relative flex-1" style={{ minHeight: 300 }}>
+        <Cropper
+          image={imageUrl}
           crop={crop}
-          onChange={onCropChange}
-          onComplete={onCropComplete}
+          zoom={zoom}
           aspect={aspect}
-          keepSelection
-          ruleOfThirds
-          className="max-h-[70vh] w-full"
-        >
-          <img
-            src={imageUrl}
-            alt="Crop source"
-            onLoad={(e) => onImageLoad(e.currentTarget)}
-            className="max-h-[70vh] w-full rounded-lg object-contain"
-          />
-        </ReactCrop>
+          onCropChange={onCropChange}
+          onZoomChange={onZoomChange}
+          onCropComplete={onCropComplete}
+          classes={{
+            containerClassName: "rounded-lg",
+          }}
+        />
       </div>
       <div className="flex items-center gap-3 px-2 py-3">
         <label className="text-xs font-medium text-zinc-500 dark:text-zinc-400">
