@@ -23,6 +23,9 @@ export function QualitySlider({ quality, onChange }: QualitySliderProps) {
         onChange={(e) => onChange(Number(e.target.value))}
         className="h-1.5 w-full cursor-pointer appearance-none rounded-full bg-zinc-200 accent-indigo-500 dark:bg-zinc-700"
       />
+      <span className="text-[10px] text-zinc-400 dark:text-zinc-500">
+        Recommended: 80–85%
+      </span>
     </div>
   );
 }

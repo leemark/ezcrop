@@ -12,6 +12,7 @@ export function useCropState() {
   const [crop, setCrop] = useState<PercentCrop>();
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<CropArea | null>(null);
+  const [imageDimensions, setImageDimensions] = useState<{ width: number; height: number } | null>(null);
   const [activePreset, setActivePreset] = useState<Preset>(presets[0]);
   const [customWidth, setCustomWidth] = useState(800);
   const [customHeight, setCustomHeight] = useState(600);
@@ -57,6 +58,7 @@ export function useCropState() {
     (e: React.SyntheticEvent<HTMLImageElement>) => {
       const img = e.currentTarget;
       imageRef.current = img;
+      setImageDimensions({ width: img.naturalWidth, height: img.naturalHeight });
       const initial = makeInitialCrop(img, aspect);
       setCrop(initial);
       updateCroppedPixels(initial);
@@ -137,6 +139,7 @@ export function useCropState() {
     setCrop(undefined);
     setZoom(1);
     setCroppedAreaPixels(null);
+    setImageDimensions(null);
     setActivePreset(presets[0]);
     setCustomWidth(800);
     setCustomHeight(600);
@@ -159,5 +162,6 @@ export function useCropState() {
     targetWidth,
     targetHeight,
     resetCrop,
+    imageDimensions,
   };
 }

@@ -67,9 +67,22 @@ export default function App() {
     <div className="flex min-h-screen flex-col bg-zinc-50 text-zinc-900 dark:bg-zinc-900 dark:text-zinc-100">
       <header className="flex items-center justify-between border-b border-zinc-200 px-4 py-2 dark:border-zinc-700">
         <h1 className="text-sm font-bold tracking-tight">EZCrop</h1>
-        <span className="text-xs text-zinc-400">
-          {originalFile?.name}
-        </span>
+        <div className="text-right">
+          <div className="text-xs text-zinc-400">{originalFile?.name}</div>
+          {(cropState.imageDimensions || originalFile) && (
+            <div className="text-xs text-zinc-400">
+              {cropState.imageDimensions &&
+                `${cropState.imageDimensions.width} × ${cropState.imageDimensions.height}`}
+              {cropState.imageDimensions && originalFile && " · "}
+              {originalFile &&
+                (originalFile.size < 1024
+                  ? `${originalFile.size} B`
+                  : originalFile.size < 1024 * 1024
+                    ? `${(originalFile.size / 1024).toFixed(1)} KB`
+                    : `${(originalFile.size / (1024 * 1024)).toFixed(1)} MB`)}
+            </div>
+          )}
+        </div>
       </header>
 
       <div className="flex flex-1 flex-col md:flex-row">
