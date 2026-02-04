@@ -78,9 +78,9 @@ export default function App() {
           crop={cropState.crop}
           zoom={cropState.zoom}
           aspect={cropState.aspect}
-          onCropChange={cropState.setCrop}
-          onZoomChange={cropState.setZoom}
-          onCropComplete={cropState.onCropComplete}
+          onCropChange={cropState.onCropChange}
+          onZoomChange={cropState.setCropForZoom}
+          onImageLoad={cropState.onImageLoad}
         />
         <Sidebar
           imageUrl={imageUrl}

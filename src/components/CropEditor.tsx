@@ -1,14 +1,14 @@
-import Cropper from "react-easy-crop";
-import type { CropArea, CropPoint } from "../types";
+import ReactCrop, { type PixelCrop, type PercentCrop } from "react-image-crop";
+import "react-image-crop/dist/ReactCrop.css";
 
 interface CropEditorProps {
   imageUrl: string;
-  crop: CropPoint;
+  crop: PercentCrop | undefined;
   zoom: number;
   aspect: number;
-  onCropChange: (crop: CropPoint) => void;
+  onCropChange: (pixelCrop: PixelCrop, percentCrop: PercentCrop) => void;
   onZoomChange: (zoom: number) => void;
-  onCropComplete: (croppedArea: CropArea, croppedAreaPixels: CropArea) => void;
+  onImageLoad: (e: React.SyntheticEvent<HTMLImageElement>) => void;
 }
 
 export function CropEditor({
@@ -18,25 +18,27 @@ export function CropEditor({
   aspect,
   onCropChange,
   onZoomChange,
-  onCropComplete,
+  onImageLoad,
 }: CropEditorProps) {
   return (
-    <div className="relative flex flex-1 flex-col">
-      <div className="relative flex-1" style={{ minHeight: 300 }}>
-        <Cropper
-          image={imageUrl}
+    <div className="relative flex flex-1 flex-col items-center">
+      <div className="flex flex-1 items-center justify-center p-4">
+        <ReactCrop
           crop={crop}
-          zoom={zoom}
+          onChange={onCropChange}
           aspect={aspect}
-          onCropChange={onCropChange}
-          onZoomChange={onZoomChange}
-          onCropComplete={onCropComplete}
-          classes={{
-            containerClassName: "rounded-lg",
-          }}
-        />
+          keepSelection
+          ruleOfThirds
+        >
+          <img
+            src={imageUrl}
+            onLoad={onImageLoad}
+            className="max-h-[70vh] max-w-full block rounded-lg"
+            alt="Crop source"
+          />
+        </ReactCrop>
       </div>
-      <div className="flex items-center gap-3 px-2 py-3">
+      <div className="flex w-full items-center gap-3 px-2 py-3">
         <label className="text-xs font-medium text-zinc-500 dark:text-zinc-400">
           Zoom
         </label>

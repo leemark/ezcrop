@@ -27,9 +27,9 @@ Supported formats: JPEG, PNG, WebP, AVIF, GIF, BMP, TIFF
 
 ### 2. Crop Your Image
 The cropper will display your image with a crop box overlay:
-- **Pan** — Click and drag the image to reposition
+- **Move crop** — Click and drag the crop box to reposition it
 - **Zoom** — Use the zoom slider at the bottom to zoom in and out
-- **Adjust crop** — Drag the edges or corners of the crop box to resize it
+- **Resize crop** — Drag the edges or corners of the crop box to resize it
 
 The aspect ratio will lock to your selected preset (e.g., 16:9 for hero banners).
 
@@ -80,7 +80,7 @@ Older browsers may work but with reduced performance.
 
 Built with:
 - [React](https://react.dev)
-- [react-easy-crop](https://github.com/ValentinH/react-easy-crop) — Crop UI
+- [react-image-crop](https://github.com/DominicTobias/react-image-crop) — Crop UI with resize handles
 - [pica](https://github.com/nodeca/pica) — High-quality image resizing
 - [exifr](https://github.com/MikeKovarik/exifr) — EXIF metadata reading
 - [Tailwind CSS](https://tailwindcss.com) — Styling
