@@ -5,7 +5,7 @@ interface CropEditorProps {
   imageUrl: string;
   crop: PercentCrop | undefined;
   zoom: number;
-  aspect: number;
+  aspect: number | undefined;
   onCropChange: (pixelCrop: PixelCrop, percentCrop: PercentCrop) => void;
   onZoomChange: (zoom: number) => void;
   onImageLoad: (e: React.SyntheticEvent<HTMLImageElement>) => void;
@@ -26,7 +26,7 @@ export function CropEditor({
         <ReactCrop
           crop={crop}
           onChange={onCropChange}
-          aspect={aspect}
+          {...(aspect ? { aspect } : {})}
           keepSelection
           ruleOfThirds
         >
