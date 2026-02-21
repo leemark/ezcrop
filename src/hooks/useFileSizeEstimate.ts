@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import type { CropArea, OutputFormat } from "../types";
 import { encodeCanvas } from "../lib/encoding";
 
-const PREVIEW_MAX_DIM = 256;
+const PREVIEW_MAX_DIM = 1024;
 const DEBOUNCE_MS = 500;
 
 export function useFileSizeEstimate(
@@ -79,10 +79,14 @@ export function useFileSizeEstimate(
           return;
         }
 
-        // Scale estimate up proportionally
+        // Scale estimate up using a sub-linear exponent (0.75) rather than a
+        // linear pixel ratio, because compressed image size doesn't scale
+        // proportionally — larger images compress more efficiently.
         const fullPixels = targetWidth * targetHeight;
         const previewPixels = previewW * previewH;
-        const estimated = Math.round(blob.size * (fullPixels / previewPixels));
+        const estimated = Math.round(
+          blob.size * Math.pow(fullPixels / previewPixels, 0.75),
+        );
 
         setEstimatedSize(estimated);
       } catch {
