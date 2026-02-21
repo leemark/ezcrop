@@ -20,6 +20,12 @@ export function useCropState() {
 
   const aspect =
     activePreset.id === "custom"
+      ? undefined
+      : activePreset.width / activePreset.height;
+
+  // The aspect to use for initializing crops
+  const initialAspect =
+    activePreset.id === "custom"
       ? customWidth / customHeight
       : activePreset.width / activePreset.height;
 
@@ -62,13 +68,13 @@ export function useCropState() {
       const img = e.currentTarget;
       imageRef.current = img;
       setImageDimensions({ width: img.naturalWidth, height: img.naturalHeight });
-      const initial = makeInitialCrop(img, aspect);
+      const initial = makeInitialCrop(img, initialAspect);
       setCrop(initial);
       updateCroppedPixels(initial);
       setZoom(1);
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [aspect],
+    [initialAspect],
   );
 
   const onCropChange = useCallback(
@@ -76,9 +82,21 @@ export function useCropState() {
       setCrop(percentCrop);
       updateCroppedPixels(percentCrop);
       setZoom(zoomFromCrop(percentCrop));
+
+      if (activePreset.id === "custom") {
+        const img = imageRef.current;
+        if (img) {
+          const w = Math.round((percentCrop.width / 100) * img.naturalWidth);
+          const h = Math.round((percentCrop.height / 100) * img.naturalHeight);
+          if (w > 0 && h > 0) {
+            setCustomWidth(w);
+            setCustomHeight(h);
+          }
+        }
+      }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [],
+    [activePreset.id],
   );
 
   const setCropForZoom = useCallback(
@@ -94,9 +112,12 @@ export function useCropState() {
       const cx = crop.x + crop.width / 2;
       const cy = crop.y + crop.height / 2;
 
+      const currentAspect =
+        (crop.width * img.naturalWidth) / (crop.height * img.naturalHeight);
+
       const newCrop = makeAspectCrop(
         { unit: "%", width: targetPct },
-        aspect,
+        aspect || currentAspect,
         img.width,
         img.height,
       );
@@ -116,12 +137,12 @@ export function useCropState() {
   useEffect(() => {
     const img = imageRef.current;
     if (!img) return;
-    const newCrop = makeInitialCrop(img, aspect);
+    const newCrop = makeInitialCrop(img, initialAspect);
     setCrop(newCrop);
     updateCroppedPixels(newCrop);
     setZoom(1);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [aspect]);
+  }, [activePreset.id]);
 
   const selectPreset = useCallback(
     (preset: Preset) => {
@@ -134,8 +155,27 @@ export function useCropState() {
     (w: number, h: number) => {
       setCustomWidth(Math.max(1, Math.round(w)));
       setCustomHeight(Math.max(1, Math.round(h)));
+
+      const img = imageRef.current;
+      if (img && crop) {
+        // Find current center
+        const cx = crop.x + crop.width / 2;
+        const cy = crop.y + crop.height / 2;
+
+        const newAspect = Math.max(1, w) / Math.max(1, h);
+        const newCrop = makeAspectCrop(
+          { unit: "%", width: crop.width },
+          newAspect,
+          img.width,
+          img.height,
+        );
+        newCrop.x = Math.max(0, Math.min(100 - newCrop.width, cx - newCrop.width / 2));
+        newCrop.y = Math.max(0, Math.min(100 - newCrop.height, cy - newCrop.height / 2));
+        setCrop(newCrop);
+        updateCroppedPixels(newCrop);
+      }
     },
-    [],
+    [crop],
   );
 
   const resetCrop = useCallback(() => {
