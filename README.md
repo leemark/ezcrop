@@ -7,8 +7,8 @@ A fast, lightweight image cropper and resizer that runs entirely in your browser
 ## Features
 
 - **Drag-and-drop upload** — Drop an image anywhere or click to browse
-- **Interactive crop editor** — Pan and zoom to frame your shot
-- **Preset dimensions** — Quick buttons for OG Image, Square, Hero Banner, Hero Tall, Twitter Header, IG Story, Favicon, or custom size
+- **Interactive crop editor** — Pan, zoom, and free-form resize to frame your shot
+- **Preset dimensions** — Quick buttons for standard modern layouts including Square, horizontal Rectangle, and Vertical aspect groupings, plus a fully unlocked custom size
 - **Multiple formats** — Export as WebP, JPEG, or AVIF
 - **Quality control** — Adjust compression from 60–100%
 - **File size preview** — See estimated output size before exporting
@@ -31,18 +31,14 @@ The cropper will display your image with a crop box overlay:
 - **Zoom** — Use the zoom slider at the bottom to zoom in and out
 - **Resize crop** — Drag the edges or corners of the crop box to resize it
 
-The aspect ratio will lock to your selected preset (e.g., 16:9 for hero banners).
+The aspect ratio will lock to your selected preset. If the **Custom** size preset is active, aspect constraints are disabled allowing you to free-form resize your crop natively while maintaining a 1:1 final pixel scale.
 
 ### 3. Choose a Preset (or Custom Size)
 In the sidebar on the right, click a preset button to snap the crop to that aspect ratio:
-- **OG Image** — 1200×630 (Facebook/Twitter cards)
-- **Square** — 800×800
-- **Hero Banner** — 1920×1080
-- **Hero Tall** — 1920×1280
-- **Twitter Header** — 1500×500
-- **IG Story** — 1080×1920
-- **Favicon** — 512×512
-- **Custom** — Enter your own width and height
+- **Square** — Large (1600×1600), Medium (1000×1000), Small (600×600)
+- **Rectangle** — Tall (1920×1280), Medium (1920×1080), Short (1920×800)
+- **Vertical** — Wide (1280×1920), Medium (1080×1920), Narrow (800×1920)
+- **Custom** — Enter your own width and height, or drag the handles to naturally update width and height while completely unconstrained.
 
 ### 4. Select Format & Quality
 - **Format** — Choose WebP (smallest), JPEG (best compatibility), or AVIF (smallest + newer)

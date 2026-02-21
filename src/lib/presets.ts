@@ -9,9 +9,9 @@ export const presets: Preset[] = [
   { id: "rect-medium", label: "Rectangle Medium (1920\u00d71080)", width: 1920, height: 1080 },
   { id: "rect-short", label: "Rectangle Short (1920\u00d7800)", width: 1920, height: 800 },
 
-  { id: "vert-tall", label: "Vertical Tall (1280\u00d71920)", width: 1280, height: 1920 },
+  { id: "vert-wide", label: "Vertical Wide (1280\u00d71920)", width: 1280, height: 1920 },
   { id: "vert-medium", label: "Vertical Medium (1080\u00d71920)", width: 1080, height: 1920 },
-  { id: "vert-short", label: "Vertical Short (800\u00d71920)", width: 800, height: 1920 },
+  { id: "vert-narrow", label: "Vertical Narrow (800\u00d71920)", width: 800, height: 1920 },
 
   { id: "custom", label: "Custom", width: 800, height: 600 },
 ];
