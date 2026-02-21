@@ -18,7 +18,10 @@ export function useCropState() {
   const [customHeight, setCustomHeight] = useState(600);
   const imageRef = useRef<HTMLImageElement | null>(null);
 
-  const aspect = activePreset.width / activePreset.height;
+  const aspect =
+    activePreset.id === "custom"
+      ? customWidth / customHeight
+      : activePreset.width / activePreset.height;
 
   const targetWidth =
     activePreset.id === "custom" ? customWidth : activePreset.width;
