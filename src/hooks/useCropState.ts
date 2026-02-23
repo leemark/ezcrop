@@ -153,6 +153,7 @@ export function useCropState() {
 
   const updateCustomDimensions = useCallback(
     (w: number, h: number) => {
+      if (!w || !h || !isFinite(w) || !isFinite(h)) return;
       setCustomWidth(Math.max(1, Math.round(w)));
       setCustomHeight(Math.max(1, Math.round(h)));
 

@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import type { Preset } from "../types";
 import { presets } from "../lib/presets";
 
@@ -73,6 +74,34 @@ export function PresetPicker({
   customHeight,
   onCustomChange,
 }: PresetPickerProps) {
+  const [widthStr, setWidthStr] = useState(String(customWidth));
+  const [heightStr, setHeightStr] = useState(String(customHeight));
+
+  useEffect(() => { setWidthStr(String(customWidth)); }, [customWidth]);
+  useEffect(() => { setHeightStr(String(customHeight)); }, [customHeight]);
+
+  const handleWidthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setWidthStr(e.target.value);
+    const v = parseInt(e.target.value, 10);
+    if (v > 0 && isFinite(v)) onCustomChange(v, customHeight);
+  };
+
+  const handleHeightChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setHeightStr(e.target.value);
+    const v = parseInt(e.target.value, 10);
+    if (v > 0 && isFinite(v)) onCustomChange(customWidth, v);
+  };
+
+  const handleWidthBlur = () => {
+    const v = parseInt(widthStr, 10);
+    if (!(v > 0 && isFinite(v))) setWidthStr(String(customWidth));
+  };
+
+  const handleHeightBlur = () => {
+    const v = parseInt(heightStr, 10);
+    if (!(v > 0 && isFinite(v))) setHeightStr(String(customHeight));
+  };
+
   return (
     <div className="flex flex-col gap-3">
       <h3 className="font-syne text-[10px] font-bold uppercase tracking-[0.15em] text-zinc-400 dark:text-zinc-500">
@@ -154,8 +183,9 @@ export function PresetPicker({
             type="number"
             min={1}
             max={7680}
-            value={customWidth}
-            onChange={(e) => onCustomChange(Number(e.target.value), customHeight)}
+            value={widthStr}
+            onChange={handleWidthChange}
+            onBlur={handleWidthBlur}
             className="w-16 rounded border border-zinc-200 bg-white px-2 py-1 font-mono text-xs tabular-nums dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200"
           />
           <span className="text-xs text-zinc-400">×</span>
@@ -163,8 +193,9 @@ export function PresetPicker({
             type="number"
             min={1}
             max={7680}
-            value={customHeight}
-            onChange={(e) => onCustomChange(customWidth, Number(e.target.value))}
+            value={heightStr}
+            onChange={handleHeightChange}
+            onBlur={handleHeightBlur}
             className="w-16 rounded border border-zinc-200 bg-white px-2 py-1 font-mono text-xs tabular-nums dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200"
           />
           <span className="text-[10px] text-zinc-400">px</span>
