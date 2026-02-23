@@ -47,7 +47,6 @@ input[type="range"]::-moz-range-thumb {
 .ReactCrop__crop-selection {
   border: 1.5px solid rgba(245, 158, 11, 0.85) !important;
   border-image: none !important;
-  box-shadow: 0 0 0 9999em rgba(0, 0, 0, 0.42) !important;
 }
 
 .ReactCrop__drag-handle::after {
@@ -56,10 +55,4 @@ input[type="range"]::-moz-range-thumb {
   border-radius: 2px;
   width: 8px !important;
   height: 8px !important;
-}
-
-@media (prefers-color-scheme: dark) {
-  .ReactCrop__crop-selection {
-    box-shadow: 0 0 0 9999em rgba(0, 0, 0, 0.55) !important;
-  }
 }
