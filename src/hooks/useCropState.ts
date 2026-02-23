@@ -158,23 +158,39 @@ export function useCropState() {
       setCustomHeight(Math.max(1, Math.round(h)));
 
       const img = imageRef.current;
-      if (img && crop) {
-        // Find current center
-        const cx = crop.x + crop.width / 2;
-        const cy = crop.y + crop.height / 2;
+      if (!img) return;
 
-        const newAspect = Math.max(1, w) / Math.max(1, h);
-        const newCrop = makeAspectCrop(
-          { unit: "%", width: crop.width },
-          newAspect,
-          img.width,
-          img.height,
-        );
-        newCrop.x = Math.max(0, Math.min(100 - newCrop.width, cx - newCrop.width / 2));
-        newCrop.y = Math.max(0, Math.min(100 - newCrop.height, cy - newCrop.height / 2));
-        setCrop(newCrop);
-        updateCroppedPixels(newCrop);
+      const imgW = img.naturalWidth;
+      const imgH = img.naturalHeight;
+      const desiredAspect = w / h;
+
+      // Scale desired pixel dimensions to fit within image bounds, preserving aspect ratio
+      let cropW = Math.min(w, imgW);
+      let cropH = cropW / desiredAspect;
+      if (cropH > imgH) {
+        cropH = imgH;
+        cropW = cropH * desiredAspect;
       }
+
+      // Convert to percentages relative to natural image dimensions
+      const pctW = (cropW / imgW) * 100;
+      const pctH = (cropH / imgH) * 100;
+
+      // Keep centered on current crop position
+      const cx = crop ? crop.x + crop.width / 2 : 50;
+      const cy = crop ? crop.y + crop.height / 2 : 50;
+
+      const newCrop: PercentCrop = {
+        unit: "%",
+        width: pctW,
+        height: pctH,
+        x: Math.max(0, Math.min(100 - pctW, cx - pctW / 2)),
+        y: Math.max(0, Math.min(100 - pctH, cy - pctH / 2)),
+      };
+
+      setCrop(newCrop);
+      updateCroppedPixels(newCrop);
+      setZoom(zoomFromCrop(newCrop));
     },
     [crop],
   );

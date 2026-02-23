@@ -82,24 +82,32 @@ export function PresetPicker({
 
   const handleWidthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setWidthStr(e.target.value);
-    const v = parseInt(e.target.value, 10);
-    if (v > 0 && isFinite(v)) onCustomChange(v, customHeight);
   };
 
   const handleHeightChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setHeightStr(e.target.value);
-    const v = parseInt(e.target.value, 10);
-    if (v > 0 && isFinite(v)) onCustomChange(customWidth, v);
   };
 
   const handleWidthBlur = () => {
     const v = parseInt(widthStr, 10);
-    if (!(v > 0 && isFinite(v))) setWidthStr(String(customWidth));
+    if (v > 0 && isFinite(v)) {
+      onCustomChange(v, customHeight);
+    } else {
+      setWidthStr(String(customWidth));
+    }
   };
 
   const handleHeightBlur = () => {
     const v = parseInt(heightStr, 10);
-    if (!(v > 0 && isFinite(v))) setHeightStr(String(customHeight));
+    if (v > 0 && isFinite(v)) {
+      onCustomChange(customWidth, v);
+    } else {
+      setHeightStr(String(customHeight));
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") e.currentTarget.blur();
   };
 
   return (
@@ -186,6 +194,7 @@ export function PresetPicker({
             value={widthStr}
             onChange={handleWidthChange}
             onBlur={handleWidthBlur}
+            onKeyDown={handleKeyDown}
             className="w-16 rounded border border-zinc-200 bg-white px-2 py-1 font-mono text-xs tabular-nums dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200"
           />
           <span className="text-xs text-zinc-400">×</span>
@@ -196,6 +205,7 @@ export function PresetPicker({
             value={heightStr}
             onChange={handleHeightChange}
             onBlur={handleHeightBlur}
+            onKeyDown={handleKeyDown}
             className="w-16 rounded border border-zinc-200 bg-white px-2 py-1 font-mono text-xs tabular-nums dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200"
           />
           <span className="text-[10px] text-zinc-400">px</span>
