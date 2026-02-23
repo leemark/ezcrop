@@ -181,14 +181,22 @@ function Footer() {
     <footer className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 border-t border-zinc-200 px-4 py-2 font-mono text-xs tracking-wider text-zinc-500 dark:border-zinc-800 dark:text-zinc-500">
       <span>All processing happens in your browser — nothing is uploaded.</span>
       <span>
-        &copy; {new Date().getFullYear()}{" "} Mark Lee -
+        &copy; {new Date().getFullYear()}{" "}
+        <a
+          href="https://themarklee.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-zinc-700 dark:hover:text-zinc-300"
+        >
+          Mark Lee
+        </a>{" "}-&nbsp;
         <a
           href="https://github.com/leemark/ezcrop"
           target="_blank"
           rel="noopener noreferrer"
           className="hover:text-zinc-700 dark:hover:text-zinc-300"
         >
-          github: leemark/ezcrop
+          github:leemark/ezcrop
         </a>
       </span>
     </footer>
