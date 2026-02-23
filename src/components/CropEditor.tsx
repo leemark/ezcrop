@@ -39,7 +39,7 @@ export function CropEditor({
         </ReactCrop>
       </div>
       <div className="flex w-full items-center gap-3 border-t border-zinc-100 px-4 py-3 dark:border-zinc-800">
-        <label className="font-syne text-[10px] font-bold uppercase tracking-[0.15em] text-zinc-400 dark:text-zinc-500">
+        <label className="font-syne text-xs font-bold uppercase tracking-[0.15em] text-zinc-500 dark:text-zinc-400">
           Zoom
         </label>
         <input

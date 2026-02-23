@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@variant dark (&:where(.dark, .dark *));
+
 @theme {
   --font-syne: "Syne", sans-serif;
   --font-mono: "DM Mono", monospace;
@@ -32,15 +34,13 @@ input[type="range"]::-moz-range-thumb {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
-@media (prefers-color-scheme: dark) {
-  input[type="range"]::-webkit-slider-thumb {
-    border-color: #18181b; /* zinc-950 */
-    background: #d97706; /* amber-600 */
-  }
-  input[type="range"]::-moz-range-thumb {
-    border-color: #18181b;
-    background: #d97706;
-  }
+.dark input[type="range"]::-webkit-slider-thumb {
+  border-color: #18181b; /* zinc-950 */
+  background: #d97706; /* amber-600 */
+}
+.dark input[type="range"]::-moz-range-thumb {
+  border-color: #18181b;
+  background: #d97706;
 }
 
 /* ReactCrop: amber accent overrides */

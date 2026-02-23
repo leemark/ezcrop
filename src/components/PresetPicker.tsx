@@ -112,7 +112,7 @@ export function PresetPicker({
 
   return (
     <div className="flex flex-col gap-3">
-      <h3 className="font-syne text-[10px] font-bold uppercase tracking-[0.15em] text-zinc-400 dark:text-zinc-500">
+      <h3 className="font-syne text-xs font-bold uppercase tracking-[0.15em] text-zinc-500 dark:text-zinc-400">
         Preset
       </h3>
 
@@ -121,7 +121,7 @@ export function PresetPicker({
           const groupPresets = presets.filter((p) => p.id.startsWith(prefix));
           return (
             <div key={prefix} className="flex items-center">
-              <span className="w-10 shrink-0 text-[9px] uppercase tracking-wide text-zinc-400 dark:text-zinc-500">
+              <span className="w-10 shrink-0 text-[10px] uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
                 {label}
               </span>
               <div className="flex gap-0.5">
@@ -141,7 +141,7 @@ export function PresetPicker({
                       height={preset.height}
                       active={activePreset.id === preset.id}
                     />
-                    <span className="font-mono text-[9px] leading-none">
+                    <span className="font-mono text-[10px] leading-none">
                       {shortLabels[i]}
                     </span>
                   </button>
@@ -153,7 +153,7 @@ export function PresetPicker({
 
         {/* Custom / free-form */}
         <div className="flex items-center">
-          <span className="w-10 shrink-0 text-[9px] uppercase tracking-wide text-zinc-400 dark:text-zinc-500">
+          <span className="w-10 shrink-0 text-[10px] uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
             Free
           </span>
           <button
@@ -195,7 +195,7 @@ export function PresetPicker({
             onChange={handleWidthChange}
             onBlur={handleWidthBlur}
             onKeyDown={handleKeyDown}
-            className="w-16 rounded border border-zinc-200 bg-white px-2 py-1 font-mono text-xs tabular-nums dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200"
+            className="w-16 rounded border border-zinc-300 bg-white px-2 py-1 font-mono text-xs tabular-nums dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200"
           />
           <span className="text-xs text-zinc-400">×</span>
           <input
@@ -206,9 +206,9 @@ export function PresetPicker({
             onChange={handleHeightChange}
             onBlur={handleHeightBlur}
             onKeyDown={handleKeyDown}
-            className="w-16 rounded border border-zinc-200 bg-white px-2 py-1 font-mono text-xs tabular-nums dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200"
+            className="w-16 rounded border border-zinc-300 bg-white px-2 py-1 font-mono text-xs tabular-nums dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200"
           />
-          <span className="text-[10px] text-zinc-400">px</span>
+          <span className="text-xs text-zinc-500">px</span>
         </div>
       )}
     </div>

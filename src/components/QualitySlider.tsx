@@ -7,7 +7,7 @@ export function QualitySlider({ quality, onChange }: QualitySliderProps) {
   return (
     <div className="flex flex-col gap-2">
       <div className="flex items-center justify-between">
-        <h3 className="font-syne text-[10px] font-bold uppercase tracking-[0.15em] text-zinc-400 dark:text-zinc-500">
+        <h3 className="font-syne text-xs font-bold uppercase tracking-[0.15em] text-zinc-500 dark:text-zinc-400">
           Quality
         </h3>
         <span className="font-mono text-xs tabular-nums text-zinc-500 dark:text-zinc-400">
@@ -23,7 +23,7 @@ export function QualitySlider({ quality, onChange }: QualitySliderProps) {
         onChange={(e) => onChange(Number(e.target.value))}
         className="h-1.5 w-full cursor-pointer appearance-none rounded-full bg-zinc-200 dark:bg-zinc-700"
       />
-      <p className="font-mono text-[10px] text-zinc-400 dark:text-zinc-500">
+      <p className="font-mono text-xs text-zinc-500 dark:text-zinc-400">
         Recommended: 80–85%
       </p>
     </div>

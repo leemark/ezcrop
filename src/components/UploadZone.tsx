@@ -53,7 +53,7 @@ export function UploadZone({ onFile, loading, error }: UploadZoneProps) {
         <h1 className="font-syne text-4xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
           EZCrop
         </h1>
-        <p className="mt-1.5 font-mono text-[10px] uppercase tracking-[0.25em] text-zinc-400 dark:text-zinc-500">
+        <p className="mt-1.5 font-mono text-xs uppercase tracking-[0.25em] text-zinc-500 dark:text-zinc-400">
           Crop · Resize · Download
         </p>
       </div>
@@ -113,11 +113,11 @@ export function UploadZone({ onFile, loading, error }: UploadZoneProps) {
               <p className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
                 Drop an image here
               </p>
-              <p className="mt-0.5 text-xs text-zinc-400 dark:text-zinc-500">
+              <p className="mt-0.5 text-xs text-zinc-500 dark:text-zinc-400">
                 or click to browse
               </p>
             </div>
-            <p className="font-mono text-[9px] uppercase tracking-widest text-zinc-300 dark:text-zinc-700">
+            <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-300 dark:text-zinc-700">
               JPEG · PNG · WebP · AVIF · GIF · BMP · TIFF
             </p>
           </>

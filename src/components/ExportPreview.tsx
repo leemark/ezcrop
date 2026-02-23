@@ -20,7 +20,7 @@ export function ExportPreview({
   return (
     <div className="rounded-lg border border-zinc-100 bg-zinc-50 px-3 py-2.5 dark:border-zinc-700/50 dark:bg-zinc-800/40">
       <div className="flex items-baseline justify-between">
-        <span className="font-syne text-[9px] font-bold uppercase tracking-[0.15em] text-zinc-400">
+        <span className="font-syne text-[10px] font-bold uppercase tracking-[0.15em] text-zinc-500">
           Output
         </span>
         <span className="font-mono text-xs tabular-nums text-zinc-700 dark:text-zinc-300">
@@ -28,7 +28,7 @@ export function ExportPreview({
         </span>
       </div>
       <div className="mt-1.5 flex items-baseline justify-between">
-        <span className="font-syne text-[9px] font-bold uppercase tracking-[0.15em] text-zinc-400">
+        <span className="font-syne text-[10px] font-bold uppercase tracking-[0.15em] text-zinc-500">
           Est. size
         </span>
         <span className="font-mono text-xs tabular-nums text-zinc-700 dark:text-zinc-300">

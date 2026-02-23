@@ -14,7 +14,7 @@ const formats: { value: OutputFormat; label: string; hint: string }[] = [
 export function FormatSelector({ format, onChange }: FormatSelectorProps) {
   return (
     <div className="flex flex-col gap-2">
-      <h3 className="font-syne text-[10px] font-bold uppercase tracking-[0.15em] text-zinc-400 dark:text-zinc-500">
+      <h3 className="font-syne text-xs font-bold uppercase tracking-[0.15em] text-zinc-500 dark:text-zinc-400">
         Format
       </h3>
       <div className="flex gap-1">

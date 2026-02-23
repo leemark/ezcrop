@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import type { AppPhase, OutputFormat } from "./types";
 import { useImageLoader } from "./hooks/useImageLoader";
 import { useCropState } from "./hooks/useCropState";
@@ -11,6 +11,19 @@ export default function App() {
   const [phase, setPhase] = useState<AppPhase>("upload");
   const [format, setFormat] = useState<OutputFormat>("webp");
   const [quality, setQuality] = useState(85);
+  const [isDark, setIsDark] = useState(() =>
+    document.documentElement.classList.contains("dark"),
+  );
+
+  useEffect(() => {
+    if (isDark) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("ezcrop-theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("ezcrop-theme", "light");
+    }
+  }, [isDark]);
 
   const { imageUrl, originalFile, error: loadError, loading, loadFile, reset: resetImage } = useImageLoader();
   const cropState = useCropState();
@@ -56,7 +69,8 @@ export default function App() {
 
   if (phase === "upload" || !imageUrl) {
     return (
-      <div className="min-h-screen bg-zinc-50 text-zinc-900 dark:bg-zinc-900 dark:text-zinc-100">
+      <div className="relative min-h-screen bg-zinc-50 text-zinc-900 dark:bg-zinc-900 dark:text-zinc-100">
+        <DarkToggle isDark={isDark} onToggle={() => setIsDark((d) => !d)} className="absolute right-4 top-4" />
         <UploadZone onFile={handleFile} loading={loading} error={loadError} />
         <Footer />
       </div>
@@ -69,21 +83,24 @@ export default function App() {
         <h1 className="font-syne text-base font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
           EZCrop
         </h1>
-        <div className="text-right">
-          <div className="font-mono text-xs text-zinc-400">{originalFile?.name}</div>
-          {(cropState.imageDimensions || originalFile) && (
-            <div className="font-mono text-xs text-zinc-400">
-              {cropState.imageDimensions &&
-                `${cropState.imageDimensions.width} × ${cropState.imageDimensions.height}`}
-              {cropState.imageDimensions && originalFile && " · "}
-              {originalFile &&
-                (originalFile.size < 1024
-                  ? `${originalFile.size} B`
-                  : originalFile.size < 1024 * 1024
-                    ? `${(originalFile.size / 1024).toFixed(1)} KB`
-                    : `${(originalFile.size / (1024 * 1024)).toFixed(1)} MB`)}
-            </div>
-          )}
+        <div className="flex items-center gap-3">
+          <div className="text-right">
+            <div className="font-mono text-xs text-zinc-500">{originalFile?.name}</div>
+            {(cropState.imageDimensions || originalFile) && (
+              <div className="font-mono text-xs text-zinc-500">
+                {cropState.imageDimensions &&
+                  `${cropState.imageDimensions.width} × ${cropState.imageDimensions.height}`}
+                {cropState.imageDimensions && originalFile && " · "}
+                {originalFile &&
+                  (originalFile.size < 1024
+                    ? `${originalFile.size} B`
+                    : originalFile.size < 1024 * 1024
+                      ? `${(originalFile.size / 1024).toFixed(1)} KB`
+                      : `${(originalFile.size / (1024 * 1024)).toFixed(1)} MB`)}
+              </div>
+            )}
+          </div>
+          <DarkToggle isDark={isDark} onToggle={() => setIsDark((d) => !d)} />
         </div>
       </header>
 
@@ -123,9 +140,45 @@ export default function App() {
   );
 }
 
+function DarkToggle({
+  isDark,
+  onToggle,
+  className = "",
+}: {
+  isDark: boolean;
+  onToggle: () => void;
+  className?: string;
+}) {
+  return (
+    <button
+      onClick={onToggle}
+      aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+      className={`rounded p-1.5 text-zinc-500 transition-colors hover:bg-zinc-100 hover:text-zinc-700 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-200 ${className}`}
+    >
+      {isDark ? (
+        <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="12" r="5" />
+          <line x1="12" y1="1" x2="12" y2="3" />
+          <line x1="12" y1="21" x2="12" y2="23" />
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+          <line x1="1" y1="12" x2="3" y2="12" />
+          <line x1="21" y1="12" x2="23" y2="12" />
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+        </svg>
+      ) : (
+        <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+        </svg>
+      )}
+    </button>
+  );
+}
+
 function Footer() {
   return (
-    <footer className="border-t border-zinc-200 px-4 py-2 text-center font-mono text-[10px] tracking-wider text-zinc-400 dark:border-zinc-800 dark:text-zinc-600">
+    <footer className="border-t border-zinc-200 px-4 py-2 text-center font-mono text-xs tracking-wider text-zinc-500 dark:border-zinc-800 dark:text-zinc-500">
       All processing happens in your browser — nothing is uploaded.
     </footer>
   );
