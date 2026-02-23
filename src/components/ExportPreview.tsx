@@ -23,7 +23,7 @@ export function ExportPreview({
         <span className="font-syne text-[10px] font-bold uppercase tracking-[0.15em] text-zinc-500">
           Output
         </span>
-        <span className="font-mono text-xs tabular-nums text-zinc-700 dark:text-zinc-300">
+        <span aria-live="polite" aria-atomic="true" className="font-mono text-xs tabular-nums text-zinc-700 dark:text-zinc-300">
           {targetWidth}×{targetHeight}
         </span>
       </div>
@@ -31,7 +31,7 @@ export function ExportPreview({
         <span className="font-syne text-[10px] font-bold uppercase tracking-[0.15em] text-zinc-500">
           Est. size
         </span>
-        <span className="font-mono text-xs tabular-nums text-zinc-700 dark:text-zinc-300">
+        <span aria-live="polite" aria-atomic="true" className="font-mono text-xs tabular-nums text-zinc-700 dark:text-zinc-300">
           {estimating
             ? "…"
             : estimatedSize !== null

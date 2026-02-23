@@ -55,7 +55,7 @@ export function Sidebar({
   );
 
   return (
-    <div className="flex w-full flex-col gap-4 overflow-y-auto p-4 md:w-72 md:border-l md:border-zinc-200 md:dark:border-zinc-700">
+    <aside aria-label="Crop options" className="flex w-full flex-col gap-4 overflow-y-auto p-4 md:w-72 md:border-l md:border-zinc-200 md:dark:border-zinc-700">
       <PresetPicker
         activePreset={activePreset}
         onSelect={onPresetSelect}
@@ -76,7 +76,7 @@ export function Sidebar({
       />
 
       {exportError && (
-        <p className="text-xs text-red-500 dark:text-red-400">{exportError}</p>
+        <p role="alert" className="text-xs text-red-500 dark:text-red-400">{exportError}</p>
       )}
 
       <ExportButton
@@ -91,6 +91,6 @@ export function Sidebar({
       >
         Upload a different image
       </button>
-    </div>
+    </aside>
   );
 }

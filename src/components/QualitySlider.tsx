@@ -20,6 +20,8 @@ export function QualitySlider({ quality, onChange }: QualitySliderProps) {
         max={100}
         step={1}
         value={quality}
+        aria-label="Quality"
+        aria-valuetext={quality + "%"}
         onChange={(e) => onChange(Number(e.target.value))}
         className="h-1.5 w-full cursor-pointer appearance-none rounded-full bg-zinc-200 dark:bg-zinc-700"
       />

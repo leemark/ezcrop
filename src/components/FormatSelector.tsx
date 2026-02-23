@@ -23,6 +23,7 @@ export function FormatSelector({ format, onChange }: FormatSelectorProps) {
             key={f.value}
             onClick={() => onChange(f.value)}
             title={f.hint}
+            aria-pressed={format === f.value}
             className={`flex flex-1 flex-col items-center rounded-lg py-2 transition-colors ${
               format === f.value
                 ? "bg-amber-500 text-white shadow-sm"

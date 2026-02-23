@@ -104,7 +104,7 @@ export default function App() {
         </div>
       </header>
 
-      <div className="flex flex-1 flex-col md:flex-row">
+      <main className="flex flex-1 flex-col md:flex-row">
         <CropEditor
           imageUrl={imageUrl}
           crop={cropState.crop}
@@ -133,7 +133,7 @@ export default function App() {
           onReset={handleReset}
           exportError={exportError}
         />
-      </div>
+      </main>
 
       <Footer />
     </div>

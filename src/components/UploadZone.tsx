@@ -34,6 +34,16 @@ export function UploadZone({ onFile, loading, error }: UploadZoneProps) {
     inputRef.current?.click();
   }, []);
 
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        handleClick();
+      }
+    },
+    [handleClick],
+  );
+
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const file = e.target.files?.[0];
@@ -64,6 +74,10 @@ export function UploadZone({ onFile, loading, error }: UploadZoneProps) {
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onClick={handleClick}
+        onKeyDown={handleKeyDown}
+        role="button"
+        tabIndex={0}
+        aria-label="Upload image"
         className={`relative flex w-full max-w-sm cursor-pointer flex-col items-center justify-center gap-5 px-12 py-14 transition-colors ${
           dragging ? "bg-amber-500/5" : ""
         }`}
@@ -106,7 +120,7 @@ export function UploadZone({ onFile, loading, error }: UploadZoneProps) {
         </div>
 
         {loading ? (
-          <p className="font-mono text-xs text-zinc-400">Loading image…</p>
+          <p aria-live="polite" className="font-mono text-xs text-zinc-400">Loading image…</p>
         ) : (
           <>
             <div className="text-center">
@@ -124,7 +138,7 @@ export function UploadZone({ onFile, loading, error }: UploadZoneProps) {
         )}
 
         {error && (
-          <p className="text-center text-xs text-red-500 dark:text-red-400">
+          <p role="alert" className="text-center text-xs text-red-500 dark:text-red-400">
             {error}
           </p>
         )}

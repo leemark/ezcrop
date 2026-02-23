@@ -130,6 +130,8 @@ export function PresetPicker({
                     key={preset.id}
                     onClick={() => onSelect(preset)}
                     title={preset.label}
+                    aria-label={preset.label}
+                    aria-pressed={activePreset.id === preset.id}
                     className={`flex flex-col items-center gap-0.5 rounded px-1 py-1 transition-colors ${
                       activePreset.id === preset.id
                         ? "bg-amber-500/10 text-amber-600 dark:text-amber-400"
@@ -192,6 +194,7 @@ export function PresetPicker({
             min={1}
             max={7680}
             value={widthStr}
+            aria-label="Width in pixels"
             onChange={handleWidthChange}
             onBlur={handleWidthBlur}
             onKeyDown={handleKeyDown}
@@ -203,6 +206,7 @@ export function PresetPicker({
             min={1}
             max={7680}
             value={heightStr}
+            aria-label="Height in pixels"
             onChange={handleHeightChange}
             onBlur={handleHeightBlur}
             onKeyDown={handleKeyDown}

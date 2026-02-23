@@ -12,7 +12,9 @@ export function getOutputFilename(
   height: number,
   format: OutputFormat,
 ): string {
-  const base = originalName.replace(/\.[^.]+$/, "");
+  const base = originalName
+    .replace(/[/\\]/g, "_")
+    .replace(/\.[^.]+$/, "");
   const ext = EXT_MAP[format];
   return `${base}_${width}x${height}.${ext}`;
 }

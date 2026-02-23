@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://leemark.github.io/ezcrop/sitemap.xml

@@ -63,15 +63,17 @@ export function useImageLoader() {
         // Need EXIF correction
         const img = new Image();
         const rawUrl = URL.createObjectURL(file);
-
-        await new Promise<void>((resolve, reject) => {
-          img.onload = () => resolve();
-          img.onerror = () => reject(new Error("Failed to load image"));
-          img.src = rawUrl;
-        });
+        try {
+          await new Promise<void>((resolve, reject) => {
+            img.onload = () => resolve();
+            img.onerror = () => reject(new Error("Failed to load image"));
+            img.src = rawUrl;
+          });
+        } finally {
+          URL.revokeObjectURL(rawUrl);
+        }
 
         const correctedCanvas = correctOrientation(img, degrees);
-        URL.revokeObjectURL(rawUrl);
 
         const blob = await new Promise<Blob>((resolve, reject) => {
           correctedCanvas.toBlob(
