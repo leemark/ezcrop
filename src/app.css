@@ -5,6 +5,7 @@
 @theme {
   --font-syne: "Syne", sans-serif;
   --font-mono: "DM Mono", monospace;
+  --container-sm: 30rem;
 }
 
 /* Custom range slider thumb */
