@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Agent instructions
+[cC]laude.md
+.cursorrules
+.cline_instructions.md
+.roo_instructions.md
+.aider*

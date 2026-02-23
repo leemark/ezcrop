@@ -9,6 +9,63 @@ interface PresetPickerProps {
   onCustomChange: (w: number, h: number) => void;
 }
 
+const BOX = 30;
+
+function AspectThumbnail({
+  width,
+  height,
+  active,
+}: {
+  width: number;
+  height: number;
+  active: boolean;
+}) {
+  const ratio = width / height;
+  let tw: number, th: number;
+  if (ratio >= 1) {
+    tw = BOX;
+    th = Math.max(Math.round(BOX / ratio), 4);
+  } else {
+    th = BOX;
+    tw = Math.max(Math.round(BOX * ratio), 4);
+  }
+  return (
+    <div
+      className="flex items-center justify-center"
+      style={{ width: BOX, height: BOX }}
+    >
+      <div
+        className={`border transition-colors ${
+          active
+            ? "border-amber-500 bg-amber-500/15"
+            : "border-zinc-300 bg-zinc-100 dark:border-zinc-600 dark:bg-zinc-700/40"
+        }`}
+        style={{ width: tw, height: th }}
+      />
+    </div>
+  );
+}
+
+const groups = [
+  {
+    label: "Square",
+    prefix: "square",
+    shortLabels: ["L", "M", "S"],
+  },
+  {
+    label: "Rect",
+    prefix: "rect",
+    shortLabels: ["Tall", "Mid", "Short"],
+  },
+  {
+    label: "Vert",
+    prefix: "vert",
+    shortLabels: ["Wide", "Mid", "Narrow"],
+  },
+];
+
+const customPreset = presets.find((p) => p.id === "custom")!;
+
 export function PresetPicker({
   activePreset,
   onSelect,
@@ -17,50 +74,100 @@ export function PresetPicker({
   onCustomChange,
 }: PresetPickerProps) {
   return (
-    <div className="flex flex-col gap-2">
-      <h3 className="text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+    <div className="flex flex-col gap-3">
+      <h3 className="font-syne text-[10px] font-bold uppercase tracking-[0.15em] text-zinc-400 dark:text-zinc-500">
         Preset
       </h3>
-      <div className="grid grid-cols-2 gap-1.5">
-        {presets.map((preset) => (
+
+      <div className="flex flex-col gap-1.5">
+        {groups.map(({ label, prefix, shortLabels }) => {
+          const groupPresets = presets.filter((p) => p.id.startsWith(prefix));
+          return (
+            <div key={prefix} className="flex items-center">
+              <span className="w-10 shrink-0 text-[9px] uppercase tracking-wide text-zinc-400 dark:text-zinc-500">
+                {label}
+              </span>
+              <div className="flex gap-0.5">
+                {groupPresets.map((preset, i) => (
+                  <button
+                    key={preset.id}
+                    onClick={() => onSelect(preset)}
+                    title={preset.label}
+                    className={`flex flex-col items-center gap-0.5 rounded px-1 py-1 transition-colors ${
+                      activePreset.id === preset.id
+                        ? "bg-amber-500/10 text-amber-600 dark:text-amber-400"
+                        : "text-zinc-400 hover:bg-zinc-100 dark:text-zinc-500 dark:hover:bg-zinc-700/50"
+                    }`}
+                  >
+                    <AspectThumbnail
+                      width={preset.width}
+                      height={preset.height}
+                      active={activePreset.id === preset.id}
+                    />
+                    <span className="font-mono text-[9px] leading-none">
+                      {shortLabels[i]}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          );
+        })}
+
+        {/* Custom / free-form */}
+        <div className="flex items-center">
+          <span className="w-10 shrink-0 text-[9px] uppercase tracking-wide text-zinc-400 dark:text-zinc-500">
+            Free
+          </span>
           <button
-            key={preset.id}
-            onClick={() => onSelect(preset)}
-            className={`rounded-lg px-2.5 py-1.5 text-left text-xs transition-colors ${
-              activePreset.id === preset.id
-                ? "bg-indigo-500 text-white"
-                : "bg-zinc-100 text-zinc-700 hover:bg-zinc-200 dark:bg-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-600"
+            onClick={() => onSelect(customPreset)}
+            className={`flex items-center gap-1.5 rounded px-2 py-1.5 text-xs transition-colors ${
+              activePreset.id === "custom"
+                ? "bg-amber-500/10 text-amber-600 ring-1 ring-amber-500/40 dark:text-amber-400"
+                : "text-zinc-500 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-700/50"
             }`}
           >
-            {preset.label}
+            <svg
+              className="h-3.5 w-3.5"
+              viewBox="0 0 14 14"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={1.5}
+            >
+              <rect
+                x="1.5"
+                y="1.5"
+                width="11"
+                height="11"
+                rx="1"
+                strokeDasharray="2.5 1.5"
+              />
+            </svg>
+            Custom size
           </button>
-        ))}
+        </div>
       </div>
 
       {activePreset.id === "custom" && (
-        <div className="mt-1 flex items-center gap-2">
+        <div className="flex items-center gap-1.5 rounded-lg bg-zinc-50 p-2 dark:bg-zinc-800/50">
           <input
             type="number"
             min={1}
             max={7680}
             value={customWidth}
-            onChange={(e) =>
-              onCustomChange(Number(e.target.value), customHeight)
-            }
-            className="w-20 rounded-md border border-zinc-300 bg-white px-2 py-1 text-xs tabular-nums dark:border-zinc-600 dark:bg-zinc-700 dark:text-zinc-200"
+            onChange={(e) => onCustomChange(Number(e.target.value), customHeight)}
+            className="w-16 rounded border border-zinc-200 bg-white px-2 py-1 font-mono text-xs tabular-nums dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200"
           />
-          <span className="text-xs text-zinc-400">&times;</span>
+          <span className="text-xs text-zinc-400">×</span>
           <input
             type="number"
             min={1}
             max={7680}
             value={customHeight}
-            onChange={(e) =>
-              onCustomChange(customWidth, Number(e.target.value))
-            }
-            className="w-20 rounded-md border border-zinc-300 bg-white px-2 py-1 text-xs tabular-nums dark:border-zinc-600 dark:bg-zinc-700 dark:text-zinc-200"
+            onChange={(e) => onCustomChange(customWidth, Number(e.target.value))}
+            className="w-16 rounded border border-zinc-200 bg-white px-2 py-1 font-mono text-xs tabular-nums dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200"
           />
-          <span className="text-xs text-zinc-400">px</span>
+          <span className="text-[10px] text-zinc-400">px</span>
         </div>
       )}
     </div>

@@ -1,1 +1,65 @@
 @import "tailwindcss";
+
+@theme {
+  --font-syne: "Syne", sans-serif;
+  --font-mono: "DM Mono", monospace;
+}
+
+/* Custom range slider thumb */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 9999px;
+  background: #f59e0b; /* amber-400 */
+  cursor: pointer;
+  border: 2px solid #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: transform 0.1s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 9999px;
+  background: #f59e0b;
+  cursor: pointer;
+  border: 2px solid #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+@media (prefers-color-scheme: dark) {
+  input[type="range"]::-webkit-slider-thumb {
+    border-color: #18181b; /* zinc-950 */
+    background: #d97706; /* amber-600 */
+  }
+  input[type="range"]::-moz-range-thumb {
+    border-color: #18181b;
+    background: #d97706;
+  }
+}
+
+/* ReactCrop: amber accent overrides */
+.ReactCrop__crop-selection {
+  border: 1.5px solid rgba(245, 158, 11, 0.85) !important;
+  border-image: none !important;
+  box-shadow: 0 0 0 9999em rgba(0, 0, 0, 0.42) !important;
+}
+
+.ReactCrop__drag-handle::after {
+  background-color: #f59e0b !important;
+  border: none !important;
+  border-radius: 2px;
+  width: 8px !important;
+  height: 8px !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .ReactCrop__crop-selection {
+    box-shadow: 0 0 0 9999em rgba(0, 0, 0, 0.55) !important;
+  }
+}

@@ -13,7 +13,7 @@ export function ExportButton({
     <button
       onClick={onClick}
       disabled={disabled || exporting}
-      className="w-full rounded-xl bg-indigo-500 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-indigo-600 disabled:cursor-not-allowed disabled:opacity-50"
+      className="w-full rounded-xl bg-amber-500 px-4 py-3 font-syne text-sm font-bold tracking-wide text-white shadow-sm transition-all hover:bg-amber-600 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40 dark:hover:bg-amber-400"
     >
       {exporting ? (
         <span className="flex items-center justify-center gap-2">
@@ -38,10 +38,25 @@ export function ExportButton({
               className="opacity-75"
             />
           </svg>
-          Exporting...
+          Exporting…
         </span>
       ) : (
-        "Export"
+        <span className="flex items-center justify-center gap-2">
+          <svg
+            className="h-4 w-4"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2.5}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+            />
+          </svg>
+          Export Image
+        </span>
       )}
     </button>
   );

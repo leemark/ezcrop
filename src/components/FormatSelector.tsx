@@ -5,30 +5,31 @@ interface FormatSelectorProps {
   onChange: (format: OutputFormat) => void;
 }
 
-const formats: { value: OutputFormat; label: string }[] = [
-  { value: "webp", label: "WebP" },
-  { value: "jpeg", label: "JPEG" },
-  { value: "avif", label: "AVIF" },
+const formats: { value: OutputFormat; label: string; hint: string }[] = [
+  { value: "webp", label: "WebP", hint: "Best balance" },
+  { value: "jpeg", label: "JPEG", hint: "Compatible" },
+  { value: "avif", label: "AVIF", hint: "Smallest" },
 ];
 
 export function FormatSelector({ format, onChange }: FormatSelectorProps) {
   return (
     <div className="flex flex-col gap-2">
-      <h3 className="text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+      <h3 className="font-syne text-[10px] font-bold uppercase tracking-[0.15em] text-zinc-400 dark:text-zinc-500">
         Format
       </h3>
-      <div className="flex gap-1.5">
+      <div className="flex gap-1">
         {formats.map((f) => (
           <button
             key={f.value}
             onClick={() => onChange(f.value)}
-            className={`flex-1 rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${
+            title={f.hint}
+            className={`flex flex-1 flex-col items-center rounded-lg py-2 transition-colors ${
               format === f.value
-                ? "bg-indigo-500 text-white"
-                : "bg-zinc-100 text-zinc-700 hover:bg-zinc-200 dark:bg-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-600"
+                ? "bg-amber-500 text-white shadow-sm"
+                : "bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-400 dark:hover:bg-zinc-700"
             }`}
           >
-            {f.label}
+            <span className="font-mono text-xs font-medium">{f.label}</span>
           </button>
         ))}
       </div>

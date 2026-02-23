@@ -65,12 +65,14 @@ export default function App() {
 
   return (
     <div className="flex min-h-screen flex-col bg-zinc-50 text-zinc-900 dark:bg-zinc-900 dark:text-zinc-100">
-      <header className="flex items-center justify-between border-b border-zinc-200 px-4 py-2 dark:border-zinc-700">
-        <h1 className="text-sm font-bold tracking-tight">EZCrop</h1>
+      <header className="flex items-center justify-between border-b border-zinc-200 px-4 py-2.5 dark:border-zinc-800">
+        <h1 className="font-syne text-base font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
+          EZCrop
+        </h1>
         <div className="text-right">
-          <div className="text-xs text-zinc-400">{originalFile?.name}</div>
+          <div className="font-mono text-xs text-zinc-400">{originalFile?.name}</div>
           {(cropState.imageDimensions || originalFile) && (
-            <div className="text-xs text-zinc-400">
+            <div className="font-mono text-xs text-zinc-400">
               {cropState.imageDimensions &&
                 `${cropState.imageDimensions.width} × ${cropState.imageDimensions.height}`}
               {cropState.imageDimensions && originalFile && " · "}
@@ -123,8 +125,8 @@ export default function App() {
 
 function Footer() {
   return (
-    <footer className="border-t border-zinc-200 px-4 py-2 text-center text-xs text-zinc-400 dark:border-zinc-700 dark:text-zinc-500">
-      All processing happens in your browser. No images are uploaded to any server.
+    <footer className="border-t border-zinc-200 px-4 py-2 text-center font-mono text-[10px] tracking-wider text-zinc-400 dark:border-zinc-800 dark:text-zinc-600">
+      All processing happens in your browser — nothing is uploaded.
     </footer>
   );
 }
