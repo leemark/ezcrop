@@ -54,7 +54,7 @@ export function UploadZone({ onFile, loading, error }: UploadZoneProps) {
 
   const bracketColor = dragging
     ? "border-amber-500"
-    : "border-zinc-300 dark:border-zinc-600";
+    : "border-zinc-300 dark:border-zinc-600 group-hover:border-amber-400 dark:group-hover:border-amber-400";
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center gap-10 p-4">
@@ -78,30 +78,30 @@ export function UploadZone({ onFile, loading, error }: UploadZoneProps) {
         role="button"
         tabIndex={0}
         aria-label="Upload image"
-        className={`relative flex w-full max-w-sm cursor-pointer flex-col items-center justify-center gap-5 px-12 py-14 transition-colors ${
+        className={`group relative flex w-full max-w-sm cursor-pointer flex-col items-center justify-center gap-5 px-12 py-14 transition-colors hover:bg-amber-500/5 ${
           dragging ? "bg-amber-500/5" : ""
         }`}
       >
         {/* Corner brackets */}
         <div
-          className={`absolute left-0 top-0 h-7 w-7 border-l-2 border-t-2 transition-colors ${bracketColor}`}
+          className={`absolute left-0 top-0 h-7 w-7 border-l-2 border-t-2 transition-all group-hover:-translate-x-0.5 group-hover:-translate-y-0.5 ${bracketColor}`}
         />
         <div
-          className={`absolute right-0 top-0 h-7 w-7 border-r-2 border-t-2 transition-colors ${bracketColor}`}
+          className={`absolute right-0 top-0 h-7 w-7 border-r-2 border-t-2 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 ${bracketColor}`}
         />
         <div
-          className={`absolute bottom-0 left-0 h-7 w-7 border-b-2 border-l-2 transition-colors ${bracketColor}`}
+          className={`absolute bottom-0 left-0 h-7 w-7 border-b-2 border-l-2 transition-all group-hover:-translate-x-0.5 group-hover:translate-y-0.5 ${bracketColor}`}
         />
         <div
-          className={`absolute bottom-0 right-0 h-7 w-7 border-b-2 border-r-2 transition-colors ${bracketColor}`}
+          className={`absolute bottom-0 right-0 h-7 w-7 border-b-2 border-r-2 transition-all group-hover:translate-x-0.5 group-hover:translate-y-0.5 ${bracketColor}`}
         />
 
         {/* Icon */}
         <div
-          className={`flex h-14 w-14 items-center justify-center rounded-full transition-colors ${
+          className={`flex h-14 w-14 items-center justify-center rounded-full transition-all group-hover:scale-110 ${
             dragging
               ? "bg-amber-500/10 text-amber-500"
-              : "bg-zinc-100 text-zinc-400 dark:bg-zinc-800 dark:text-zinc-500"
+              : "bg-zinc-100 text-zinc-400 group-hover:bg-amber-500/10 group-hover:text-amber-500 dark:bg-zinc-800 dark:text-zinc-500"
           }`}
         >
           <svg
