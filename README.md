@@ -36,7 +36,7 @@ The aspect ratio will lock to your selected preset. If the **Custom** size prese
 ### 3. Choose a Preset (or Custom Size)
 In the sidebar on the right, click a preset button to snap the crop to that aspect ratio:
 - **Square** — Large (1600×1600), Medium (1000×1000), Small (600×600)
-- **Rectangle** — Tall (1920×1280), Medium (1920×1080), Short (1920×800)
+- **Rectangle** — Tall (1920×1280), Medium (1920×1080), Short (1920×900)
 - **Vertical** — Wide (1280×1920), Medium (1080×1920), Narrow (800×1920)
 - **Custom** — Enter your own width and height, or drag the handles to naturally update width and height while completely unconstrained.
 
