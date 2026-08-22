@@ -78,7 +78,6 @@ Built with:
 - [React](https://react.dev)
 - [react-image-crop](https://github.com/DominicTobias/react-image-crop) — Crop UI with resize handles
 - [pica](https://github.com/nodeca/pica) — High-quality image resizing
-- [exifr](https://github.com/MikeKovarik/exifr) — EXIF metadata reading
 - [Tailwind CSS](https://tailwindcss.com) — Styling
 - [@jsquash/avif](https://github.com/jamsinclair/jSquash) — AVIF encoding
 

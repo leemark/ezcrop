@@ -26,16 +26,14 @@ export function CropEditor({
   const [fitToHeight, setFitToHeight] = useState(false);
 
   useEffect(() => {
-    if (!fitToHeight || !containerRef.current) {
-      setContainerHeight(null);
-      return;
-    }
+    const el = containerRef.current;
+    if (!el) return;
     const ro = new ResizeObserver((entries) => {
       setContainerHeight(entries[0].contentRect.height);
     });
-    ro.observe(containerRef.current);
+    ro.observe(el);
     return () => ro.disconnect();
-  }, [fitToHeight]);
+  }, []);
 
   return (
     <div className="relative flex flex-1 flex-col items-center">

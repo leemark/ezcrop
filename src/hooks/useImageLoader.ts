@@ -1,5 +1,4 @@
 import { useState, useCallback, useRef } from "react";
-import { getOrientation, correctOrientation } from "../lib/orientation";
 
 const ACCEPTED_TYPES = [
   "image/jpeg",
@@ -34,6 +33,9 @@ export function useImageLoader() {
     }
   }, []);
 
+  // No manual EXIF correction here: modern browsers apply EXIF orientation
+  // automatically when decoding, keeping <img> rendering, naturalWidth/Height,
+  // and canvas drawImage consistent. Rotating again would double-rotate.
   const loadFile = useCallback(
     async (file: File) => {
       cleanup();
@@ -50,42 +52,20 @@ export function useImageLoader() {
 
       setState({ imageUrl: null, originalFile: file, error: null, loading: true });
 
+      const url = URL.createObjectURL(file);
       try {
-        const degrees = await getOrientation(file);
-
-        if (degrees === 0) {
-          const url = URL.createObjectURL(file);
-          objectUrlRef.current = url;
-          setState({ imageUrl: url, originalFile: file, error: null, loading: false });
-          return;
-        }
-
-        // Need EXIF correction
+        // Verify the browser can actually decode the file before entering edit
         const img = new Image();
-        const rawUrl = URL.createObjectURL(file);
-        try {
-          await new Promise<void>((resolve, reject) => {
-            img.onload = () => resolve();
-            img.onerror = () => reject(new Error("Failed to load image"));
-            img.src = rawUrl;
-          });
-        } finally {
-          URL.revokeObjectURL(rawUrl);
-        }
-
-        const correctedCanvas = correctOrientation(img, degrees);
-
-        const blob = await new Promise<Blob>((resolve, reject) => {
-          correctedCanvas.toBlob(
-            (b) => (b ? resolve(b) : reject(new Error("Orientation correction failed"))),
-            "image/png",
-          );
+        await new Promise<void>((resolve, reject) => {
+          img.onload = () => resolve();
+          img.onerror = () => reject(new Error("Failed to load image"));
+          img.src = url;
         });
 
-        const url = URL.createObjectURL(blob);
         objectUrlRef.current = url;
         setState({ imageUrl: url, originalFile: file, error: null, loading: false });
       } catch (e) {
+        URL.revokeObjectURL(url);
         setState({
           imageUrl: null,
           originalFile: null,

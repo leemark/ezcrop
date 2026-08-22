@@ -23,7 +23,7 @@ The app cycles through three phases managed in `App.tsx`: `upload` → `edit` �
 
 ### Data flow
 
-1. **`useImageLoader`** (`src/hooks/useImageLoader.ts`) — Accepts a `File`, reads EXIF orientation via `exifr`, corrects rotation via canvas if needed, and produces an object URL.
+1. **`useImageLoader`** (`src/hooks/useImageLoader.ts`) — Accepts a `File`, validates the MIME type, verifies the browser can decode it, and produces an object URL. No manual EXIF handling: modern browsers apply EXIF orientation automatically and consistently for rendering, `naturalWidth`/`naturalHeight`, and canvas `drawImage`.
 2. **`useCropState`** (`src/hooks/useCropState.ts`) — All crop interaction state: the `PercentCrop` from `react-image-crop`, zoom level, active preset, custom dimensions, and derived `targetWidth`/`targetHeight`. The "custom" preset is special: `aspect` is `undefined` (free-form), and drag-resizing the crop box writes back into `customWidth`/`customHeight`.
 3. **`useExportPipeline`** (`src/hooks/useExportPipeline.ts`) — Orchestrates export. Crops the image to a canvas (`cropUtils.ts`), then resizes and encodes either in a Web Worker (preferred) or main thread (fallback). Downloads the result via a temporary `<a>` element.
 

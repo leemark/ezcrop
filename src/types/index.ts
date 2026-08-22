@@ -12,19 +12,9 @@ export interface CropArea {
   height: number;
 }
 
-export interface CropPoint {
-  x: number;
-  y: number;
-}
-
 export type OutputFormat = "webp" | "jpeg" | "avif";
 
 export type AppPhase = "upload" | "edit" | "exporting";
-
-export interface ExportSettings {
-  format: OutputFormat;
-  quality: number;
-}
 
 export interface EncodeRequest {
   imageData: ImageData;

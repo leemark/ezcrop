@@ -73,7 +73,6 @@ export function useCropState() {
       updateCroppedPixels(initial);
       setZoom(1);
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [initialAspect],
   );
 
@@ -95,7 +94,6 @@ export function useCropState() {
         }
       }
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [activePreset.id],
   );
 
@@ -129,7 +127,6 @@ export function useCropState() {
       setCrop(newCrop);
       updateCroppedPixels(newCrop);
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [crop, aspect],
   );
 
