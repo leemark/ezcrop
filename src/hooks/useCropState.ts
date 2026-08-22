@@ -18,21 +18,16 @@ export function useCropState() {
   const [customHeight, setCustomHeight] = useState(600);
   const imageRef = useRef<HTMLImageElement | null>(null);
 
-  const aspect =
-    activePreset.id === "custom"
-      ? undefined
-      : activePreset.width / activePreset.height;
-
-  // The aspect to use for initializing crops
-  const initialAspect =
-    activePreset.id === "custom"
-      ? customWidth / customHeight
-      : activePreset.width / activePreset.height;
-
+  // Custom works like the other presets: the entered dimensions are the
+  // OUTPUT size, and the crop box covers most of the image at that aspect,
+  // so export resizes the selection (crop + resize in one step).
   const targetWidth =
     activePreset.id === "custom" ? customWidth : activePreset.width;
   const targetHeight =
     activePreset.id === "custom" ? customHeight : activePreset.height;
+
+  const aspect = targetWidth / targetHeight;
+  const initialAspect = aspect;
 
   function makeInitialCrop(img: HTMLImageElement, asp: number): PercentCrop {
     const crop = makeAspectCrop(
@@ -81,20 +76,8 @@ export function useCropState() {
       setCrop(percentCrop);
       updateCroppedPixels(percentCrop);
       setZoom(zoomFromCrop(percentCrop));
-
-      if (activePreset.id === "custom") {
-        const img = imageRef.current;
-        if (img) {
-          const w = Math.round((percentCrop.width / 100) * img.naturalWidth);
-          const h = Math.round((percentCrop.height / 100) * img.naturalHeight);
-          if (w > 0 && h > 0) {
-            setCustomWidth(w);
-            setCustomHeight(h);
-          }
-        }
-      }
     },
-    [activePreset.id],
+    [],
   );
 
   const setCropForZoom = useCallback(
@@ -157,33 +140,20 @@ export function useCropState() {
       const img = imageRef.current;
       if (!img) return;
 
-      const imgW = img.naturalWidth;
-      const imgH = img.naturalHeight;
-      const desiredAspect = w / h;
-
-      // Scale desired pixel dimensions to fit within image bounds, preserving aspect ratio
-      let cropW = Math.min(w, imgW);
-      let cropH = cropW / desiredAspect;
-      if (cropH > imgH) {
-        cropH = imgH;
-        cropW = cropH * desiredAspect;
-      }
-
-      // Convert to percentages relative to natural image dimensions
-      const pctW = (cropW / imgW) * 100;
-      const pctH = (cropH / imgH) * 100;
-
-      // Keep centered on current crop position
+      // Re-fit the crop box to the new output aspect ratio at ~90% of the
+      // image (like presets do), keeping the current crop center
+      const newAspect = w / h;
       const cx = crop ? crop.x + crop.width / 2 : 50;
       const cy = crop ? crop.y + crop.height / 2 : 50;
 
-      const newCrop: PercentCrop = {
-        unit: "%",
-        width: pctW,
-        height: pctH,
-        x: Math.max(0, Math.min(100 - pctW, cx - pctW / 2)),
-        y: Math.max(0, Math.min(100 - pctH, cy - pctH / 2)),
-      };
+      const newCrop = makeAspectCrop(
+        { unit: "%", width: 90 },
+        newAspect,
+        img.width,
+        img.height,
+      );
+      newCrop.x = Math.max(0, Math.min(100 - newCrop.width, cx - newCrop.width / 2));
+      newCrop.y = Math.max(0, Math.min(100 - newCrop.height, cy - newCrop.height / 2));
 
       setCrop(newCrop);
       updateCroppedPixels(newCrop);

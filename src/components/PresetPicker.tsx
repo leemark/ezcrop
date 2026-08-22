@@ -153,10 +153,10 @@ export function PresetPicker({
           );
         })}
 
-        {/* Custom / free-form */}
+        {/* Custom output size */}
         <div className="flex items-center">
           <span className="w-10 shrink-0 text-[10px] uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
-            Free
+            Size
           </span>
           <button
             onClick={() => onSelect(customPreset)}
