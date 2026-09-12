@@ -1,0 +1,66 @@
+{
+  "date": "2026-09-12T04:09:20.435Z",
+  "base": "http://127.0.0.1:4173/ezcrop/",
+  "suite": "edges",
+  "browsers": {
+    "chrome": {
+      "version": "151.0.7922.176",
+      "engine": "chrome"
+    }
+  },
+  "cases": [
+    {
+      "name": "custom/unchanged-blur",
+      "status": "defect",
+      "before": {
+        "style": "top: 33.125%; left: 35%; width: 30%; height: 33.75%;",
+        "width": 315,
+        "height": 236.25,
+        "x": 418.5,
+        "y": 368.375
+      },
+      "after": {
+        "style": "top: 0%; left: 5.55556%; width: 88.8889%; height: 100%;",
+        "width": 933.328125,
+        "height": 700,
+        "x": 109.328125,
+        "y": 136.5
+      }
+    },
+    {
+      "name": "custom/upper-bound",
+      "status": "defect",
+      "text": "PRESET\nSQUARE\nL\nM\nS\nRECT\nTall\nMid\nShort\nVERT\nWide\nMid\nNarrow\nSIZE\nCustom size\n×\npx\nFORMAT\nWebP\nJPEG\nAVIF\nQUALITY\n85%\n\nRecommended: 80–85%\n\nOUTPUT\n7681×600\nEST. SIZE\n…\nExport Image\nUpload a different image"
+    },
+    {
+      "name": "custom/extreme-aspect",
+      "status": "defect",
+      "error": [
+        "Failed to execute 'drawImage' on 'CanvasRenderingContext2D': The image argument is a canvas element with a width or height of 0."
+      ]
+    },
+    {
+      "name": "offline/first-avif",
+      "status": "defect",
+      "error": [
+        "Failed to fetch dynamically imported module: http://127.0.0.1:4173/ezcrop/assets/index-B8dm3f4v.js"
+      ]
+    },
+    {
+      "name": "storage/blocked",
+      "status": "defect",
+      "usable": false,
+      "errors": [
+        "Storage denied",
+        "Storage denied"
+      ],
+      "body": ""
+    },
+    {
+      "name": "layout/long-name",
+      "status": "defect",
+      "viewport": 390,
+      "scrollWidth": 1447
+    }
+  ]
+}

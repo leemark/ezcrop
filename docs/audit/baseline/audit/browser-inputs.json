@@ -1,0 +1,868 @@
+{
+  "date": "2026-09-12T04:21:46.763Z",
+  "base": "http://127.0.0.1:4173/ezcrop/",
+  "suite": "inputs",
+  "browsers": {
+    "chrome": {
+      "version": "151.0.7922.176",
+      "engine": "chrome"
+    }
+  },
+  "cases": [
+    {
+      "name": "input/landscape.jpg",
+      "status": "pass",
+      "accepted": true,
+      "error": []
+    },
+    {
+      "name": "input/landscape.png",
+      "status": "pass",
+      "accepted": true,
+      "error": []
+    },
+    {
+      "name": "input/landscape.webp",
+      "status": "pass",
+      "accepted": true,
+      "error": []
+    },
+    {
+      "name": "input/landscape.bmp",
+      "status": "pass",
+      "accepted": true,
+      "error": []
+    },
+    {
+      "name": "input/landscape.tiff",
+      "status": "defect",
+      "accepted": false,
+      "error": [
+        "Failed to load image"
+      ]
+    },
+    {
+      "name": "input/animated.gif",
+      "status": "pass",
+      "accepted": true,
+      "error": []
+    },
+    {
+      "name": "input/corrupt.png",
+      "status": "pass",
+      "accepted": false,
+      "error": [
+        "Failed to load image"
+      ]
+    },
+    {
+      "name": "input/unsupported.svg",
+      "status": "pass",
+      "accepted": false,
+      "error": [
+        "Unsupported file type: image/svg+xml. Please use JPEG, PNG, WebP, AVIF, GIF, BMP, or TIFF."
+      ]
+    },
+    {
+      "name": "input/one-pixel.png",
+      "status": "pass",
+      "accepted": true,
+      "error": []
+    },
+    {
+      "name": "orientation/1",
+      "status": "pass",
+      "displayed": {
+        "width": 300,
+        "height": 200
+      },
+      "expected": {
+        "file": "orientation-1.jpg",
+        "value": 1,
+        "width": 300,
+        "height": 200,
+        "samples": [
+          [
+            220,
+            40,
+            51
+          ],
+          [
+            40,
+            180,
+            81
+          ],
+          [
+            40,
+            91,
+            219
+          ],
+          [
+            240,
+            200,
+            40
+          ]
+        ]
+      },
+      "result": {
+        "requested": "JPEG",
+        "actual": "JPEG",
+        "filename": "orientation-1_300x200.jpg",
+        "width": 300,
+        "height": 200,
+        "bytes": 2110,
+        "samples": [
+          [
+            220,
+            40,
+            51,
+            255
+          ],
+          [
+            40,
+            180,
+            81,
+            255
+          ],
+          [
+            40,
+            91,
+            219,
+            255
+          ],
+          [
+            240,
+            200,
+            40,
+            255
+          ]
+        ],
+        "sha256": "7e6c476e02d8fba217c57eac7f1bc4d0061bb19841458b9ab12c89064c5de75a",
+        "elapsedMs": 4502,
+        "file": "C:\\Users\\mark\\Documents\\EZCrop\\output\\playwright\\exports\\orientation-1-orientation-1_300x200.jpg"
+      },
+      "maxChannelError": 0
+    },
+    {
+      "name": "orientation/2",
+      "status": "pass",
+      "displayed": {
+        "width": 300,
+        "height": 200
+      },
+      "expected": {
+        "file": "orientation-2.jpg",
+        "value": 2,
+        "width": 300,
+        "height": 200,
+        "samples": [
+          [
+            40,
+            180,
+            81
+          ],
+          [
+            220,
+            40,
+            51
+          ],
+          [
+            240,
+            200,
+            40
+          ],
+          [
+            40,
+            91,
+            219
+          ]
+        ]
+      },
+      "result": {
+        "requested": "JPEG",
+        "actual": "JPEG",
+        "filename": "orientation-2_300x200.jpg",
+        "width": 300,
+        "height": 200,
+        "bytes": 2123,
+        "samples": [
+          [
+            40,
+            180,
+            81,
+            255
+          ],
+          [
+            220,
+            40,
+            51,
+            255
+          ],
+          [
+            240,
+            200,
+            40,
+            255
+          ],
+          [
+            40,
+            91,
+            219,
+            255
+          ]
+        ],
+        "sha256": "ea589c1f9aab645dc1055d37f87f8c6aa52b0a5db9d4080eb24bea9bbeca919e",
+        "elapsedMs": 1962,
+        "file": "C:\\Users\\mark\\Documents\\EZCrop\\output\\playwright\\exports\\orientation-2-orientation-2_300x200.jpg"
+      },
+      "maxChannelError": 0
+    },
+    {
+      "name": "orientation/3",
+      "status": "pass",
+      "displayed": {
+        "width": 300,
+        "height": 200
+      },
+      "expected": {
+        "file": "orientation-3.jpg",
+        "value": 3,
+        "width": 300,
+        "height": 200,
+        "samples": [
+          [
+            240,
+            200,
+            40
+          ],
+          [
+            40,
+            91,
+            219
+          ],
+          [
+            40,
+            180,
+            81
+          ],
+          [
+            220,
+            40,
+            51
+          ]
+        ]
+      },
+      "result": {
+        "requested": "JPEG",
+        "actual": "JPEG",
+        "filename": "orientation-3_300x200.jpg",
+        "width": 300,
+        "height": 200,
+        "bytes": 2121,
+        "samples": [
+          [
+            240,
+            200,
+            40,
+            255
+          ],
+          [
+            40,
+            91,
+            219,
+            255
+          ],
+          [
+            40,
+            180,
+            81,
+            255
+          ],
+          [
+            220,
+            40,
+            51,
+            255
+          ]
+        ],
+        "sha256": "6df33e31979b17e3da6312a831ed4f554ecc4fd9d1bea036f03874828f825306",
+        "elapsedMs": 871,
+        "file": "C:\\Users\\mark\\Documents\\EZCrop\\output\\playwright\\exports\\orientation-3-orientation-3_300x200.jpg"
+      },
+      "maxChannelError": 0
+    },
+    {
+      "name": "orientation/4",
+      "status": "pass",
+      "displayed": {
+        "width": 300,
+        "height": 200
+      },
+      "expected": {
+        "file": "orientation-4.jpg",
+        "value": 4,
+        "width": 300,
+        "height": 200,
+        "samples": [
+          [
+            40,
+            91,
+            219
+          ],
+          [
+            240,
+            200,
+            40
+          ],
+          [
+            220,
+            40,
+            51
+          ],
+          [
+            40,
+            180,
+            81
+          ]
+        ]
+      },
+      "result": {
+        "requested": "JPEG",
+        "actual": "JPEG",
+        "filename": "orientation-4_300x200.jpg",
+        "width": 300,
+        "height": 200,
+        "bytes": 2114,
+        "samples": [
+          [
+            40,
+            91,
+            219,
+            255
+          ],
+          [
+            240,
+            200,
+            40,
+            255
+          ],
+          [
+            220,
+            40,
+            51,
+            255
+          ],
+          [
+            40,
+            180,
+            81,
+            255
+          ]
+        ],
+        "sha256": "9f74efcd68c5facd012f1e17f90aef52db7f040685f168c5fcf6b9e20209e6ad",
+        "elapsedMs": 537,
+        "file": "C:\\Users\\mark\\Documents\\EZCrop\\output\\playwright\\exports\\orientation-4-orientation-4_300x200.jpg"
+      },
+      "maxChannelError": 0
+    },
+    {
+      "name": "orientation/5",
+      "status": "pass",
+      "displayed": {
+        "width": 200,
+        "height": 300
+      },
+      "expected": {
+        "file": "orientation-5.jpg",
+        "value": 5,
+        "width": 200,
+        "height": 300,
+        "samples": [
+          [
+            220,
+            40,
+            51
+          ],
+          [
+            40,
+            91,
+            219
+          ],
+          [
+            40,
+            180,
+            81
+          ],
+          [
+            240,
+            200,
+            40
+          ]
+        ]
+      },
+      "result": {
+        "requested": "JPEG",
+        "actual": "JPEG",
+        "filename": "orientation-5_200x300.jpg",
+        "width": 200,
+        "height": 300,
+        "bytes": 2152,
+        "samples": [
+          [
+            220,
+            40,
+            51,
+            255
+          ],
+          [
+            40,
+            91,
+            219,
+            255
+          ],
+          [
+            40,
+            180,
+            81,
+            255
+          ],
+          [
+            240,
+            200,
+            40,
+            255
+          ]
+        ],
+        "sha256": "b4db67784f013c75547ab82b5fd964660fb692689b30710f933383a4aa187e86",
+        "elapsedMs": 879,
+        "file": "C:\\Users\\mark\\Documents\\EZCrop\\output\\playwright\\exports\\orientation-5-orientation-5_200x300.jpg"
+      },
+      "maxChannelError": 0
+    },
+    {
+      "name": "orientation/6",
+      "status": "pass",
+      "displayed": {
+        "width": 200,
+        "height": 300
+      },
+      "expected": {
+        "file": "orientation-6.jpg",
+        "value": 6,
+        "width": 200,
+        "height": 300,
+        "samples": [
+          [
+            40,
+            91,
+            219
+          ],
+          [
+            220,
+            40,
+            51
+          ],
+          [
+            240,
+            200,
+            40
+          ],
+          [
+            40,
+            180,
+            81
+          ]
+        ]
+      },
+      "result": {
+        "requested": "JPEG",
+        "actual": "JPEG",
+        "filename": "orientation-6_200x300.jpg",
+        "width": 200,
+        "height": 300,
+        "bytes": 2157,
+        "samples": [
+          [
+            40,
+            91,
+            219,
+            255
+          ],
+          [
+            220,
+            40,
+            51,
+            255
+          ],
+          [
+            240,
+            200,
+            40,
+            255
+          ],
+          [
+            40,
+            180,
+            81,
+            255
+          ]
+        ],
+        "sha256": "39f0410def76973119ea439fc724dc56cc61cbafa423b7d277f03d382a9c1c99",
+        "elapsedMs": 2415,
+        "file": "C:\\Users\\mark\\Documents\\EZCrop\\output\\playwright\\exports\\orientation-6-orientation-6_200x300.jpg"
+      },
+      "maxChannelError": 0
+    },
+    {
+      "name": "orientation/7",
+      "status": "pass",
+      "displayed": {
+        "width": 200,
+        "height": 300
+      },
+      "expected": {
+        "file": "orientation-7.jpg",
+        "value": 7,
+        "width": 200,
+        "height": 300,
+        "samples": [
+          [
+            240,
+            200,
+            40
+          ],
+          [
+            40,
+            180,
+            81
+          ],
+          [
+            40,
+            91,
+            219
+          ],
+          [
+            220,
+            40,
+            51
+          ]
+        ]
+      },
+      "result": {
+        "requested": "JPEG",
+        "actual": "JPEG",
+        "filename": "orientation-7_200x300.jpg",
+        "width": 200,
+        "height": 300,
+        "bytes": 2153,
+        "samples": [
+          [
+            240,
+            200,
+            40,
+            255
+          ],
+          [
+            40,
+            180,
+            81,
+            255
+          ],
+          [
+            40,
+            91,
+            219,
+            255
+          ],
+          [
+            220,
+            40,
+            51,
+            255
+          ]
+        ],
+        "sha256": "32933c80b381f2083239d7032312b65fd019a69a0307f9ff3a63da445a209e94",
+        "elapsedMs": 1810,
+        "file": "C:\\Users\\mark\\Documents\\EZCrop\\output\\playwright\\exports\\orientation-7-orientation-7_200x300.jpg"
+      },
+      "maxChannelError": 0
+    },
+    {
+      "name": "orientation/8",
+      "status": "pass",
+      "displayed": {
+        "width": 200,
+        "height": 300
+      },
+      "expected": {
+        "file": "orientation-8.jpg",
+        "value": 8,
+        "width": 200,
+        "height": 300,
+        "samples": [
+          [
+            40,
+            180,
+            81
+          ],
+          [
+            240,
+            200,
+            40
+          ],
+          [
+            220,
+            40,
+            51
+          ],
+          [
+            40,
+            91,
+            219
+          ]
+        ]
+      },
+      "result": {
+        "requested": "JPEG",
+        "actual": "JPEG",
+        "filename": "orientation-8_200x300.jpg",
+        "width": 200,
+        "height": 300,
+        "bytes": 2151,
+        "samples": [
+          [
+            40,
+            180,
+            81,
+            255
+          ],
+          [
+            240,
+            200,
+            40,
+            255
+          ],
+          [
+            220,
+            40,
+            51,
+            255
+          ],
+          [
+            40,
+            91,
+            219,
+            255
+          ]
+        ],
+        "sha256": "864c9d108c49b351c117b4e93f8d42164360fe0fe538d2ac86c5175ba65763b7",
+        "elapsedMs": 2733,
+        "file": "C:\\Users\\mark\\Documents\\EZCrop\\output\\playwright\\exports\\orientation-8-orientation-8_200x300.jpg"
+      },
+      "maxChannelError": 0
+    },
+    {
+      "name": "transparency/WebP",
+      "status": "pass",
+      "requested": "WebP",
+      "actual": "WebP",
+      "filename": "transparent_600x600.webp",
+      "width": 600,
+      "height": 600,
+      "bytes": 2000,
+      "samples": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "sha256": "908ddc9d90abecf76d13ab7cd7a853de65523efe1bd01ad485627477a304adf0",
+      "elapsedMs": 4233,
+      "file": "C:\\Users\\mark\\Documents\\EZCrop\\output\\playwright\\exports\\transparency-transparent_600x600.webp"
+    },
+    {
+      "name": "transparency/JPEG",
+      "status": "observation",
+      "requested": "JPEG",
+      "actual": "JPEG",
+      "filename": "transparent_600x600.jpg",
+      "width": 600,
+      "height": 600,
+      "bytes": 7235,
+      "samples": [
+        [
+          0,
+          0,
+          0,
+          255
+        ],
+        [
+          0,
+          0,
+          0,
+          255
+        ],
+        [
+          0,
+          0,
+          0,
+          255
+        ],
+        [
+          0,
+          0,
+          0,
+          255
+        ]
+      ],
+      "sha256": "efa12b89d3bfeb66df9bf811a92aad54cdaf4a803c78afe035335cf59ab10fbe",
+      "elapsedMs": 1789,
+      "file": "C:\\Users\\mark\\Documents\\EZCrop\\output\\playwright\\exports\\transparency-transparent_600x600.jpg"
+    },
+    {
+      "name": "transparency/AVIF",
+      "status": "pass",
+      "requested": "AVIF",
+      "actual": "AVIF",
+      "filename": "transparent_600x600.avif",
+      "width": 600,
+      "height": 600,
+      "bytes": 1265,
+      "samples": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "sha256": "f3bdf63f4654ae69639c1ec6e96cd086ea1aeaafcb84d785c2c7cf4361e46172",
+      "elapsedMs": 6111,
+      "file": "C:\\Users\\mark\\Documents\\EZCrop\\output\\playwright\\exports\\transparency-transparent_600x600.avif"
+    },
+    {
+      "name": "large/large-12mp.jpg",
+      "status": "pass",
+      "loadMs": 326,
+      "maxMainThreadGapMs": 552.7000000178814,
+      "result": {
+        "requested": "JPEG",
+        "actual": "JPEG",
+        "filename": "large-12mp_600x600.jpg",
+        "width": 600,
+        "height": 600,
+        "bytes": 86508,
+        "samples": [
+          [
+            223,
+            59,
+            60,
+            255
+          ],
+          [
+            51,
+            184,
+            93,
+            255
+          ],
+          [
+            40,
+            89,
+            194,
+            255
+          ],
+          [
+            248,
+            206,
+            60,
+            255
+          ]
+        ],
+        "sha256": "820e54099587ddd1648b17cac79879b5f531e7426f44ff2abdedcb250e2b5ba6",
+        "elapsedMs": 3260,
+        "file": "C:\\Users\\mark\\Documents\\EZCrop\\output\\playwright\\exports\\large-large-12mp_600x600.jpg"
+      }
+    },
+    {
+      "name": "large/large-24mp.jpg",
+      "status": "pass",
+      "loadMs": 242,
+      "maxMainThreadGapMs": 778,
+      "result": {
+        "requested": "JPEG",
+        "actual": "JPEG",
+        "filename": "large-24mp_600x600.jpg",
+        "width": 600,
+        "height": 600,
+        "bytes": 86443,
+        "samples": [
+          [
+            215,
+            42,
+            61,
+            255
+          ],
+          [
+            57,
+            177,
+            88,
+            255
+          ],
+          [
+            26,
+            67,
+            181,
+            255
+          ],
+          [
+            241,
+            199,
+            65,
+            255
+          ]
+        ],
+        "sha256": "0fafe9cd8cbb5245f7dfdfdaed58320a0223c417cecd1c82fffd3e4b243de23d",
+        "elapsedMs": 6125,
+        "file": "C:\\Users\\mark\\Documents\\EZCrop\\output\\playwright\\exports\\large-large-24mp_600x600.jpg"
+      }
+    }
+  ]
+}

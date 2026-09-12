@@ -1,0 +1,346 @@
+{
+  "synthetic": true,
+  "orientations": [
+    {
+      "file": "orientation-1.jpg",
+      "value": 1,
+      "width": 300,
+      "height": 200,
+      "samples": [
+        [
+          220,
+          40,
+          51
+        ],
+        [
+          40,
+          180,
+          81
+        ],
+        [
+          40,
+          91,
+          219
+        ],
+        [
+          240,
+          200,
+          40
+        ]
+      ]
+    },
+    {
+      "file": "orientation-2.jpg",
+      "value": 2,
+      "width": 300,
+      "height": 200,
+      "samples": [
+        [
+          40,
+          180,
+          81
+        ],
+        [
+          220,
+          40,
+          51
+        ],
+        [
+          240,
+          200,
+          40
+        ],
+        [
+          40,
+          91,
+          219
+        ]
+      ]
+    },
+    {
+      "file": "orientation-3.jpg",
+      "value": 3,
+      "width": 300,
+      "height": 200,
+      "samples": [
+        [
+          240,
+          200,
+          40
+        ],
+        [
+          40,
+          91,
+          219
+        ],
+        [
+          40,
+          180,
+          81
+        ],
+        [
+          220,
+          40,
+          51
+        ]
+      ]
+    },
+    {
+      "file": "orientation-4.jpg",
+      "value": 4,
+      "width": 300,
+      "height": 200,
+      "samples": [
+        [
+          40,
+          91,
+          219
+        ],
+        [
+          240,
+          200,
+          40
+        ],
+        [
+          220,
+          40,
+          51
+        ],
+        [
+          40,
+          180,
+          81
+        ]
+      ]
+    },
+    {
+      "file": "orientation-5.jpg",
+      "value": 5,
+      "width": 200,
+      "height": 300,
+      "samples": [
+        [
+          220,
+          40,
+          51
+        ],
+        [
+          40,
+          91,
+          219
+        ],
+        [
+          40,
+          180,
+          81
+        ],
+        [
+          240,
+          200,
+          40
+        ]
+      ]
+    },
+    {
+      "file": "orientation-6.jpg",
+      "value": 6,
+      "width": 200,
+      "height": 300,
+      "samples": [
+        [
+          40,
+          91,
+          219
+        ],
+        [
+          220,
+          40,
+          51
+        ],
+        [
+          240,
+          200,
+          40
+        ],
+        [
+          40,
+          180,
+          81
+        ]
+      ]
+    },
+    {
+      "file": "orientation-7.jpg",
+      "value": 7,
+      "width": 200,
+      "height": 300,
+      "samples": [
+        [
+          240,
+          200,
+          40
+        ],
+        [
+          40,
+          180,
+          81
+        ],
+        [
+          40,
+          91,
+          219
+        ],
+        [
+          220,
+          40,
+          51
+        ]
+      ]
+    },
+    {
+      "file": "orientation-8.jpg",
+      "value": 8,
+      "width": 200,
+      "height": 300,
+      "samples": [
+        [
+          40,
+          180,
+          81
+        ],
+        [
+          240,
+          200,
+          40
+        ],
+        [
+          220,
+          40,
+          51
+        ],
+        [
+          40,
+          91,
+          219
+        ]
+      ]
+    }
+  ],
+  "files": [
+    {
+      "name": "animated.gif",
+      "bytes": 907,
+      "sha256": "f95101ce9bd8e72bb70146c85dedecd99b0cebee2f82b85987e51503423e5541"
+    },
+    {
+      "name": "corrupt.png",
+      "bytes": 21,
+      "sha256": "fe76b3c8389def637053e38357420ecc9d1acf50e39c914ec9fd995d0eb917f0"
+    },
+    {
+      "name": "landscape.bmp",
+      "bytes": 2880054,
+      "sha256": "4938ba2b1f2341272da2c72af80fa05324334b495be9fb1115859b28b0cccf5f"
+    },
+    {
+      "name": "landscape.jpg",
+      "bytes": 16882,
+      "sha256": "7a532bd630f6d289b4a47352f7190614b0e90f6349a51210913b4c8b34299aeb"
+    },
+    {
+      "name": "landscape.png",
+      "bytes": 4617,
+      "sha256": "6d34453eb1dbf4c6861f5567e8d894894a935ec88bd0b479d032541c2d1fb3c0"
+    },
+    {
+      "name": "landscape.tiff",
+      "bytes": 2880140,
+      "sha256": "f203c86666cc72337127b9dda7558d1b0dd276dd8294f425d09acda5b75d8a51"
+    },
+    {
+      "name": "landscape.webp",
+      "bytes": 2162,
+      "sha256": "8c4e96eddaead950b67b2ebc9b1b65fdcb3f6c7d139c286a00f9dd3dbd211876"
+    },
+    {
+      "name": "large-12mp.jpg",
+      "bytes": 2644112,
+      "sha256": "1797a247e059eb33b00ad820f3b55a9686a8bf7954e8b2de93e26c8b518a9427"
+    },
+    {
+      "name": "large-24mp.jpg",
+      "bytes": 5306482,
+      "sha256": "63209fce19efb1c3ccb539089fa7540e71abf3ef7cd7bedb706c691d0a186042"
+    },
+    {
+      "name": "one-pixel.png",
+      "bytes": 69,
+      "sha256": "925bca6f59cdea689b2150609e905edce6c7df51bf37e3f6138dd813fa89eb21"
+    },
+    {
+      "name": "orientation-1.jpg",
+      "bytes": 5194,
+      "sha256": "6bc5db399d8dcd774b86dc10353251aa72bc643f13b803a3d58448a707810150"
+    },
+    {
+      "name": "orientation-2.jpg",
+      "bytes": 5194,
+      "sha256": "266db6e836823204c7700faab73d0ed355c13b2173eba649d6b26ae282bbe505"
+    },
+    {
+      "name": "orientation-3.jpg",
+      "bytes": 5194,
+      "sha256": "57f1c70cf74ad8954b05931b4493722fecb363e95738fa2ce57e6f79bc74cd27"
+    },
+    {
+      "name": "orientation-4.jpg",
+      "bytes": 5194,
+      "sha256": "45ed0fa5f38b086ce27e94f7230c1793d03537ac2b0f8ecc58b8ebe8c69d93d4"
+    },
+    {
+      "name": "orientation-5.jpg",
+      "bytes": 5194,
+      "sha256": "eff98c1450f7e41e0d99ac6975998ac52fa0b42ec739590e814613cec51abc6e"
+    },
+    {
+      "name": "orientation-6.jpg",
+      "bytes": 5194,
+      "sha256": "a1ddb133b417286fbd12dd6f80c2807338401d9e7724a4df32f6fa0dacc2f0be"
+    },
+    {
+      "name": "orientation-7.jpg",
+      "bytes": 5194,
+      "sha256": "243261a0eb8a51c0d95d6a87ce0178b63bec0ccb78e55fdf7e20bae55301717c"
+    },
+    {
+      "name": "orientation-8.jpg",
+      "bytes": 5194,
+      "sha256": "a30c6ab1dab284f04630bb94d69d52901e74c93bf81081c6a316e7bbdb6e03af"
+    },
+    {
+      "name": "portrait.png",
+      "bytes": 5521,
+      "sha256": "4cf88b18c92fde74d852f0ee464fb0b3db0970f9b08b7f2317fcd25e10f6e7e5"
+    },
+    {
+      "name": "small.png",
+      "bytes": 772,
+      "sha256": "33a31ee05b89da8c3ca32773154854a02a97e1a80a7ed0a061c1a68660aa602e"
+    },
+    {
+      "name": "square.png",
+      "bytes": 3722,
+      "sha256": "15d8cdc4b2eaa708789754ba871c3bbcdf7ac1a68fcbc6000353e79a0998479a"
+    },
+    {
+      "name": "transparent.png",
+      "bytes": 3491,
+      "sha256": "13543038886a98b6bedb42f3ba96a67360317112ab3e49a874191fc68f52f136"
+    },
+    {
+      "name": "unsupported.svg",
+      "bytes": 114,
+      "sha256": "8403ce79e864df930f1e2e391ae02aa6fcd2bf0dee823b4cb1612b1e6a65b7fe"
+    }
+  ]
+}

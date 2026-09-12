@@ -1,0 +1,186 @@
+[
+  {
+    "name": "keyboard/file-picker",
+    "status": "pass"
+  },
+  {
+    "name": "mouse/crop-drag",
+    "status": "pass",
+    "before": "top: 0%; left: 25%; width: 50%; height: 100%;",
+    "after": "top: 0%; left: 28.75%; width: 50%; height: 100%;"
+  },
+  {
+    "name": "touch-target/preset",
+    "status": "observation",
+    "width": 38,
+    "height": 50
+  },
+  {
+    "name": "contrast/export",
+    "status": "defect",
+    "foreground": [
+      255,
+      255,
+      255
+    ],
+    "background": [
+      254,
+      154,
+      0
+    ],
+    "ratio": 2.134925984304926,
+    "font": "14px"
+  },
+  {
+    "name": "aria/custom-selected",
+    "status": "defect"
+  },
+  {
+    "name": "theme/persistence",
+    "status": "pass"
+  },
+  {
+    "name": "drag-drop/upload-zone",
+    "status": "pass"
+  },
+  {
+    "name": "touch/crop-drag",
+    "status": "pass",
+    "before": "top: 0%; left: 25%; width: 50%; height: 100%;",
+    "after": "top: 0%; left: 29.1899%; width: 50%; height: 100%;",
+    "method": "Chromium emulated touch events; no physical device"
+  },
+  {
+    "name": "worker/proxy-after-gc",
+    "status": "defect",
+    "first": {
+      "name": "first_600x600.webp",
+      "ms": 796,
+      "bytes": 1522
+    },
+    "events": [
+      {
+        "event": "create",
+        "worker": 1,
+        "url": "http://127.0.0.1:4173/ezcrop/assets/encode.worker-Ds3fw_F6.js",
+        "t": 1553.5999999940395
+      },
+      {
+        "event": "send",
+        "worker": 1,
+        "type": "APPLY",
+        "path": [
+          "resizeAndEncode"
+        ],
+        "t": 1564.699999988079
+      },
+      {
+        "event": "receive",
+        "worker": 1,
+        "type": "RAW",
+        "t": 2257.399999976158
+      },
+      {
+        "event": "send",
+        "worker": 1,
+        "type": "RELEASE",
+        "t": 3057.199999988079
+      },
+      {
+        "event": "receive",
+        "worker": 1,
+        "type": "RAW",
+        "t": 3058.5999999940395
+      }
+    ]
+  },
+  {
+    "name": "export/cancel-and-replace",
+    "status": "defect",
+    "oldDownload": "first_600x600.webp",
+    "newHeader": "EZCrop\nreplacement.png\n400 × 200 · 772 B",
+    "elapsedMs": 20631,
+    "events": [
+      {
+        "event": "create",
+        "worker": 1,
+        "url": "http://127.0.0.1:4173/ezcrop/assets/encode.worker-Ds3fw_F6.js",
+        "t": 1553.5999999940395
+      },
+      {
+        "event": "send",
+        "worker": 1,
+        "type": "APPLY",
+        "path": [
+          "resizeAndEncode"
+        ],
+        "t": 1564.699999988079
+      },
+      {
+        "event": "receive",
+        "worker": 1,
+        "type": "RAW",
+        "t": 2257.399999976158
+      },
+      {
+        "event": "send",
+        "worker": 1,
+        "type": "RELEASE",
+        "t": 3057.199999988079
+      },
+      {
+        "event": "receive",
+        "worker": 1,
+        "type": "RAW",
+        "t": 3058.5999999940395
+      },
+      {
+        "event": "send",
+        "worker": 1,
+        "type": "APPLY",
+        "path": [
+          "resizeAndEncode"
+        ],
+        "t": 3488.0999999940395
+      },
+      {
+        "event": "terminate",
+        "worker": 1,
+        "t": 23498.79999998212
+      }
+    ]
+  },
+  {
+    "name": "first_600x600.webp",
+    "status": "pass",
+    "ms": 412,
+    "bytes": 1614,
+    "condition": "OffscreenCanvas disabled before boot"
+  },
+  {
+    "name": "first_600x600.jpg",
+    "status": "pass",
+    "ms": 152,
+    "bytes": 4518,
+    "condition": "OffscreenCanvas disabled before boot"
+  },
+  {
+    "name": "first_600x600.avif",
+    "status": "pass",
+    "ms": 1483,
+    "bytes": 606,
+    "condition": "OffscreenCanvas disabled before boot"
+  },
+  {
+    "name": "first_600x600.webp",
+    "status": "observation",
+    "ms": 20229,
+    "bytes": 1614
+  },
+  {
+    "name": "first_600x600.jpg",
+    "status": "observation",
+    "ms": 20209,
+    "bytes": 4518
+  }
+]

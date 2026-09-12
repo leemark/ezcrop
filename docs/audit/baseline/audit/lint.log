@@ -1,0 +1,4 @@
+
+> ezcrop@0.0.0 lint
+> eslint . --ignore-pattern output/**
+

@@ -1,0 +1,199 @@
+{
+  "schemaVersion": 1,
+  "sourceRevision": "f4c39b9be2f0e6da76d6e4db40f71488bc763511",
+  "targetUrl": "http://127.0.0.1:5173/ezcrop/output/audit/hooks/probe.html",
+  "browser": "Chrome via Playwright channel=chrome",
+  "browserVersion": "151.0.7922.176",
+  "notes": {
+    "controlledConditions": [
+      "useImageLoader Image decode completions are explicitly held and released out of order by the harness.",
+      "Estimator toBlob completions are explicitly held and resolved by the harness during transition probes.",
+      "Wrong-MIME responses are injected for both toBlob and a controlled OffscreenCanvas.convertToBlob; no natural browser fallback is claimed."
+    ],
+    "naturallyObserved": [
+      "The estimator's 1x1 data-URI image decode and canvas drawing ran in Chrome; no naturally occurring WebP-to-PNG fallback was observed."
+    ]
+  },
+  "probes": {
+    "loaderOverlap": {
+      "afterNewLoad": {
+        "imageUrl": "blob:audit/new-overlap.png",
+        "originalFile": "new-overlap.png",
+        "error": null,
+        "loading": false
+      },
+      "finalState": {
+        "imageUrl": "blob:audit/old-overlap.png",
+        "originalFile": "old-overlap.png",
+        "error": null,
+        "loading": false
+      },
+      "olderResultOverwroteNewer": true
+    },
+    "loaderReset": {
+      "afterReset": {
+        "imageUrl": null,
+        "originalFile": null,
+        "error": null,
+        "loading": false
+      },
+      "finalState": {
+        "imageUrl": "blob:audit/pending-reset.png",
+        "originalFile": "pending-reset.png",
+        "error": null,
+        "loading": false
+      },
+      "pendingResultResurrectedAfterReset": true,
+      "revokedUrls": [
+        "blob:audit/old-overlap.png"
+      ]
+    },
+    "estimateNullTransition": {
+      "afterValid": {
+        "estimatedSize": null,
+        "estimating": true
+      },
+      "afterNull": {
+        "estimatedSize": null,
+        "estimating": true
+      },
+      "afterClearedDebounceWindow": {
+        "estimate": {
+          "estimatedSize": null,
+          "estimating": true
+        },
+        "blobRequests": []
+      }
+    },
+    "estimateChangedDuringEncode": {
+      "firstRequest": {
+        "requestedType": "image/jpeg",
+        "quality": 0.8,
+        "completed": false
+      },
+      "afterOldEncodeResolved": {
+        "estimatedSize": null,
+        "estimating": true
+      },
+      "afterCurrentEncodeResolved": {
+        "estimate": {
+          "estimatedSize": 12,
+          "estimating": false
+        },
+        "blobRequests": [
+          {
+            "requestedType": "image/jpeg",
+            "quality": 0.8,
+            "completed": true
+          },
+          {
+            "requestedType": "image/jpeg",
+            "quality": 0.9,
+            "completed": true
+          }
+        ]
+      }
+    },
+    "estimateNullDuringEncode": {
+      "whilePending": {
+        "inputBeforeNull": {
+          "imageUrl": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+/p6sAAAAASUVORK5CYII=",
+          "croppedAreaPixels": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 1
+          },
+          "targetWidth": 100,
+          "targetHeight": 100,
+          "format": "jpeg",
+          "quality": 75
+        },
+        "estimateAfterNull": {
+          "estimatedSize": null,
+          "estimating": true
+        },
+        "inputsAfterNull": {
+          "imageUrl": null,
+          "croppedAreaPixels": null,
+          "targetWidth": 100,
+          "targetHeight": 100,
+          "format": "jpeg",
+          "quality": 75
+        },
+        "request": {
+          "requestedType": "image/jpeg",
+          "quality": 0.75,
+          "completed": false
+        }
+      },
+      "afterPendingEncodeResolved": {
+        "estimate": {
+          "estimatedSize": 27,
+          "estimating": false
+        },
+        "inputs": {
+          "imageUrl": null,
+          "croppedAreaPixels": null,
+          "targetWidth": 100,
+          "targetHeight": 100,
+          "format": "jpeg",
+          "quality": 75
+        }
+      }
+    },
+    "wrongMimeFallback": {
+      "toBlob": {
+        "requestedMime": "image/webp",
+        "returnedMime": "image/png",
+        "returnedSize": 13,
+        "acceptedMismatch": true
+      },
+      "convertToBlob": {
+        "requestedMime": "image/webp",
+        "returnedMime": "image/png",
+        "returnedSize": 13,
+        "acceptedMismatch": true
+      }
+    }
+  },
+  "pageErrors": [],
+  "checks": [
+    {
+      "id": "image_loader_overlap_overwrite",
+      "reproduced": true,
+      "expected": true
+    },
+    {
+      "id": "image_loader_reset_resurrection",
+      "reproduced": true,
+      "expected": true
+    },
+    {
+      "id": "estimate_valid_to_null_stuck_busy",
+      "reproduced": true,
+      "expected": true
+    },
+    {
+      "id": "estimate_changed_during_encode_rejects_old_result",
+      "reproduced": true,
+      "expected": true
+    },
+    {
+      "id": "estimate_null_during_encode_publishes_stale_result",
+      "reproduced": true,
+      "expected": true
+    },
+    {
+      "id": "encoding_toBlob_accepts_wrong_mime_fallback",
+      "reproduced": true,
+      "expected": true
+    },
+    {
+      "id": "encoding_convertToBlob_accepts_wrong_mime_fallback",
+      "reproduced": true,
+      "expected": true
+    }
+  ],
+  "allExpectedChecksPassed": true
+}

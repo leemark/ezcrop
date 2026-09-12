@@ -1,0 +1,196 @@
+[
+  {
+    "name": "contrast/upload-formats/false",
+    "text": "JPEG · PNG · WebP · AVIF · GIF · BMP · TIFF",
+    "foreground": [
+      212,
+      212,
+      216
+    ],
+    "background": [
+      250,
+      250,
+      250
+    ],
+    "ratio": 1.4160285505482513,
+    "fontSize": "10px"
+  },
+  {
+    "name": "contrast/footer/false",
+    "text": "All processing happens in your browser — nothing is uploaded.",
+    "foreground": [
+      113,
+      113,
+      123
+    ],
+    "background": [
+      250,
+      250,
+      250
+    ],
+    "ratio": 4.624946780412645,
+    "fontSize": "12px"
+  },
+  {
+    "name": "focus/upload/false",
+    "focused": true,
+    "outline": "rgb(24, 24, 27) auto 1px"
+  },
+  {
+    "name": "contrast/selected-format/false",
+    "text": "WebP",
+    "foreground": [
+      255,
+      255,
+      255
+    ],
+    "background": [
+      254,
+      154,
+      0
+    ],
+    "ratio": 2.134925984304926,
+    "fontSize": "12px"
+  },
+  {
+    "name": "contrast/inactive-preset/false",
+    "text": "S",
+    "foreground": [
+      159,
+      159,
+      169
+    ],
+    "background": [
+      250,
+      250,
+      250
+    ],
+    "ratio": 2.512937161474883,
+    "fontSize": "10px"
+  },
+  {
+    "name": "focus/preset/false",
+    "focused": true,
+    "outline": "rgb(159, 159, 169) auto 1px"
+  },
+  {
+    "name": "custom/value/0",
+    "value": "800",
+    "options": "PRESET\nSQUARE\nL\nM\nS\nRECT\nTall\nMid\nShort\nVERT\nWide\nMid\nNarrow\nSIZE\nCustom size\n×\npx\nFORMAT\nWebP\nJPEG\nAVIF\nQUALITY\n85%\n\nRecommended: 80–85%\n\nOUTPUT\n800×600\nEST. SIZE\n…\nExport Image\nUpload a different image"
+  },
+  {
+    "name": "custom/value/-1",
+    "value": "800",
+    "options": "PRESET\nSQUARE\nL\nM\nS\nRECT\nTall\nMid\nShort\nVERT\nWide\nMid\nNarrow\nSIZE\nCustom size\n×\npx\nFORMAT\nWebP\nJPEG\nAVIF\nQUALITY\n85%\n\nRecommended: 80–85%\n\nOUTPUT\n800×600\nEST. SIZE\n…\nExport Image\nUpload a different image"
+  },
+  {
+    "name": "custom/value/",
+    "value": "800",
+    "options": "PRESET\nSQUARE\nL\nM\nS\nRECT\nTall\nMid\nShort\nVERT\nWide\nMid\nNarrow\nSIZE\nCustom size\n×\npx\nFORMAT\nWebP\nJPEG\nAVIF\nQUALITY\n85%\n\nRecommended: 80–85%\n\nOUTPUT\n800×600\nEST. SIZE\n…\nExport Image\nUpload a different image"
+  },
+  {
+    "name": "custom/value/600.5",
+    "value": "600",
+    "options": "PRESET\nSQUARE\nL\nM\nS\nRECT\nTall\nMid\nShort\nVERT\nWide\nMid\nNarrow\nSIZE\nCustom size\n×\npx\nFORMAT\nWebP\nJPEG\nAVIF\nQUALITY\n85%\n\nRecommended: 80–85%\n\nOUTPUT\n600×600\nEST. SIZE\n…\nExport Image\nUpload a different image"
+  },
+  {
+    "name": "custom/value/1e3",
+    "value": "1",
+    "options": "PRESET\nSQUARE\nL\nM\nS\nRECT\nTall\nMid\nShort\nVERT\nWide\nMid\nNarrow\nSIZE\nCustom size\n×\npx\nFORMAT\nWebP\nJPEG\nAVIF\nQUALITY\n85%\n\nRecommended: 80–85%\n\nOUTPUT\n1×600\nEST. SIZE\n…\nExport Image\nUpload a different image"
+  },
+  {
+    "name": "custom/value/7681",
+    "value": "7681",
+    "options": "PRESET\nSQUARE\nL\nM\nS\nRECT\nTall\nMid\nShort\nVERT\nWide\nMid\nNarrow\nSIZE\nCustom size\n×\npx\nFORMAT\nWebP\nJPEG\nAVIF\nQUALITY\n85%\n\nRecommended: 80–85%\n\nOUTPUT\n7681×600\nEST. SIZE\n…\nExport Image\nUpload a different image"
+  },
+  {
+    "name": "contrast/upload-formats/true",
+    "text": "JPEG · PNG · WebP · AVIF · GIF · BMP · TIFF",
+    "foreground": [
+      63,
+      63,
+      71
+    ],
+    "background": [
+      24,
+      24,
+      27
+    ],
+    "ratio": 1.6985665926846758,
+    "fontSize": "10px"
+  },
+  {
+    "name": "contrast/footer/true",
+    "text": "All processing happens in your browser — nothing is uploaded.",
+    "foreground": [
+      113,
+      113,
+      123
+    ],
+    "background": [
+      24,
+      24,
+      27
+    ],
+    "ratio": 3.670074370171168,
+    "fontSize": "12px"
+  },
+  {
+    "name": "focus/upload/true",
+    "focused": true,
+    "outline": "rgb(242, 242, 243) auto 1px"
+  },
+  {
+    "name": "contrast/selected-format/true",
+    "text": "WebP",
+    "foreground": [
+      255,
+      255,
+      255
+    ],
+    "background": [
+      254,
+      154,
+      0
+    ],
+    "ratio": 2.134925984304926,
+    "fontSize": "12px"
+  },
+  {
+    "name": "contrast/inactive-preset/true",
+    "text": "S",
+    "foreground": [
+      113,
+      113,
+      123
+    ],
+    "background": [
+      24,
+      24,
+      27
+    ],
+    "ratio": 3.670074370171168,
+    "fontSize": "10px"
+  },
+  {
+    "name": "focus/preset/true",
+    "focused": true,
+    "outline": "rgb(113, 113, 123) auto 1px"
+  },
+  {
+    "name": "quality/jpeg/60",
+    "bytes": 45631,
+    "width": 600,
+    "height": 600,
+    "format": "jpeg",
+    "file": "C:\\Users\\mark\\Documents\\EZCrop\\output\\playwright\\exports\\quality-60.jpg"
+  },
+  {
+    "name": "quality/jpeg/100",
+    "bytes": 499522,
+    "width": 600,
+    "height": 600,
+    "format": "jpeg",
+    "file": "C:\\Users\\mark\\Documents\\EZCrop\\output\\playwright\\exports\\quality-100.jpg"
+  }
+]

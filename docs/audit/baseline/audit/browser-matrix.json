@@ -1,0 +1,1371 @@
+{
+  "date": "2026-09-12T04:09:19.863Z",
+  "base": "http://127.0.0.1:4173/ezcrop/",
+  "suite": "matrix",
+  "browsers": {
+    "chrome": {
+      "version": "151.0.7922.176",
+      "engine": "chrome"
+    },
+    "edge": {
+      "version": "152.0.4191.66",
+      "engine": "edge"
+    },
+    "firefox": {
+      "version": "153.0",
+      "engine": "firefox"
+    },
+    "webkit": {
+      "version": "26.5",
+      "engine": "webkit"
+    }
+  },
+  "cases": [
+    {
+      "name": "chrome/presets",
+      "status": "pass",
+      "checks": [
+        {
+          "title": "Square Large (1600×1600)",
+          "expected": [
+            1600,
+            1600
+          ],
+          "output": true,
+          "aspectError": 0
+        },
+        {
+          "title": "Square Medium (1000×1000)",
+          "expected": [
+            1000,
+            1000
+          ],
+          "output": true,
+          "aspectError": 0
+        },
+        {
+          "title": "Square Small (600×600)",
+          "expected": [
+            600,
+            600
+          ],
+          "output": true,
+          "aspectError": 0
+        },
+        {
+          "title": "Rectangle Tall (1920×1280)",
+          "expected": [
+            1920,
+            1280
+          ],
+          "output": true,
+          "aspectError": 0
+        },
+        {
+          "title": "Rectangle Medium (1920×1080)",
+          "expected": [
+            1920,
+            1080
+          ],
+          "output": true,
+          "aspectError": 0
+        },
+        {
+          "title": "Rectangle Short (1920×900)",
+          "expected": [
+            1920,
+            900
+          ],
+          "output": true,
+          "aspectError": 0
+        },
+        {
+          "title": "Vertical Wide (1280×1920)",
+          "expected": [
+            1280,
+            1920
+          ],
+          "output": true,
+          "aspectError": 0.000014880952380891266
+        },
+        {
+          "title": "Vertical Medium (1080×1920)",
+          "expected": [
+            1080,
+            1920
+          ],
+          "output": true,
+          "aspectError": 0
+        },
+        {
+          "title": "Vertical Narrow (800×1920)",
+          "expected": [
+            800,
+            1920
+          ],
+          "output": true,
+          "aspectError": 0.000014880952380946777
+        }
+      ]
+    },
+    {
+      "name": "chrome/narrow-zoom",
+      "status": "defect",
+      "before": {
+        "style": "top: 0%; left: 36.1111%; width: 27.7778%; height: 100%;",
+        "width": 291.65625,
+        "height": 700,
+        "x": 430.15625,
+        "y": 136.5
+      },
+      "after": {
+        "style": "top: 0%; left: 36.1111%; width: 27.7778%; height: 100%;",
+        "width": 291.65625,
+        "height": 700,
+        "x": 430.15625,
+        "y": 136.5
+      },
+      "slider": "3"
+    },
+    {
+      "name": "chrome/keyboard-zoom",
+      "status": "defect",
+      "before": "3",
+      "after": "2"
+    },
+    {
+      "name": "chrome/quality-range",
+      "status": "pass",
+      "low": "60",
+      "high": "100"
+    },
+    {
+      "name": "chrome/mobile-fit",
+      "status": "defect",
+      "before": {
+        "x": 16,
+        "y": 69,
+        "width": 357.984375,
+        "height": 238.65625
+      },
+      "after": {
+        "x": 162.75,
+        "y": 85,
+        "width": 64.5,
+        "height": 43
+      },
+      "viewport": {
+        "width": 390,
+        "scrollWidth": 390
+      }
+    },
+    {
+      "name": "chrome/network-and-console",
+      "status": "pass",
+      "requests": [
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:4173/ezcrop/"
+        },
+        {
+          "method": "GET",
+          "url": "https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@600;700;800&display=swap"
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:4173/ezcrop/assets/index-BOHjcMbo.js"
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:4173/ezcrop/assets/index-B1EKwA7H.css"
+        },
+        {
+          "method": "GET",
+          "url": "https://fonts.gstatic.com/s/syne/v24/8vIH7w4qzmVxm2BL9A.woff2"
+        },
+        {
+          "method": "GET",
+          "url": "https://fonts.gstatic.com/s/dmmono/v16/aFTU7PB1QTsUX8KYthqQBA.woff2"
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:4173/ezcrop/favicon.svg"
+        },
+        {
+          "method": "GET",
+          "url": "https://fonts.gstatic.com/s/dmmono/v16/aFTR7PB1QTsUX8KYvumzEYOtbQ.woff2"
+        }
+      ],
+      "responses": [],
+      "errors": [],
+      "console": []
+    },
+    {
+      "name": "chrome/export-WebP",
+      "status": "pass",
+      "requested": "WebP",
+      "actual": "WebP",
+      "filename": "landscape_600x600.webp",
+      "width": 600,
+      "height": 600,
+      "bytes": 1586,
+      "samples": [
+        [
+          222,
+          40,
+          51,
+          255
+        ],
+        [
+          39,
+          181,
+          81,
+          255
+        ],
+        [
+          40,
+          89,
+          221,
+          255
+        ],
+        [
+          240,
+          199,
+          40,
+          255
+        ]
+      ],
+      "sha256": "5dd38bd747cfafa5d4b5278ddfeabde753c62fd97e477e5cb6b5c55da2cf93e5",
+      "elapsedMs": 11562,
+      "file": "C:\\Users\\mark\\Documents\\EZCrop\\output\\playwright\\exports\\chrome-landscape_600x600.webp",
+      "network": {
+        "requests": [
+          {
+            "method": "GET",
+            "url": "http://127.0.0.1:4173/ezcrop/"
+          },
+          {
+            "method": "GET",
+            "url": "https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@600;700;800&display=swap"
+          },
+          {
+            "method": "GET",
+            "url": "http://127.0.0.1:4173/ezcrop/assets/index-BOHjcMbo.js"
+          },
+          {
+            "method": "GET",
+            "url": "http://127.0.0.1:4173/ezcrop/assets/index-B1EKwA7H.css"
+          },
+          {
+            "method": "GET",
+            "url": "https://fonts.gstatic.com/s/syne/v24/8vIH7w4qzmVxm2BL9A.woff2"
+          },
+          {
+            "method": "GET",
+            "url": "https://fonts.gstatic.com/s/dmmono/v16/aFTU7PB1QTsUX8KYthqQBA.woff2"
+          },
+          {
+            "method": "GET",
+            "url": "http://127.0.0.1:4173/ezcrop/favicon.svg"
+          },
+          {
+            "method": "GET",
+            "url": "https://fonts.gstatic.com/s/dmmono/v16/aFTR7PB1QTsUX8KYvumzEYOtbQ.woff2"
+          },
+          {
+            "method": "GET",
+            "url": "http://127.0.0.1:4173/ezcrop/assets/encode.worker-Ds3fw_F6.js"
+          }
+        ],
+        "responses": [
+          {
+            "url": "http://127.0.0.1:4173/ezcrop/assets/encode.worker-Ds3fw_F6.js",
+            "status": 200
+          }
+        ],
+        "errors": [],
+        "console": []
+      }
+    },
+    {
+      "name": "chrome/export-JPEG",
+      "status": "pass",
+      "requested": "JPEG",
+      "actual": "JPEG",
+      "filename": "landscape_600x600.jpg",
+      "width": 600,
+      "height": 600,
+      "bytes": 5153,
+      "samples": [
+        [
+          220,
+          40,
+          51,
+          255
+        ],
+        [
+          40,
+          180,
+          81,
+          255
+        ],
+        [
+          40,
+          91,
+          219,
+          255
+        ],
+        [
+          240,
+          200,
+          40,
+          255
+        ]
+      ],
+      "sha256": "a9ce348c1fb2fccba1dbd9fa887cb45c56a9f9800a371abac142ec7b9a3381dd",
+      "elapsedMs": 5216,
+      "file": "C:\\Users\\mark\\Documents\\EZCrop\\output\\playwright\\exports\\chrome-landscape_600x600.jpg",
+      "network": {
+        "requests": [
+          {
+            "method": "GET",
+            "url": "http://127.0.0.1:4173/ezcrop/"
+          },
+          {
+            "method": "GET",
+            "url": "https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@600;700;800&display=swap"
+          },
+          {
+            "method": "GET",
+            "url": "http://127.0.0.1:4173/ezcrop/assets/index-BOHjcMbo.js"
+          },
+          {
+            "method": "GET",
+            "url": "http://127.0.0.1:4173/ezcrop/assets/index-B1EKwA7H.css"
+          },
+          {
+            "method": "GET",
+            "url": "https://fonts.gstatic.com/s/syne/v24/8vIH7w4qzmVxm2BL9A.woff2"
+          },
+          {
+            "method": "GET",
+            "url": "https://fonts.gstatic.com/s/dmmono/v16/aFTU7PB1QTsUX8KYthqQBA.woff2"
+          },
+          {
+            "method": "GET",
+            "url": "http://127.0.0.1:4173/ezcrop/favicon.svg"
+          },
+          {
+            "method": "GET",
+            "url": "https://fonts.gstatic.com/s/dmmono/v16/aFTR7PB1QTsUX8KYvumzEYOtbQ.woff2"
+          },
+          {
+            "method": "GET",
+            "url": "http://127.0.0.1:4173/ezcrop/assets/encode.worker-Ds3fw_F6.js"
+          }
+        ],
+        "responses": [
+          {
+            "url": "http://127.0.0.1:4173/ezcrop/assets/encode.worker-Ds3fw_F6.js",
+            "status": 200
+          }
+        ],
+        "errors": [],
+        "console": []
+      }
+    },
+    {
+      "name": "chrome/export-AVIF",
+      "status": "pass",
+      "requested": "AVIF",
+      "actual": "AVIF",
+      "filename": "landscape_600x600.avif",
+      "width": 600,
+      "height": 600,
+      "bytes": 593,
+      "samples": [
+        [
+          220,
+          40,
+          51,
+          255
+        ],
+        [
+          40,
+          180,
+          81,
+          255
+        ],
+        [
+          40,
+          91,
+          219,
+          255
+        ],
+        [
+          240,
+          200,
+          40,
+          255
+        ]
+      ],
+      "sha256": "3f7e9dfc104a8d46fc8b21881e03971836a353dd39f5022c017050b310a074e2",
+      "elapsedMs": 6462,
+      "file": "C:\\Users\\mark\\Documents\\EZCrop\\output\\playwright\\exports\\chrome-landscape_600x600.avif",
+      "network": {
+        "requests": [
+          {
+            "method": "GET",
+            "url": "http://127.0.0.1:4173/ezcrop/"
+          },
+          {
+            "method": "GET",
+            "url": "https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@600;700;800&display=swap"
+          },
+          {
+            "method": "GET",
+            "url": "http://127.0.0.1:4173/ezcrop/assets/index-BOHjcMbo.js"
+          },
+          {
+            "method": "GET",
+            "url": "http://127.0.0.1:4173/ezcrop/assets/index-B1EKwA7H.css"
+          },
+          {
+            "method": "GET",
+            "url": "http://127.0.0.1:4173/ezcrop/favicon.svg"
+          },
+          {
+            "method": "GET",
+            "url": "https://fonts.gstatic.com/s/syne/v24/8vIH7w4qzmVxm2BL9A.woff2"
+          },
+          {
+            "method": "GET",
+            "url": "https://fonts.gstatic.com/s/dmmono/v16/aFTU7PB1QTsUX8KYthqQBA.woff2"
+          },
+          {
+            "method": "GET",
+            "url": "https://fonts.gstatic.com/s/dmmono/v16/aFTR7PB1QTsUX8KYvumzEYOtbQ.woff2"
+          },
+          {
+            "method": "GET",
+            "url": "http://127.0.0.1:4173/ezcrop/assets/encode.worker-Ds3fw_F6.js"
+          },
+          {
+            "method": "GET",
+            "url": "http://127.0.0.1:4173/ezcrop/assets/index-B8dm3f4v.js"
+          },
+          {
+            "method": "GET",
+            "url": "http://127.0.0.1:4173/ezcrop/assets/avif_enc-DzETXbOZ.js"
+          },
+          {
+            "method": "GET",
+            "url": "http://127.0.0.1:4173/ezcrop/assets/avif_enc-Co4TcJko.wasm"
+          }
+        ],
+        "responses": [
+          {
+            "url": "http://127.0.0.1:4173/ezcrop/assets/encode.worker-Ds3fw_F6.js",
+            "status": 200
+          },
+          {
+            "url": "http://127.0.0.1:4173/ezcrop/assets/avif_enc-Co4TcJko.wasm",
+            "status": 200
+          }
+        ],
+        "errors": [],
+        "console": []
+      }
+    },
+    {
+      "name": "chrome/mobile-touch",
+      "status": "pass",
+      "pressed": "true"
+    },
+    {
+      "name": "edge/presets",
+      "status": "pass",
+      "checks": [
+        {
+          "title": "Square Large (1600×1600)",
+          "expected": [
+            1600,
+            1600
+          ],
+          "output": true,
+          "aspectError": 0
+        },
+        {
+          "title": "Square Medium (1000×1000)",
+          "expected": [
+            1000,
+            1000
+          ],
+          "output": true,
+          "aspectError": 0
+        },
+        {
+          "title": "Square Small (600×600)",
+          "expected": [
+            600,
+            600
+          ],
+          "output": true,
+          "aspectError": 0
+        },
+        {
+          "title": "Rectangle Tall (1920×1280)",
+          "expected": [
+            1920,
+            1280
+          ],
+          "output": true,
+          "aspectError": 0
+        },
+        {
+          "title": "Rectangle Medium (1920×1080)",
+          "expected": [
+            1920,
+            1080
+          ],
+          "output": true,
+          "aspectError": 0
+        },
+        {
+          "title": "Rectangle Short (1920×900)",
+          "expected": [
+            1920,
+            900
+          ],
+          "output": true,
+          "aspectError": 0
+        },
+        {
+          "title": "Vertical Wide (1280×1920)",
+          "expected": [
+            1280,
+            1920
+          ],
+          "output": true,
+          "aspectError": 0.000014880952380891266
+        },
+        {
+          "title": "Vertical Medium (1080×1920)",
+          "expected": [
+            1080,
+            1920
+          ],
+          "output": true,
+          "aspectError": 0
+        },
+        {
+          "title": "Vertical Narrow (800×1920)",
+          "expected": [
+            800,
+            1920
+          ],
+          "output": true,
+          "aspectError": 0.000014880952380946777
+        }
+      ]
+    },
+    {
+      "name": "edge/narrow-zoom",
+      "status": "defect",
+      "before": {
+        "style": "top: 0%; left: 36.1111%; width: 27.7778%; height: 100%;",
+        "width": 291.65625,
+        "height": 700,
+        "x": 430.15625,
+        "y": 136.5
+      },
+      "after": {
+        "style": "top: 0%; left: 36.1111%; width: 27.7778%; height: 100%;",
+        "width": 291.65625,
+        "height": 700,
+        "x": 430.15625,
+        "y": 136.5
+      },
+      "slider": "3"
+    },
+    {
+      "name": "edge/keyboard-zoom",
+      "status": "defect",
+      "before": "3",
+      "after": "2"
+    },
+    {
+      "name": "edge/quality-range",
+      "status": "pass",
+      "low": "60",
+      "high": "100"
+    },
+    {
+      "name": "edge/mobile-fit",
+      "status": "defect",
+      "before": {
+        "x": 16,
+        "y": 69,
+        "width": 357.984375,
+        "height": 238.65625
+      },
+      "after": {
+        "x": 162.75,
+        "y": 85,
+        "width": 64.5,
+        "height": 43
+      },
+      "viewport": {
+        "width": 390,
+        "scrollWidth": 390
+      }
+    },
+    {
+      "name": "edge/network-and-console",
+      "status": "pass",
+      "requests": [
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:4173/ezcrop/"
+        },
+        {
+          "method": "GET",
+          "url": "https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@600;700;800&display=swap"
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:4173/ezcrop/assets/index-BOHjcMbo.js"
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:4173/ezcrop/assets/index-B1EKwA7H.css"
+        },
+        {
+          "method": "GET",
+          "url": "https://fonts.gstatic.com/s/syne/v24/8vIH7w4qzmVxm2BL9A.woff2"
+        },
+        {
+          "method": "GET",
+          "url": "https://fonts.gstatic.com/s/dmmono/v16/aFTU7PB1QTsUX8KYthqQBA.woff2"
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:4173/ezcrop/favicon.svg"
+        },
+        {
+          "method": "GET",
+          "url": "https://fonts.gstatic.com/s/dmmono/v16/aFTR7PB1QTsUX8KYvumzEYOtbQ.woff2"
+        }
+      ],
+      "responses": [],
+      "errors": [],
+      "console": []
+    },
+    {
+      "name": "edge/export-WebP",
+      "status": "pass",
+      "requested": "WebP",
+      "actual": "WebP",
+      "filename": "landscape_600x600.webp",
+      "width": 600,
+      "height": 600,
+      "bytes": 1586,
+      "samples": [
+        [
+          222,
+          40,
+          51,
+          255
+        ],
+        [
+          39,
+          181,
+          81,
+          255
+        ],
+        [
+          40,
+          89,
+          221,
+          255
+        ],
+        [
+          240,
+          199,
+          40,
+          255
+        ]
+      ],
+      "sha256": "5dd38bd747cfafa5d4b5278ddfeabde753c62fd97e477e5cb6b5c55da2cf93e5",
+      "elapsedMs": 5362,
+      "file": "C:\\Users\\mark\\Documents\\EZCrop\\output\\playwright\\exports\\edge-landscape_600x600.webp",
+      "network": {
+        "requests": [
+          {
+            "method": "GET",
+            "url": "http://127.0.0.1:4173/ezcrop/"
+          },
+          {
+            "method": "GET",
+            "url": "https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@600;700;800&display=swap"
+          },
+          {
+            "method": "GET",
+            "url": "http://127.0.0.1:4173/ezcrop/assets/index-BOHjcMbo.js"
+          },
+          {
+            "method": "GET",
+            "url": "http://127.0.0.1:4173/ezcrop/assets/index-B1EKwA7H.css"
+          },
+          {
+            "method": "GET",
+            "url": "https://fonts.gstatic.com/s/syne/v24/8vIH7w4qzmVxm2BL9A.woff2"
+          },
+          {
+            "method": "GET",
+            "url": "https://fonts.gstatic.com/s/dmmono/v16/aFTU7PB1QTsUX8KYthqQBA.woff2"
+          },
+          {
+            "method": "GET",
+            "url": "http://127.0.0.1:4173/ezcrop/favicon.svg"
+          },
+          {
+            "method": "GET",
+            "url": "https://fonts.gstatic.com/s/dmmono/v16/aFTR7PB1QTsUX8KYvumzEYOtbQ.woff2"
+          },
+          {
+            "method": "GET",
+            "url": "http://127.0.0.1:4173/ezcrop/assets/encode.worker-Ds3fw_F6.js"
+          }
+        ],
+        "responses": [
+          {
+            "url": "http://127.0.0.1:4173/ezcrop/assets/encode.worker-Ds3fw_F6.js",
+            "status": 200
+          }
+        ],
+        "errors": [],
+        "console": []
+      }
+    },
+    {
+      "name": "edge/export-JPEG",
+      "status": "pass",
+      "requested": "JPEG",
+      "actual": "JPEG",
+      "filename": "landscape_600x600.jpg",
+      "width": 600,
+      "height": 600,
+      "bytes": 5153,
+      "samples": [
+        [
+          220,
+          40,
+          51,
+          255
+        ],
+        [
+          40,
+          180,
+          81,
+          255
+        ],
+        [
+          40,
+          91,
+          219,
+          255
+        ],
+        [
+          240,
+          200,
+          40,
+          255
+        ]
+      ],
+      "sha256": "a9ce348c1fb2fccba1dbd9fa887cb45c56a9f9800a371abac142ec7b9a3381dd",
+      "elapsedMs": 2521,
+      "file": "C:\\Users\\mark\\Documents\\EZCrop\\output\\playwright\\exports\\edge-landscape_600x600.jpg",
+      "network": {
+        "requests": [
+          {
+            "method": "GET",
+            "url": "http://127.0.0.1:4173/ezcrop/"
+          },
+          {
+            "method": "GET",
+            "url": "https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@600;700;800&display=swap"
+          },
+          {
+            "method": "GET",
+            "url": "http://127.0.0.1:4173/ezcrop/assets/index-BOHjcMbo.js"
+          },
+          {
+            "method": "GET",
+            "url": "http://127.0.0.1:4173/ezcrop/assets/index-B1EKwA7H.css"
+          },
+          {
+            "method": "GET",
+            "url": "http://127.0.0.1:4173/ezcrop/favicon.svg"
+          },
+          {
+            "method": "GET",
+            "url": "https://fonts.gstatic.com/s/syne/v24/8vIH7w4qzmVxm2BL9A.woff2"
+          },
+          {
+            "method": "GET",
+            "url": "https://fonts.gstatic.com/s/dmmono/v16/aFTU7PB1QTsUX8KYthqQBA.woff2"
+          },
+          {
+            "method": "GET",
+            "url": "https://fonts.gstatic.com/s/dmmono/v16/aFTR7PB1QTsUX8KYvumzEYOtbQ.woff2"
+          },
+          {
+            "method": "GET",
+            "url": "http://127.0.0.1:4173/ezcrop/assets/encode.worker-Ds3fw_F6.js"
+          }
+        ],
+        "responses": [
+          {
+            "url": "http://127.0.0.1:4173/ezcrop/assets/encode.worker-Ds3fw_F6.js",
+            "status": 200
+          }
+        ],
+        "errors": [],
+        "console": []
+      }
+    },
+    {
+      "name": "edge/export-AVIF",
+      "status": "pass",
+      "requested": "AVIF",
+      "actual": "AVIF",
+      "filename": "landscape_600x600.avif",
+      "width": 600,
+      "height": 600,
+      "bytes": 593,
+      "samples": [
+        [
+          220,
+          40,
+          51,
+          255
+        ],
+        [
+          40,
+          180,
+          81,
+          255
+        ],
+        [
+          40,
+          91,
+          219,
+          255
+        ],
+        [
+          240,
+          200,
+          40,
+          255
+        ]
+      ],
+      "sha256": "3f7e9dfc104a8d46fc8b21881e03971836a353dd39f5022c017050b310a074e2",
+      "elapsedMs": 3956,
+      "file": "C:\\Users\\mark\\Documents\\EZCrop\\output\\playwright\\exports\\edge-landscape_600x600.avif",
+      "network": {
+        "requests": [
+          {
+            "method": "GET",
+            "url": "http://127.0.0.1:4173/ezcrop/"
+          },
+          {
+            "method": "GET",
+            "url": "https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@600;700;800&display=swap"
+          },
+          {
+            "method": "GET",
+            "url": "http://127.0.0.1:4173/ezcrop/assets/index-BOHjcMbo.js"
+          },
+          {
+            "method": "GET",
+            "url": "http://127.0.0.1:4173/ezcrop/assets/index-B1EKwA7H.css"
+          },
+          {
+            "method": "GET",
+            "url": "https://fonts.gstatic.com/s/syne/v24/8vIH7w4qzmVxm2BL9A.woff2"
+          },
+          {
+            "method": "GET",
+            "url": "https://fonts.gstatic.com/s/dmmono/v16/aFTU7PB1QTsUX8KYthqQBA.woff2"
+          },
+          {
+            "method": "GET",
+            "url": "http://127.0.0.1:4173/ezcrop/favicon.svg"
+          },
+          {
+            "method": "GET",
+            "url": "https://fonts.gstatic.com/s/dmmono/v16/aFTR7PB1QTsUX8KYvumzEYOtbQ.woff2"
+          },
+          {
+            "method": "GET",
+            "url": "http://127.0.0.1:4173/ezcrop/assets/encode.worker-Ds3fw_F6.js"
+          },
+          {
+            "method": "GET",
+            "url": "http://127.0.0.1:4173/ezcrop/assets/index-B8dm3f4v.js"
+          },
+          {
+            "method": "GET",
+            "url": "http://127.0.0.1:4173/ezcrop/assets/avif_enc-DzETXbOZ.js"
+          },
+          {
+            "method": "GET",
+            "url": "http://127.0.0.1:4173/ezcrop/assets/avif_enc-Co4TcJko.wasm"
+          }
+        ],
+        "responses": [
+          {
+            "url": "http://127.0.0.1:4173/ezcrop/assets/encode.worker-Ds3fw_F6.js",
+            "status": 200
+          },
+          {
+            "url": "http://127.0.0.1:4173/ezcrop/assets/avif_enc-Co4TcJko.wasm",
+            "status": 200
+          }
+        ],
+        "errors": [],
+        "console": []
+      }
+    },
+    {
+      "name": "edge/mobile-touch",
+      "status": "pass",
+      "pressed": "true"
+    },
+    {
+      "name": "firefox/suite",
+      "status": "error",
+      "error": "locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Vertical Wide (1280×1920)', exact: true })\u001b[22m\n\u001b[2m    - locator resolved to <button aria-pressed=\"false\" title=\"Vertical Wide (1280×1920)\" aria-label=\"Vertical Wide (1280×1920)\" class=\"flex flex-col items-center gap-0.5 rounded px-1 py-1 transition-colors text-zinc-400 hover:bg-zinc-100 dark:text-zinc-500 dark:hover:bg-zinc-700/50\">…</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is visible, enabled and stable\u001b[22m\n\u001b[2m    - scrolling into view if needed\u001b[22m\n\u001b[2m    - done scrolling\u001b[22m\n"
+    },
+    {
+      "name": "webkit/presets",
+      "status": "defect",
+      "checks": [
+        {
+          "title": "Square Large (1600×1600)",
+          "expected": [
+            1600,
+            1600
+          ],
+          "output": true,
+          "aspectError": 0.00002232142857139241
+        },
+        {
+          "title": "Square Medium (1000×1000)",
+          "expected": [
+            1000,
+            1000
+          ],
+          "output": true,
+          "aspectError": 0.00002232142857139241
+        },
+        {
+          "title": "Square Small (600×600)",
+          "expected": [
+            600,
+            600
+          ],
+          "output": true,
+          "aspectError": 0.00002232142857139241
+        },
+        {
+          "title": "Rectangle Tall (1920×1280)",
+          "expected": [
+            1920,
+            1280
+          ],
+          "output": true,
+          "aspectError": 0
+        },
+        {
+          "title": "Rectangle Medium (1920×1080)",
+          "expected": [
+            1920,
+            1080
+          ],
+          "output": true,
+          "aspectError": 0
+        },
+        {
+          "title": "Rectangle Short (1920×900)",
+          "expected": [
+            1920,
+            900
+          ],
+          "output": true,
+          "aspectError": 0.3555555555555556
+        },
+        {
+          "title": "Vertical Wide (1280×1920)",
+          "expected": [
+            1280,
+            1920
+          ],
+          "output": true,
+          "aspectError": 0.000014880952380891266
+        },
+        {
+          "title": "Vertical Medium (1080×1920)",
+          "expected": [
+            1080,
+            1920
+          ],
+          "output": true,
+          "aspectError": 0
+        },
+        {
+          "title": "Vertical Narrow (800×1920)",
+          "expected": [
+            800,
+            1920
+          ],
+          "output": true,
+          "aspectError": 0.000014880952380946777
+        }
+      ]
+    },
+    {
+      "name": "webkit/narrow-zoom",
+      "status": "defect",
+      "before": {
+        "style": "top: 0%; left: 36.111111%; width: 27.777778%; height: 100%;",
+        "width": 291.65625,
+        "height": 700,
+        "x": 430.15625,
+        "y": 136.484375
+      },
+      "after": {
+        "style": "top: 0%; left: 36.111111%; width: 27.777778%; height: 100%;",
+        "width": 291.65625,
+        "height": 700,
+        "x": 430.15625,
+        "y": 136.484375
+      },
+      "slider": "3"
+    },
+    {
+      "name": "webkit/keyboard-zoom",
+      "status": "defect",
+      "before": "3",
+      "after": "2"
+    },
+    {
+      "name": "webkit/quality-range",
+      "status": "pass",
+      "low": "60",
+      "high": "100"
+    },
+    {
+      "name": "webkit/mobile-fit",
+      "status": "defect",
+      "before": {
+        "x": 16,
+        "y": 68.96875,
+        "width": 358,
+        "height": 238.65625
+      },
+      "after": {
+        "x": 161.84375,
+        "y": 84.96875,
+        "width": 66.296875,
+        "height": 44.1875
+      },
+      "viewport": {
+        "width": 390,
+        "scrollWidth": 390
+      }
+    },
+    {
+      "name": "webkit/network-and-console",
+      "status": "pass",
+      "requests": [
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:4173/ezcrop/"
+        },
+        {
+          "method": "GET",
+          "url": "https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@600;700;800&display=swap"
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:4173/ezcrop/assets/index-BOHjcMbo.js"
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:4173/ezcrop/assets/index-B1EKwA7H.css"
+        },
+        {
+          "method": "GET",
+          "url": "https://fonts.gstatic.com/s/syne/v24/8vIH7w4qzmVxm2BL9G78HEY.woff2"
+        },
+        {
+          "method": "GET",
+          "url": "https://fonts.gstatic.com/s/dmmono/v16/aFTU7PB1QTsUX8KYthqQBK6PYK0.woff2"
+        },
+        {
+          "method": "GET",
+          "url": "https://fonts.gstatic.com/s/dmmono/v16/aFTR7PB1QTsUX8KYvumzEYOtbYf-Vlg.woff2"
+        }
+      ],
+      "responses": [],
+      "errors": [],
+      "console": []
+    },
+    {
+      "name": "webkit/export-WebP",
+      "status": "pass",
+      "requested": "WebP",
+      "actual": "WebP",
+      "filename": "landscape_600x600.webp",
+      "width": 600,
+      "height": 600,
+      "bytes": 1586,
+      "samples": [
+        [
+          222,
+          40,
+          51,
+          255
+        ],
+        [
+          39,
+          181,
+          81,
+          255
+        ],
+        [
+          40,
+          89,
+          221,
+          255
+        ],
+        [
+          240,
+          199,
+          40,
+          255
+        ]
+      ],
+      "sha256": "5dd38bd747cfafa5d4b5278ddfeabde753c62fd97e477e5cb6b5c55da2cf93e5",
+      "elapsedMs": 1132,
+      "file": "C:\\Users\\mark\\Documents\\EZCrop\\output\\playwright\\exports\\webkit-landscape_600x600.webp",
+      "network": {
+        "requests": [
+          {
+            "method": "GET",
+            "url": "http://127.0.0.1:4173/ezcrop/"
+          },
+          {
+            "method": "GET",
+            "url": "https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@600;700;800&display=swap"
+          },
+          {
+            "method": "GET",
+            "url": "http://127.0.0.1:4173/ezcrop/assets/index-BOHjcMbo.js"
+          },
+          {
+            "method": "GET",
+            "url": "http://127.0.0.1:4173/ezcrop/assets/index-B1EKwA7H.css"
+          },
+          {
+            "method": "GET",
+            "url": "https://fonts.gstatic.com/s/syne/v24/8vIH7w4qzmVxm2BL9G78HEY.woff2"
+          },
+          {
+            "method": "GET",
+            "url": "https://fonts.gstatic.com/s/dmmono/v16/aFTU7PB1QTsUX8KYthqQBK6PYK0.woff2"
+          },
+          {
+            "method": "GET",
+            "url": "https://fonts.gstatic.com/s/dmmono/v16/aFTR7PB1QTsUX8KYvumzEYOtbYf-Vlg.woff2"
+          }
+        ],
+        "responses": [],
+        "errors": [],
+        "console": []
+      }
+    },
+    {
+      "name": "webkit/export-JPEG",
+      "status": "pass",
+      "requested": "JPEG",
+      "actual": "JPEG",
+      "filename": "landscape_600x600.jpg",
+      "width": 600,
+      "height": 600,
+      "bytes": 5153,
+      "samples": [
+        [
+          220,
+          40,
+          51,
+          255
+        ],
+        [
+          40,
+          180,
+          81,
+          255
+        ],
+        [
+          40,
+          91,
+          219,
+          255
+        ],
+        [
+          240,
+          200,
+          40,
+          255
+        ]
+      ],
+      "sha256": "a9ce348c1fb2fccba1dbd9fa887cb45c56a9f9800a371abac142ec7b9a3381dd",
+      "elapsedMs": 558,
+      "file": "C:\\Users\\mark\\Documents\\EZCrop\\output\\playwright\\exports\\webkit-landscape_600x600.jpg",
+      "network": {
+        "requests": [
+          {
+            "method": "GET",
+            "url": "http://127.0.0.1:4173/ezcrop/"
+          },
+          {
+            "method": "GET",
+            "url": "https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@600;700;800&display=swap"
+          },
+          {
+            "method": "GET",
+            "url": "http://127.0.0.1:4173/ezcrop/assets/index-BOHjcMbo.js"
+          },
+          {
+            "method": "GET",
+            "url": "http://127.0.0.1:4173/ezcrop/assets/index-B1EKwA7H.css"
+          },
+          {
+            "method": "GET",
+            "url": "https://fonts.gstatic.com/s/syne/v24/8vIH7w4qzmVxm2BL9G78HEY.woff2"
+          },
+          {
+            "method": "GET",
+            "url": "https://fonts.gstatic.com/s/dmmono/v16/aFTU7PB1QTsUX8KYthqQBK6PYK0.woff2"
+          },
+          {
+            "method": "GET",
+            "url": "https://fonts.gstatic.com/s/dmmono/v16/aFTR7PB1QTsUX8KYvumzEYOtbYf-Vlg.woff2"
+          }
+        ],
+        "responses": [],
+        "errors": [],
+        "console": []
+      }
+    },
+    {
+      "name": "webkit/export-AVIF",
+      "status": "pass",
+      "requested": "AVIF",
+      "actual": "AVIF",
+      "filename": "landscape_600x600.avif",
+      "width": 600,
+      "height": 600,
+      "bytes": 593,
+      "samples": [
+        [
+          220,
+          40,
+          51,
+          255
+        ],
+        [
+          40,
+          180,
+          81,
+          255
+        ],
+        [
+          40,
+          91,
+          219,
+          255
+        ],
+        [
+          240,
+          200,
+          40,
+          255
+        ]
+      ],
+      "sha256": "3f7e9dfc104a8d46fc8b21881e03971836a353dd39f5022c017050b310a074e2",
+      "elapsedMs": 3022,
+      "file": "C:\\Users\\mark\\Documents\\EZCrop\\output\\playwright\\exports\\webkit-landscape_600x600.avif",
+      "network": {
+        "requests": [
+          {
+            "method": "GET",
+            "url": "http://127.0.0.1:4173/ezcrop/"
+          },
+          {
+            "method": "GET",
+            "url": "https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@600;700;800&display=swap"
+          },
+          {
+            "method": "GET",
+            "url": "http://127.0.0.1:4173/ezcrop/assets/index-BOHjcMbo.js"
+          },
+          {
+            "method": "GET",
+            "url": "http://127.0.0.1:4173/ezcrop/assets/index-B1EKwA7H.css"
+          },
+          {
+            "method": "GET",
+            "url": "https://fonts.gstatic.com/s/syne/v24/8vIH7w4qzmVxm2BL9G78HEY.woff2"
+          },
+          {
+            "method": "GET",
+            "url": "https://fonts.gstatic.com/s/dmmono/v16/aFTU7PB1QTsUX8KYthqQBK6PYK0.woff2"
+          },
+          {
+            "method": "GET",
+            "url": "https://fonts.gstatic.com/s/dmmono/v16/aFTR7PB1QTsUX8KYvumzEYOtbYf-Vlg.woff2"
+          },
+          {
+            "method": "GET",
+            "url": "http://127.0.0.1:4173/ezcrop/assets/index-B8dm3f4v.js"
+          },
+          {
+            "method": "GET",
+            "url": "http://127.0.0.1:4173/ezcrop/assets/avif_enc-DzETXbOZ.js"
+          },
+          {
+            "method": "GET",
+            "url": "http://127.0.0.1:4173/ezcrop/assets/avif_enc-Co4TcJko.wasm"
+          }
+        ],
+        "responses": [
+          {
+            "url": "http://127.0.0.1:4173/ezcrop/assets/avif_enc-Co4TcJko.wasm",
+            "status": 200
+          }
+        ],
+        "errors": [],
+        "console": []
+      }
+    },
+    {
+      "name": "webkit/mobile-touch",
+      "status": "pass",
+      "pressed": "true"
+    }
+  ]
+}

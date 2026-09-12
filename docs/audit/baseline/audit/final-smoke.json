@@ -1,0 +1,510 @@
+{
+  "schemaVersion": 1,
+  "sourceRevision": "f4c39b9be2f0e6da76d6e4db40f71488bc763511",
+  "fixture": {
+    "name": "small.png",
+    "format": "png",
+    "width": 96,
+    "height": 72,
+    "bytes": 1335
+  },
+  "browserVersions": {
+    "chrome": "151.0.7922.176",
+    "firefox": "153.0"
+  },
+  "apps": {
+    "dev": "http://127.0.0.1:5173/ezcrop/",
+    "production": "http://127.0.0.1:4173/ezcrop/"
+  },
+  "exportRuns": [
+    {
+      "browser": "Chrome",
+      "url": "http://127.0.0.1:5173/ezcrop/",
+      "format": "webp",
+      "freshContext": true,
+      "status": "downloaded",
+      "pageErrors": [],
+      "consoleErrors": [],
+      "relevantResponses": [
+        {
+          "url": "http://127.0.0.1:5173/ezcrop/src/workers/encode.worker.ts?worker_file&type=module",
+          "status": 200,
+          "resourceType": "script"
+        }
+      ],
+      "requestFailures": [],
+      "download": {
+        "suggestedFilename": "small_600x600.webp",
+        "magic": {
+          "bytes": 4138,
+          "prefixHex": "524946462210000057454250565038580a00000020000000",
+          "first16Ascii": "RIFF\"...WEBPVP8X",
+          "png": false,
+          "webp": true,
+          "avif": false,
+          "avifBrand": null
+        },
+        "dimensions": {
+          "format": "webp",
+          "width": 600,
+          "height": 600
+        },
+        "metadataError": null
+      },
+      "alert": [],
+      "avifInputRoundtrip": null,
+      "preset": {
+        "selected": true,
+        "outputSize": "600×600",
+        "cropSelection": {
+          "width": 72,
+          "height": 72,
+          "ratio": 1
+        }
+      }
+    },
+    {
+      "browser": "Chrome",
+      "url": "http://127.0.0.1:5173/ezcrop/",
+      "format": "avif",
+      "freshContext": true,
+      "status": "downloaded",
+      "pageErrors": [],
+      "consoleErrors": [],
+      "relevantResponses": [
+        {
+          "url": "http://127.0.0.1:5173/ezcrop/src/workers/encode.worker.ts?worker_file&type=module",
+          "status": 200,
+          "resourceType": "script"
+        },
+        {
+          "url": "http://127.0.0.1:5173/ezcrop/node_modules/@jsquash/avif/index.js?v=5a8ef881",
+          "status": 200,
+          "resourceType": "script"
+        },
+        {
+          "url": "http://127.0.0.1:5173/ezcrop/node_modules/@jsquash/avif/encode.js?v=5a8ef881",
+          "status": 200,
+          "resourceType": "script"
+        },
+        {
+          "url": "http://127.0.0.1:5173/ezcrop/node_modules/@jsquash/avif/decode.js?v=5a8ef881",
+          "status": 200,
+          "resourceType": "script"
+        },
+        {
+          "url": "http://127.0.0.1:5173/ezcrop/node_modules/@jsquash/avif/meta.js?v=5a8ef881",
+          "status": 200,
+          "resourceType": "script"
+        },
+        {
+          "url": "http://127.0.0.1:5173/ezcrop/node_modules/@jsquash/avif/utils.js?v=5a8ef881",
+          "status": 200,
+          "resourceType": "script"
+        },
+        {
+          "url": "http://127.0.0.1:5173/ezcrop/node_modules/wasm-feature-detect/dist/esm/index.js?v=5a8ef881",
+          "status": 200,
+          "resourceType": "script"
+        },
+        {
+          "url": "http://127.0.0.1:5173/ezcrop/node_modules/@jsquash/avif/codec/dec/avif_dec.js?v=5a8ef881",
+          "status": 200,
+          "resourceType": "script"
+        },
+        {
+          "url": "http://127.0.0.1:5173/ezcrop/node_modules/@jsquash/avif/codec/enc/avif_enc.js?v=5a8ef881",
+          "status": 200,
+          "resourceType": "script"
+        },
+        {
+          "url": "http://127.0.0.1:5173/ezcrop/node_modules/@jsquash/avif/codec/enc/avif_enc.wasm",
+          "status": 200,
+          "resourceType": "fetch"
+        },
+        {
+          "url": "http://127.0.0.1:5173/ezcrop/node_modules/@jsquash/avif/index.js?v=5a8ef881",
+          "status": 200,
+          "resourceType": "script"
+        },
+        {
+          "url": "http://127.0.0.1:5173/ezcrop/node_modules/@jsquash/avif/decode.js?v=5a8ef881",
+          "status": 200,
+          "resourceType": "script"
+        },
+        {
+          "url": "http://127.0.0.1:5173/ezcrop/node_modules/@jsquash/avif/encode.js?v=5a8ef881",
+          "status": 200,
+          "resourceType": "script"
+        },
+        {
+          "url": "http://127.0.0.1:5173/ezcrop/node_modules/@jsquash/avif/utils.js?v=5a8ef881",
+          "status": 200,
+          "resourceType": "script"
+        },
+        {
+          "url": "http://127.0.0.1:5173/ezcrop/node_modules/@jsquash/avif/meta.js?v=5a8ef881",
+          "status": 200,
+          "resourceType": "script"
+        },
+        {
+          "url": "http://127.0.0.1:5173/ezcrop/node_modules/wasm-feature-detect/dist/esm/index.js?v=5a8ef881",
+          "status": 200,
+          "resourceType": "script"
+        },
+        {
+          "url": "http://127.0.0.1:5173/ezcrop/node_modules/@jsquash/avif/codec/dec/avif_dec.js?v=5a8ef881",
+          "status": 200,
+          "resourceType": "script"
+        },
+        {
+          "url": "http://127.0.0.1:5173/ezcrop/node_modules/@jsquash/avif/codec/enc/avif_enc.js?v=5a8ef881",
+          "status": 200,
+          "resourceType": "script"
+        },
+        {
+          "url": "http://127.0.0.1:5173/ezcrop/node_modules/@jsquash/avif/codec/enc/avif_enc.wasm",
+          "status": 200,
+          "resourceType": "fetch"
+        }
+      ],
+      "requestFailures": [],
+      "download": {
+        "suggestedFilename": "small_600x600.avif",
+        "magic": {
+          "bytes": 3180,
+          "prefixHex": "00000020667479706176696600000000617669666d696631",
+          "first16Ascii": "... ftypavif....",
+          "png": false,
+          "webp": false,
+          "avif": true,
+          "avifBrand": "avif"
+        },
+        "dimensions": {
+          "format": "heif",
+          "width": 600,
+          "height": 600
+        },
+        "metadataError": null
+      },
+      "alert": [],
+      "avifInputRoundtrip": {
+        "complete": true,
+        "naturalWidth": 600,
+        "naturalHeight": 600
+      },
+      "preset": {
+        "selected": true,
+        "outputSize": "600×600",
+        "cropSelection": {
+          "width": 72,
+          "height": 72,
+          "ratio": 1
+        }
+      }
+    },
+    {
+      "browser": "Firefox",
+      "url": "http://127.0.0.1:4173/ezcrop/",
+      "format": "webp",
+      "freshContext": true,
+      "status": "downloaded",
+      "pageErrors": [],
+      "consoleErrors": [],
+      "relevantResponses": [
+        {
+          "url": "http://127.0.0.1:4173/ezcrop/assets/encode.worker-Ds3fw_F6.js",
+          "status": 200,
+          "resourceType": "script"
+        }
+      ],
+      "requestFailures": [],
+      "download": {
+        "suggestedFilename": "small_1600x1600.webp",
+        "magic": {
+          "bytes": 13008,
+          "prefixHex": "52494646c83200005745425056503820bc320000f020039d",
+          "first16Ascii": "RIFF.2..WEBPVP8 ",
+          "png": false,
+          "webp": true,
+          "avif": false,
+          "avifBrand": null
+        },
+        "dimensions": {
+          "format": "webp",
+          "width": 1600,
+          "height": 1600
+        },
+        "metadataError": null
+      },
+      "alert": [],
+      "avifInputRoundtrip": null,
+      "preset": {
+        "defaultPreset": "Square Large (1600×1600)",
+        "outputSize": "1600×1600",
+        "cropSelection": {
+          "width": 72,
+          "height": 72,
+          "ratio": 1
+        }
+      }
+    },
+    {
+      "browser": "Firefox",
+      "url": "http://127.0.0.1:4173/ezcrop/",
+      "format": "avif",
+      "freshContext": true,
+      "status": "failed",
+      "pageErrors": [],
+      "consoleErrors": [],
+      "relevantResponses": [
+        {
+          "url": "http://127.0.0.1:4173/ezcrop/assets/encode.worker-Ds3fw_F6.js",
+          "status": 200,
+          "resourceType": "script"
+        },
+        {
+          "url": "http://127.0.0.1:4173/ezcrop/assets/avif_enc-Co4TcJko.wasm",
+          "status": 200,
+          "resourceType": "fetch"
+        },
+        {
+          "url": "http://127.0.0.1:4173/ezcrop/assets/avif_enc-DzETXbOZ.js",
+          "status": 304,
+          "resourceType": "script"
+        },
+        {
+          "url": "http://127.0.0.1:4173/ezcrop/assets/avif_enc-Co4TcJko.wasm",
+          "status": 304,
+          "resourceType": "fetch"
+        }
+      ],
+      "requestFailures": [],
+      "download": null,
+      "alert": [],
+      "avifInputRoundtrip": null,
+      "preset": {
+        "defaultPreset": "Square Large (1600×1600)",
+        "outputSize": "1600×1600",
+        "cropSelection": {
+          "width": 72,
+          "height": 72,
+          "ratio": 1
+        }
+      },
+      "failure": "page.waitForEvent: Timeout 28000ms exceeded while waiting for event \"download\"\n=========================== logs ===========================\nwaiting for event \"download\"\n============================================================"
+    }
+  ],
+  "firefoxPresetPass": {
+    "browser": "Firefox",
+    "browserVersion": "153.0",
+    "url": "http://127.0.0.1:4173/ezcrop/",
+    "pacedDelayMs": 750,
+    "status": "passed",
+    "pageErrors": [],
+    "consoleErrors": [],
+    "relevantResponses": [],
+    "requestFailures": [],
+    "steps": [
+      {
+        "label": "Square Large (1600×1600)",
+        "expected": {
+          "width": 1600,
+          "height": 1600,
+          "ratio": 1
+        },
+        "observed": {
+          "selected": true,
+          "outputSize": "1600×1600",
+          "cropSelection": {
+            "width": 72,
+            "height": 72,
+            "ratio": 1
+          }
+        },
+        "elapsedMs": 942,
+        "status": "passed"
+      },
+      {
+        "label": "Square Medium (1000×1000)",
+        "expected": {
+          "width": 1000,
+          "height": 1000,
+          "ratio": 1
+        },
+        "observed": {
+          "selected": true,
+          "outputSize": "1000×1000",
+          "cropSelection": {
+            "width": 72,
+            "height": 72,
+            "ratio": 1
+          }
+        },
+        "elapsedMs": 923,
+        "status": "passed"
+      },
+      {
+        "label": "Square Small (600×600)",
+        "expected": {
+          "width": 600,
+          "height": 600,
+          "ratio": 1
+        },
+        "observed": {
+          "selected": true,
+          "outputSize": "600×600",
+          "cropSelection": {
+            "width": 72,
+            "height": 72,
+            "ratio": 1
+          }
+        },
+        "elapsedMs": 902,
+        "status": "passed"
+      },
+      {
+        "label": "Rectangle Tall (1920×1280)",
+        "expected": {
+          "width": 1920,
+          "height": 1280,
+          "ratio": 1.5
+        },
+        "observed": {
+          "selected": true,
+          "outputSize": "1920×1280",
+          "cropSelection": {
+            "width": 86.39999389648438,
+            "height": 57.600006103515625,
+            "ratio": 1.4999997350904957
+          }
+        },
+        "elapsedMs": 892,
+        "status": "passed"
+      },
+      {
+        "label": "Rectangle Medium (1920×1080)",
+        "expected": {
+          "width": 1920,
+          "height": 1080,
+          "ratio": 1.7777777777777777
+        },
+        "observed": {
+          "selected": true,
+          "outputSize": "1920×1080",
+          "cropSelection": {
+            "width": 86.39999389648438,
+            "height": 48.600006103515625,
+            "ratio": 1.7777774289257626
+          }
+        },
+        "elapsedMs": 883,
+        "status": "passed"
+      },
+      {
+        "label": "Rectangle Short (1920×900)",
+        "expected": {
+          "width": 1920,
+          "height": 900,
+          "ratio": 2.1333333333333333
+        },
+        "observed": {
+          "selected": true,
+          "outputSize": "1920×900",
+          "cropSelection": {
+            "width": 86.39999389648438,
+            "height": 40.5,
+            "ratio": 2.1333331826292437
+          }
+        },
+        "elapsedMs": 870,
+        "status": "passed"
+      },
+      {
+        "label": "Vertical Wide (1280×1920)",
+        "expected": {
+          "width": 1280,
+          "height": 1920,
+          "ratio": 0.6666666666666666
+        },
+        "observed": {
+          "selected": true,
+          "outputSize": "1280×1920",
+          "cropSelection": {
+            "width": 48,
+            "height": 72,
+            "ratio": 0.6666666666666666
+          }
+        },
+        "elapsedMs": 854,
+        "status": "passed"
+      },
+      {
+        "label": "Vertical Medium (1080×1920)",
+        "expected": {
+          "width": 1080,
+          "height": 1920,
+          "ratio": 0.5625
+        },
+        "observed": {
+          "selected": true,
+          "outputSize": "1080×1920",
+          "cropSelection": {
+            "width": 40.5,
+            "height": 72,
+            "ratio": 0.5625
+          }
+        },
+        "elapsedMs": 857,
+        "status": "passed"
+      },
+      {
+        "label": "Vertical Narrow (800×1920)",
+        "expected": {
+          "width": 800,
+          "height": 1920,
+          "ratio": 0.4166666666666667
+        },
+        "observed": {
+          "selected": true,
+          "outputSize": "800×1920",
+          "cropSelection": {
+            "width": 30,
+            "height": 72,
+            "ratio": 0.4166666666666667
+          }
+        },
+        "elapsedMs": 916,
+        "status": "passed"
+      }
+    ],
+    "mobile": {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenshot": "final-smoke-mobile.png",
+      "skippedReason": null,
+      "layout": {
+        "innerWidth": 390,
+        "documentWidth": 390,
+        "editorImageLoaded": true
+      },
+      "status": "captured"
+    },
+    "initialState": {
+      "naturalImage": [
+        96,
+        72
+      ],
+      "outputSize": "1600×1600"
+    }
+  },
+  "summary": {
+    "exportsDownloaded": 3,
+    "exportRunCount": 4,
+    "firefoxPresetStepsPassed": 9,
+    "firefoxPresetStepsRequested": 9,
+    "mobileScreenshot": "final-smoke-mobile.png"
+  }
+}

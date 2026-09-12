@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Rectangle Medium (1920×1080)",
+    "style": "top: 12.03125%; left: 5%; width: 90%; height: 75.9375%;",
+    "status": "pass"
+  },
+  {
+    "name": "Rectangle Short (1920×900)",
+    "style": "top: 18.359375%; left: 5%; width: 90%; height: 63.28125%;",
+    "status": "pass"
+  }
+]

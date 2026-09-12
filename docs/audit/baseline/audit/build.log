@@ -1,0 +1,23 @@
+
+> ezcrop@0.0.0 build
+> tsc -b && vite build
+
+vite v7.3.1 building client environment for production...
+transforming...
+✓ 63 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/assets/avif_enc_mt.worker-C-5TmijJ.js      1.50 kB
+dist/assets/index-Chu8AFt6.js                   2.11 kB
+dist/index.html                                 2.56 kB │ gzip:     1.00 kB
+dist/assets/avif_enc_mt-CotiS4tO.js            26.40 kB
+dist/assets/encode.worker-Ds3fw_F6.js          41.04 kB
+dist/assets/avif_dec-B7YOdlSS.wasm          1,170.93 kB │ gzip:   341.83 kB
+dist/assets/avif_enc-Co4TcJko.wasm          3,485.87 kB │ gzip: 1,128.05 kB
+dist/assets/avif_enc_mt-DFoVXd45.wasm       3,534.67 kB │ gzip: 1,142.78 kB
+dist/assets/index-B1EKwA7H.css                 26.08 kB │ gzip:     5.56 kB
+dist/assets/index-B8dm3f4v.js                   2.17 kB │ gzip:     1.06 kB
+dist/assets/avif_enc-DzETXbOZ.js               19.09 kB │ gzip:     7.72 kB
+dist/assets/avif_enc_mt-KOYYu3T_.js            26.45 kB │ gzip:    10.51 kB
+dist/assets/index-BOHjcMbo.js                 276.49 kB │ gzip:    89.01 kB
+✓ built in 20.93s
