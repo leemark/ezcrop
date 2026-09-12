@@ -88,6 +88,18 @@ async function download(page, format = 'WebP', label = 'export') {
   return { ...decoded, bytes: bytes.length, filename: d.suggestedFilename(), elapsed: Date.now() - start };
 }
 const crop = page => page.locator('.ReactCrop__crop-selection').getAttribute('style');
+async function waitForCropAspect(page, aspect) {
+  // Preset changes refit the selection in a React effect. Observe that visible
+  // update before recording a selection for later preservation comparisons.
+  await page.waitForFunction(expected => {
+    const image = document.querySelector('img[alt="Crop source"]');
+    const selection = document.querySelector('.ReactCrop__crop-selection');
+    if (!image || !selection) return false;
+    const actual = (parseFloat(selection.style.width) * image.naturalWidth) /
+      (parseFloat(selection.style.height) * image.naturalHeight);
+    return Math.abs(actual - expected) < 0.0001;
+  }, aspect);
+}
 
 test('F01: repeated exports retain the worker connection across garbage collection', { timeout: 60000 }, async () => {
   await pageFor(async (page, context) => {
@@ -123,13 +135,14 @@ test('F03/F04: zoom, movement, output resolution and unchanged fields preserve c
   await pageFor(async page => {
     await upload(page, 'landscape.png', 1200, 800);
     await page.getByRole('button', { name: 'Vertical Narrow (800×1920)', exact: true }).click();
+    await waitForCropAspect(page, 800 / 1920);
     const first = await crop(page); const zoom = page.getByRole('slider', { name: 'Zoom', exact: true }); await zoom.focus(); await page.keyboard.press('End');
     assert.notEqual(await crop(page), first); assert.equal(await zoom.inputValue(), '3');
     const group = page.getByRole('group', { name: 'Use the arrow keys to move the crop selection area', exact: true }); await group.focus(); await page.keyboard.press('ArrowRight');
     assert.equal(await zoom.inputValue(), '3');
-    await page.getByRole('button', { name: 'Square Small (600×600)', exact: true }).click(); await zoom.focus(); await page.keyboard.press('End');
+    await page.getByRole('button', { name: 'Square Small (600×600)', exact: true }).click(); await waitForCropAspect(page, 1); await zoom.focus(); await page.keyboard.press('End');
     const beforeResolution = await crop(page); await page.getByRole('button', { name: 'Square Large (1600×1600)', exact: true }).click(); assert.equal(await crop(page), beforeResolution);
-    await size(page, 800, 600); await zoom.focus(); await page.keyboard.press('End'); const beforeBlur = await crop(page);
+    await size(page, 800, 600); await waitForCropAspect(page, 800 / 600); await zoom.focus(); await page.keyboard.press('End'); const beforeBlur = await crop(page);
     await page.getByRole('spinbutton', { name: 'Width in pixels' }).focus(); await page.keyboard.press('Tab'); assert.equal(await crop(page), beforeBlur);
   });
 });
