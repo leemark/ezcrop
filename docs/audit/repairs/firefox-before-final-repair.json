@@ -1,0 +1,396 @@
+{
+  "schemaVersion": 1,
+  "audit": "Post-repair Firefox AVIF responsiveness check",
+  "startedAt": "2026-09-12T05:30:58.606Z",
+  "repoRoot": "C:\\Users\\mark\\Documents\\EZCrop",
+  "browser": {
+    "name": "Firefox",
+    "version": "153.0",
+    "playwrightVersion": "1.62.1"
+  },
+  "fixture": {
+    "name": "small.png",
+    "generator": "exact SVG generator copied from output/audit/final-smoke.cjs",
+    "format": "png",
+    "width": 96,
+    "height": 72,
+    "bytes": 1335,
+    "sha256": "9ed280bf0bdd79fe09ec39f5881a842e253c341254c0437b5c97c259fc02a6fd"
+  },
+  "preview": {
+    "url": "http://127.0.0.1:4196/ezcrop/",
+    "host": "127.0.0.1",
+    "port": 4196,
+    "status": "ready",
+    "stoppedAt": "2026-09-12T05:33:17.378Z",
+    "closedCheck": "connection-refused",
+    "ready": {
+      "status": 200,
+      "url": "http://127.0.0.1:4196/ezcrop/"
+    }
+  },
+  "exportCapMs": 60000,
+  "runs": [
+    {
+      "name": "600-square",
+      "target": {
+        "width": 600,
+        "height": 600
+      },
+      "freshContext": true,
+      "format": "avif",
+      "requestedQuality": 85,
+      "exportCapMs": 60000,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "assetResponses": [
+        {
+          "at": "2026-09-12T05:31:30.980Z",
+          "url": "http://127.0.0.1:4196/ezcrop/assets/avif_enc-DzETXbOZ.js",
+          "status": 200,
+          "resourceType": "script"
+        },
+        {
+          "at": "2026-09-12T05:31:31.007Z",
+          "url": "http://127.0.0.1:4196/ezcrop/assets/encode.worker-DVY8EH5y.js",
+          "status": 200,
+          "resourceType": "script"
+        },
+        {
+          "at": "2026-09-12T05:31:31.024Z",
+          "url": "http://127.0.0.1:4196/ezcrop/assets/avif_enc-Co4TcJko.wasm",
+          "status": 200,
+          "resourceType": "fetch"
+        },
+        {
+          "at": "2026-09-12T05:31:31.251Z",
+          "url": "http://127.0.0.1:4196/ezcrop/assets/avif_enc-Co4TcJko.wasm",
+          "status": 304,
+          "resourceType": "fetch"
+        }
+      ],
+      "requestFailures": [],
+      "workerEvents": [
+        {
+          "event": "create",
+          "workerId": 1,
+          "timeMs": 5806,
+          "at": "2026-09-12T05:31:30.882Z",
+          "url": "http://127.0.0.1:4196/ezcrop/assets/encode.worker-DVY8EH5y.js",
+          "options": {
+            "type": "module"
+          }
+        },
+        {
+          "event": "postMessage",
+          "workerId": 1,
+          "timeMs": 5807,
+          "at": "2026-09-12T05:31:30.883Z",
+          "wireType": "APPLY",
+          "messageId": "f9abb8d485ca6-134dae395ef43-80e1d676bd195-154cecbfeaafce",
+          "path": [
+            "resizeAndEncode"
+          ]
+        },
+        {
+          "event": "message",
+          "workerId": 1,
+          "timeMs": 16586,
+          "at": "2026-09-12T05:31:41.662Z",
+          "wireType": "RAW",
+          "messageId": "f9abb8d485ca6-134dae395ef43-80e1d676bd195-154cecbfeaafce",
+          "path": null
+        }
+      ],
+      "status": "downloaded-avif",
+      "screenshots": {
+        "beforeExport": "firefox-avif-600-square-before.png",
+        "afterExport": "firefox-avif-600-square-after.png"
+      },
+      "navigationStartedAt": "2026-09-12T05:31:25.026Z",
+      "pageReadyAt": "2026-09-12T05:31:27.531Z",
+      "fixtureLoadedAt": "2026-09-12T05:31:28.540Z",
+      "sourceCrop": {
+        "image": {
+          "naturalWidth": 96,
+          "naturalHeight": 72,
+          "displayedWidth": 96,
+          "displayedHeight": 72
+        },
+        "selection": {
+          "displayedX": 15.58331298828125,
+          "displayedY": 3.600006103515625,
+          "displayedWidth": 64.80000305175781,
+          "displayedHeight": 64.79998779296875,
+          "sourceX": 15.58331298828125,
+          "sourceY": 3.600006103515625,
+          "sourceWidth": 64.80000305175781,
+          "sourceHeight": 64.79998779296875
+        }
+      },
+      "qualityControl": "85%",
+      "cropAtExport": {
+        "image": {
+          "naturalWidth": 96,
+          "naturalHeight": 72,
+          "displayedWidth": 96,
+          "displayedHeight": 72
+        },
+        "selection": {
+          "displayedX": 15.58331298828125,
+          "displayedY": 3.600006103515625,
+          "displayedWidth": 64.80000305175781,
+          "displayedHeight": 64.79998779296875,
+          "sourceX": 15.58331298828125,
+          "sourceY": 3.600006103515625,
+          "sourceWidth": 64.80000305175781,
+          "sourceHeight": 64.79998779296875
+        }
+      },
+      "uiAtExport": {
+        "outputSize": "600×600",
+        "quality": "85%",
+        "selectedFormat": [
+          "S",
+          "AVIF"
+        ]
+      },
+      "exportStartedAt": "2026-09-12T05:31:30.577Z",
+      "downloadObservedAt": "2026-09-12T05:31:47.422Z",
+      "exportElapsedMs": 16844.8,
+      "download": {
+        "path": "output/playwright/repair-firefox/firefox-avif-600-square.avif",
+        "suggestedFilename": "small_600x600.avif",
+        "magic": {
+          "bytes": 2476,
+          "prefixHex": "00000020667479706176696600000000617669666d696631",
+          "first16Ascii": "... ftypavif....",
+          "avifBrand": "avif",
+          "isAvif": true
+        }
+      },
+      "imageInspection": {
+        "metadata": {
+          "format": "heif",
+          "width": 600,
+          "height": 600,
+          "space": "srgb",
+          "hasAlpha": false
+        },
+        "decodeError": null,
+        "pixels": [
+          {
+            "label": "output-center",
+            "includedInCrop": true,
+            "outputPoint": {
+              "x": 300,
+              "y": 300
+            },
+            "rgba": [
+              229,
+              89,
+              40,
+              255
+            ]
+          },
+          {
+            "label": "yellow-circle-center",
+            "includedInCrop": true,
+            "outputPoint": {
+              "x": 96,
+              "y": 189
+            },
+            "rgba": [
+              244,
+              211,
+              95,
+              255
+            ]
+          },
+          {
+            "label": "blue-mountain",
+            "includedInCrop": true,
+            "outputPoint": {
+              "x": 290,
+              "y": 503
+            },
+            "rgba": [
+              25,
+              91,
+              115,
+              255
+            ]
+          }
+        ]
+      },
+      "endUi": {
+        "alerts": [],
+        "exportButtons": [
+          {
+            "text": "Export Image",
+            "disabled": false
+          }
+        ],
+        "loadingText": null
+      },
+      "contextClosedAt": "2026-09-12T05:31:48.226Z"
+    },
+    {
+      "name": "1600-square",
+      "target": {
+        "width": 1600,
+        "height": 1600
+      },
+      "freshContext": true,
+      "format": "avif",
+      "requestedQuality": 85,
+      "exportCapMs": 60000,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "assetResponses": [
+        {
+          "at": "2026-09-12T05:31:53.934Z",
+          "url": "http://127.0.0.1:4196/ezcrop/assets/avif_enc-DzETXbOZ.js",
+          "status": 200,
+          "resourceType": "script"
+        },
+        {
+          "at": "2026-09-12T05:31:54.013Z",
+          "url": "http://127.0.0.1:4196/ezcrop/assets/avif_enc-Co4TcJko.wasm",
+          "status": 200,
+          "resourceType": "fetch"
+        },
+        {
+          "at": "2026-09-12T05:31:54.014Z",
+          "url": "http://127.0.0.1:4196/ezcrop/assets/encode.worker-DVY8EH5y.js",
+          "status": 200,
+          "resourceType": "script"
+        },
+        {
+          "at": "2026-09-12T05:31:54.459Z",
+          "url": "http://127.0.0.1:4196/ezcrop/assets/avif_enc-Co4TcJko.wasm",
+          "status": 304,
+          "resourceType": "fetch"
+        }
+      ],
+      "requestFailures": [],
+      "workerEvents": [
+        {
+          "event": "create",
+          "workerId": 1,
+          "timeMs": 3282,
+          "at": "2026-09-12T05:31:53.801Z",
+          "url": "http://127.0.0.1:4196/ezcrop/assets/encode.worker-DVY8EH5y.js",
+          "options": {
+            "type": "module"
+          }
+        },
+        {
+          "event": "postMessage",
+          "workerId": 1,
+          "timeMs": 3283,
+          "at": "2026-09-12T05:31:53.802Z",
+          "wireType": "APPLY",
+          "messageId": "4707ccc3e4d12-3e271a9e3b148-cad0710c18aa-11e8dc3a9df377",
+          "path": [
+            "resizeAndEncode"
+          ]
+        },
+        {
+          "event": "postMessage",
+          "workerId": 1,
+          "timeMs": 33363,
+          "at": "2026-09-12T05:32:23.882Z",
+          "wireType": "RELEASE",
+          "messageId": "189d8e0d22696d-7e9e6b481cc78-18d4d9822f4ff7-6c6e09b9d60f9",
+          "path": null
+        },
+        {
+          "event": "terminate",
+          "workerId": 1,
+          "timeMs": 33363,
+          "at": "2026-09-12T05:32:23.882Z"
+        }
+      ],
+      "status": "download-cap-reached",
+      "screenshots": {
+        "beforeExport": "firefox-avif-1600-square-before.png",
+        "afterExport": "firefox-avif-1600-square-after.png"
+      },
+      "navigationStartedAt": "2026-09-12T05:31:50.515Z",
+      "pageReadyAt": "2026-09-12T05:31:51.182Z",
+      "fixtureLoadedAt": "2026-09-12T05:31:52.105Z",
+      "sourceCrop": {
+        "image": {
+          "naturalWidth": 96,
+          "naturalHeight": 72,
+          "displayedWidth": 96,
+          "displayedHeight": 72
+        },
+        "selection": {
+          "displayedX": 15.58331298828125,
+          "displayedY": 3.600006103515625,
+          "displayedWidth": 64.80000305175781,
+          "displayedHeight": 64.79998779296875,
+          "sourceX": 15.58331298828125,
+          "sourceY": 3.600006103515625,
+          "sourceWidth": 64.80000305175781,
+          "sourceHeight": 64.79998779296875
+        }
+      },
+      "qualityControl": "85%",
+      "cropAtExport": {
+        "image": {
+          "naturalWidth": 96,
+          "naturalHeight": 72,
+          "displayedWidth": 96,
+          "displayedHeight": 72
+        },
+        "selection": {
+          "displayedX": 15.58331298828125,
+          "displayedY": 3.600006103515625,
+          "displayedWidth": 64.80000305175781,
+          "displayedHeight": 64.79998779296875,
+          "sourceX": 15.58331298828125,
+          "sourceY": 3.600006103515625,
+          "sourceWidth": 64.80000305175781,
+          "sourceHeight": 64.79998779296875
+        }
+      },
+      "uiAtExport": {
+        "outputSize": "1600×1600",
+        "quality": "85%",
+        "selectedFormat": [
+          "L",
+          "AVIF"
+        ]
+      },
+      "exportStartedAt": "2026-09-12T05:31:53.584Z",
+      "exportElapsedMs": 60009.8,
+      "failure": "page.waitForEvent: Timeout 60000ms exceeded while waiting for event \"download\"\n=========================== logs ===========================\nwaiting for event \"download\"\n============================================================",
+      "endUi": {
+        "alerts": [],
+        "exportButtons": [],
+        "loadingText": "Exporting…"
+      },
+      "contextClosedAt": "2026-09-12T05:33:10.287Z"
+    }
+  ],
+  "finishedAt": "2026-09-12T05:33:17.393Z",
+  "summary": {
+    "firefoxVersion": "153.0",
+    "runStatuses": [
+      {
+        "name": "600-square",
+        "status": "downloaded-avif",
+        "exportElapsedMs": 16844.8
+      },
+      {
+        "name": "1600-square",
+        "status": "download-cap-reached",
+        "exportElapsedMs": 60009.8
+      }
+    ],
+    "previewClosed": true
+  }
+}

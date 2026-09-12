@@ -57,3 +57,17 @@ input[type="range"]::-moz-range-thumb {
   width: 8px !important;
   height: 8px !important;
 }
+
+/* Preserve the crop library's touch targets while keeping keyboard focus visible. */
+button:focus-visible,
+[role="button"]:focus-visible,
+input:focus-visible {
+  outline: 2px solid #b45309;
+  outline-offset: 2px;
+}
+
+.dark button:focus-visible,
+.dark [role="button"]:focus-visible,
+.dark input:focus-visible {
+  outline-color: #fbbf24;
+}

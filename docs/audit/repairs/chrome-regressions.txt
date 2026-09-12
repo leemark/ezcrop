@@ -1,0 +1,36 @@
+Browser: chrome 151.0.7922.176
+✔ F01: repeated exports retain the worker connection across garbage collection (21416.47ms)
+✔ F02: replacing an image terminates a held worker and suppresses its download (2628.8536ms)
+✔ F03/F04: zoom, movement, output resolution and unchanged fields preserve composition (3624.5669ms)
+✔ F04: invalid custom dimensions do not become output; extreme valid ratios encode (11468.6168ms)
+✔ F05/F06/F12: mobile preview is stable, Custom is selected, and names do not overflow (7023.5412ms)
+✔ F11: denied theme storage leaves upload and export usable (6386.5865ms)
+chrome WebP: 1578ms, 1830 bytes
+✔ formats and F14: WebP signature, dimensions, pixels and transparency (4393.8223ms)
+chrome JPEG: 1389ms, 6874 bytes
+✔ formats and F14: JPEG signature, dimensions, pixels and transparency (3581.1546ms)
+chrome AVIF: 5061ms, 1144 bytes
+✔ formats and F14: AVIF signature, dimensions, pixels and transparency (7571.3995ms)
+✔ F10: worker script failure falls back immediately (3488.2737ms)
+✔ F10: uncached offline AVIF explains recovery without a module URL (2543.5415ms)
+✔ F07: load completion order, stale errors and reset cannot replace the current image (8738.9918ms)
+✔ F08: clearing during debounce/encoding stays empty; latest valid estimate wins (4752.1401ms)
+✔ F03/F04: geometry round-trips across orientations and fractional source rectangles (9898.6819ms)
+✔ F09: both native encoders reject a PNG fallback requested as WebP (3244.5923ms)
+✔ F06: affected text meets normal-text contrast in light theme (3787.411ms)
+✔ F06: affected text meets normal-text contrast in dark theme (3196.7936ms)
+✔ F02: stale main-thread successes and errors cannot affect a newer export (3687.0375ms)
+✔ Phone photographs keep all eight EXIF orientations through export (51904.8573ms)
+✔ F13: an invalid file gives guidance and a new valid image recovers (5884.5476ms)
+✔ F03/F04: mouse crop movement and crossing a resize edge keep the editor usable (10994.2791ms)
+✔ F06: Chromium touch emulation moves the crop without changing zoom (2461.4963ms)
+✔ O01: an AVIF timeout stays cancellable and offers recovery without a main-thread retry (2742.3439ms)
+✔ O01/F02: AVIF estimation runs in a worker and stops when exporting or replacing the image (4102.4382ms)
+ℹ tests 24
+ℹ suites 0
+ℹ pass 24
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 214714.2869

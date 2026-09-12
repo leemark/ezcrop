@@ -1,170 +1,165 @@
 import { useState, useCallback, useEffect, useRef } from "react";
-import {
-  makeAspectCrop,
-  centerCrop,
-  type PercentCrop,
-  type PixelCrop,
-} from "react-image-crop";
+import type { PercentCrop, PixelCrop } from "react-image-crop";
 import type { CropArea, Preset } from "../types";
 import { presets } from "../lib/presets";
+import {
+  createBaselineCrop,
+  getCropAtZoom,
+  getZoomForCrop,
+  isValidOutputDimension,
+  type ImageSize,
+} from "../lib/cropGeometry";
+
+function toSourceCrop(percentCrop: PercentCrop, image: ImageSize): CropArea {
+  return {
+    x: (percentCrop.x / 100) * image.width,
+    y: (percentCrop.y / 100) * image.height,
+    width: (percentCrop.width / 100) * image.width,
+    height: (percentCrop.height / 100) * image.height,
+  };
+}
+
+function toPercentCrop(crop: CropArea, image: ImageSize): PercentCrop {
+  return {
+    unit: "%",
+    x: (crop.x / image.width) * 100,
+    y: (crop.y / image.height) * 100,
+    width: (crop.width / image.width) * 100,
+    height: (crop.height / image.height) * 100,
+  };
+}
+
+function cropCenter(crop: CropArea) {
+  return { x: crop.x + crop.width / 2, y: crop.y + crop.height / 2 };
+}
+
+function hasSameSize(left: CropArea, right: CropArea): boolean {
+  return Math.abs(left.width - right.width) < 0.5 &&
+    Math.abs(left.height - right.height) < 0.5;
+}
 
 export function useCropState() {
   const [crop, setCrop] = useState<PercentCrop>();
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<CropArea | null>(null);
-  const [imageDimensions, setImageDimensions] = useState<{ width: number; height: number } | null>(null);
+  const [imageDimensions, setImageDimensions] = useState<ImageSize | null>(null);
   const [activePreset, setActivePreset] = useState<Preset>(presets[0]);
   const [customWidth, setCustomWidth] = useState(800);
   const [customHeight, setCustomHeight] = useState(600);
   const imageRef = useRef<HTMLImageElement | null>(null);
+  const baselineCropRef = useRef<CropArea | null>(null);
+  const currentCropRef = useRef<CropArea | null>(null);
+  const zoomRef = useRef(1);
 
-  // Custom works like the other presets: the entered dimensions are the
-  // OUTPUT size, and the crop box covers most of the image at that aspect,
-  // so export resizes the selection (crop + resize in one step).
-  const targetWidth =
-    activePreset.id === "custom" ? customWidth : activePreset.width;
-  const targetHeight =
-    activePreset.id === "custom" ? customHeight : activePreset.height;
-
+  // Custom dimensions describe the output canvas; their ratio controls the crop.
+  const targetWidth = activePreset.id === "custom" ? customWidth : activePreset.width;
+  const targetHeight = activePreset.id === "custom" ? customHeight : activePreset.height;
   const aspect = targetWidth / targetHeight;
-  const initialAspect = aspect;
 
-  function makeInitialCrop(img: HTMLImageElement, asp: number): PercentCrop {
-    const crop = makeAspectCrop(
-      { unit: "%", width: 90 },
-      asp,
-      img.width,
-      img.height,
-    );
-    return centerCrop(crop, img.width, img.height);
-  }
-
-  function updateCroppedPixels(percentCrop: PercentCrop) {
-    const img = imageRef.current;
-    if (!img) return;
-    const { naturalWidth, naturalHeight } = img;
-    setCroppedAreaPixels({
-      x: Math.round((percentCrop.x / 100) * naturalWidth),
-      y: Math.round((percentCrop.y / 100) * naturalHeight),
-      width: Math.round((percentCrop.width / 100) * naturalWidth),
-      height: Math.round((percentCrop.height / 100) * naturalHeight),
-    });
-  }
-
-  function zoomFromCrop(percentCrop: PercentCrop): number {
-    const maxDim = Math.max(percentCrop.width, percentCrop.height);
-    if (maxDim === 0) return 1;
-    // zoom=1 → crop fills ~90%, zoom=3 → crop is small
-    return Math.max(1, Math.min(3, 90 / maxDim));
-  }
+  const applyCrop = useCallback((nextCrop: CropArea, image: ImageSize) => {
+    currentCropRef.current = nextCrop;
+    setCrop(toPercentCrop(nextCrop, image));
+    setCroppedAreaPixels(nextCrop);
+  }, []);
 
   const onImageLoad = useCallback(
     (e: React.SyntheticEvent<HTMLImageElement>) => {
       const img = e.currentTarget;
+      const image = { width: img.naturalWidth, height: img.naturalHeight };
+      if (!image.width || !image.height) return;
+
       imageRef.current = img;
-      setImageDimensions({ width: img.naturalWidth, height: img.naturalHeight });
-      const initial = makeInitialCrop(img, initialAspect);
-      setCrop(initial);
-      updateCroppedPixels(initial);
+      setImageDimensions(image);
+      const baseline = createBaselineCrop(image, aspect);
+      baselineCropRef.current = baseline;
+      zoomRef.current = 1;
       setZoom(1);
+      applyCrop(baseline, image);
     },
-    [initialAspect],
+    [aspect, applyCrop],
   );
 
   const onCropChange = useCallback(
     (_pixelCrop: PixelCrop, percentCrop: PercentCrop) => {
-      setCrop(percentCrop);
-      updateCroppedPixels(percentCrop);
-      setZoom(zoomFromCrop(percentCrop));
+      const img = imageRef.current;
+      if (!img?.naturalWidth || !img.naturalHeight) return;
+      const image = { width: img.naturalWidth, height: img.naturalHeight };
+      let nextCrop = toSourceCrop(percentCrop, image);
+      // A handle can briefly cross its opposite edge during a pointer gesture.
+      // Keep the last valid selection until the library reports positive bounds.
+      if (!Object.values(nextCrop).every(Number.isFinite) ||
+          nextCrop.width <= 0 || nextCrop.height <= 0) return;
+      const previousCrop = currentCropRef.current;
+      const baseline = baselineCropRef.current;
+
+      if (baseline && previousCrop && !hasSameSize(previousCrop, nextCrop)) {
+        const nextZoom = getZoomForCrop(nextCrop, baseline);
+        nextCrop = getCropAtZoom(baseline, image, nextZoom, cropCenter(nextCrop));
+        zoomRef.current = nextZoom;
+        setZoom(nextZoom);
+      }
+
+      applyCrop(nextCrop, image);
     },
-    [],
+    [applyCrop],
   );
 
   const setCropForZoom = useCallback(
     (newZoom: number) => {
       const img = imageRef.current;
-      if (!img || !crop) return;
-      setZoom(newZoom);
+      const baseline = baselineCropRef.current;
+      if (!img || !baseline || !Number.isFinite(newZoom)) return;
+      const image = { width: img.naturalWidth, height: img.naturalHeight };
+      if (!image.width || !image.height) return;
 
-      // Target crop width in percent (zoom=1 → 90%, zoom=3 → 30%)
-      const targetPct = 90 / newZoom;
-
-      // Center of current crop
-      const cx = crop.x + crop.width / 2;
-      const cy = crop.y + crop.height / 2;
-
-      const currentAspect =
-        (crop.width * img.naturalWidth) / (crop.height * img.naturalHeight);
-
-      const newCrop = makeAspectCrop(
-        { unit: "%", width: targetPct },
-        aspect || currentAspect,
-        img.width,
-        img.height,
-      );
-
-      // Re-center on current center, clamped to image bounds
-      newCrop.x = Math.max(0, Math.min(100 - newCrop.width, cx - newCrop.width / 2));
-      newCrop.y = Math.max(0, Math.min(100 - newCrop.height, cy - newCrop.height / 2));
-
-      setCrop(newCrop);
-      updateCroppedPixels(newCrop);
+      const center = currentCropRef.current
+        ? cropCenter(currentCropRef.current)
+        : cropCenter(baseline);
+      const nextCrop = getCropAtZoom(baseline, image, newZoom, center);
+      const boundedZoom = getZoomForCrop(nextCrop, baseline);
+      zoomRef.current = boundedZoom;
+      setZoom(boundedZoom);
+      applyCrop(nextCrop, image);
     },
-    [crop, aspect],
+    [applyCrop],
   );
 
-  // Re-center crop when aspect changes (preset switch)
+  // An aspect change refits around the current center at the current zoom. An
+  // output-size change with the same ratio leaves the source selection intact.
   useEffect(() => {
     const img = imageRef.current;
-    if (!img) return;
-    const newCrop = makeInitialCrop(img, initialAspect);
-    setCrop(newCrop);
-    updateCroppedPixels(newCrop);
-    setZoom(1);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activePreset.id]);
+    if (!img || !img.naturalWidth || !img.naturalHeight) return;
+    const image = { width: img.naturalWidth, height: img.naturalHeight };
+    const nextBaseline = createBaselineCrop(image, aspect);
+    const center = currentCropRef.current
+      ? cropCenter(currentCropRef.current)
+      : cropCenter(nextBaseline);
+    const nextCrop = getCropAtZoom(nextBaseline, image, zoomRef.current, center);
 
-  const selectPreset = useCallback(
-    (preset: Preset) => {
-      setActivePreset(preset);
-    },
-    [],
-  );
+    baselineCropRef.current = nextBaseline;
+    applyCrop(nextCrop, image);
+  }, [aspect, applyCrop]);
+
+  const selectPreset = useCallback((preset: Preset) => {
+    setActivePreset(preset);
+  }, []);
 
   const updateCustomDimensions = useCallback(
-    (w: number, h: number) => {
-      if (!w || !h || !isFinite(w) || !isFinite(h)) return;
-      setCustomWidth(Math.max(1, Math.round(w)));
-      setCustomHeight(Math.max(1, Math.round(h)));
-
-      const img = imageRef.current;
-      if (!img) return;
-
-      // Re-fit the crop box to the new output aspect ratio at ~90% of the
-      // image (like presets do), keeping the current crop center
-      const newAspect = w / h;
-      const cx = crop ? crop.x + crop.width / 2 : 50;
-      const cy = crop ? crop.y + crop.height / 2 : 50;
-
-      const newCrop = makeAspectCrop(
-        { unit: "%", width: 90 },
-        newAspect,
-        img.width,
-        img.height,
-      );
-      newCrop.x = Math.max(0, Math.min(100 - newCrop.width, cx - newCrop.width / 2));
-      newCrop.y = Math.max(0, Math.min(100 - newCrop.height, cy - newCrop.height / 2));
-
-      setCrop(newCrop);
-      updateCroppedPixels(newCrop);
-      setZoom(zoomFromCrop(newCrop));
+    (width: number, height: number) => {
+      if (!isValidOutputDimension(width) || !isValidOutputDimension(height)) return;
+      if (width === customWidth && height === customHeight) return;
+      setCustomWidth(width);
+      setCustomHeight(height);
     },
-    [crop],
+    [customWidth, customHeight],
   );
 
   const resetCrop = useCallback(() => {
     setCrop(undefined);
+    zoomRef.current = 1;
     setZoom(1);
+    currentCropRef.current = null;
+    baselineCropRef.current = null;
     setCroppedAreaPixels(null);
     setImageDimensions(null);
     setActivePreset(presets[0]);

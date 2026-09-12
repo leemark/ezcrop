@@ -1,0 +1,19 @@
+Browser: edge 152.0.4191.66
+✔ F02: replacing an image terminates a held worker and suppresses its download (19846.5822ms)
+edge WebP: 5891ms, 1830 bytes
+✔ formats and F14: WebP signature, dimensions, pixels and transparency (8249.9973ms)
+edge JPEG: 1313ms, 6874 bytes
+✔ formats and F14: JPEG signature, dimensions, pixels and transparency (3705.1534ms)
+edge AVIF: 5705ms, 1144 bytes
+✔ formats and F14: AVIF signature, dimensions, pixels and transparency (8829.9618ms)
+✔ F02: stale main-thread successes and errors cannot affect a newer export (9220.3948ms)
+✔ O01: an AVIF timeout stays cancellable and offers recovery without a main-thread retry (4170.4637ms)
+✔ O01/F02: AVIF estimation runs in a worker and stops when exporting or replacing the image (5471.5821ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 91671.6721

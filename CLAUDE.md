@@ -9,9 +9,11 @@ npm run dev        # Start dev server (Vite, http://localhost:5173/ezcrop/)
 npm run build      # Type-check + build to dist/
 npm run lint       # Run ESLint
 npm run preview    # Preview production build locally
+npm test           # Browser regressions against a built app (install Playwright Chromium first)
+npm run check      # Lint, TypeScript/build, and browser regressions
 ```
 
-No test suite is configured.
+The maintained regression suite is in `tests/`; it starts local development and production-preview servers automatically. Historical audit evidence is in `docs/audit/baseline/` and generated local results are in ignored `output/`.
 
 ## Architecture
 
@@ -25,11 +27,11 @@ The app cycles through three phases managed in `App.tsx`: `upload` → `edit` �
 
 1. **`useImageLoader`** (`src/hooks/useImageLoader.ts`) — Accepts a `File`, validates the MIME type, verifies the browser can decode it, and produces an object URL. No manual EXIF handling: modern browsers apply EXIF orientation automatically and consistently for rendering, `naturalWidth`/`naturalHeight`, and canvas `drawImage`.
 2. **`useCropState`** (`src/hooks/useCropState.ts`) — All crop interaction state: the `PercentCrop` from `react-image-crop`, zoom level, active preset, custom dimensions, and derived `targetWidth`/`targetHeight`. All presets—including "custom"—lock the crop box to the output aspect ratio at ~90% of the image, so export resizes the selection (crop + resize in one step). Custom simply lets the user type arbitrary output dimensions; dragging repositions/resizes the selection without changing them.
-3. **`useExportPipeline`** (`src/hooks/useExportPipeline.ts`) — Orchestrates export. Crops the image to a canvas (`cropUtils.ts`), then resizes and encodes either in a Web Worker (preferred) or main thread (fallback). Downloads the result via a temporary `<a>` element.
+3. **`useExportPipeline`** (`src/hooks/useExportPipeline.ts`) — Orchestrates export. Crops the image to a canvas (`cropUtils.ts`), then resizes and encodes in a paired Web Worker, with page-side resizing where OffscreenCanvas is unavailable. JPEG/WebP retain native page encoding as a fallback; AVIF encoding stays in a worker with a 120-second deadline. Downloads the result via a temporary `<a>` element.
 
 ### Export pipeline detail
 
-- **Worker path** (`src/workers/encode.worker.ts`): Uses `OffscreenCanvas` + pica (Lanczos downscaling) or native `drawImage` (upscaling). Exposed via Comlink. Worker is recycled every 2 uses; pica instance every 5.
+- **Worker path** (`src/workers/encode.worker.ts`): Uses `OffscreenCanvas` + pica (high-quality downscaling) or native `drawImage` (upscaling). Each worker retains one Comlink proxy; they are disposed together. Worker is recycled every 2 uses; pica instance every 5. Export job identity and `cancelExport()` prevent obsolete downloads and state updates when images change.
 - **Main thread fallback**: Same logic without OffscreenCanvas.
 - **AVIF encoding**: Handled by `@jsquash/avif` (WASM), dynamically imported. `@jsquash/avif` is excluded from Vite's `optimizeDeps` to avoid bundling issues with its WASM.
 - WebP and JPEG use native `canvas.toBlob` / `OffscreenCanvas.convertToBlob`.

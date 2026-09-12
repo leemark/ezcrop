@@ -1,0 +1,1864 @@
+{
+  "schemaVersion": 1,
+  "audit": "Final post-repair Firefox AVIF app verification",
+  "startedAt": "2026-09-12T06:19:37.657Z",
+  "repoRoot": "C:\\Users\\mark\\Documents\\EZCrop",
+  "browser": {
+    "name": "Firefox",
+    "version": "153.0",
+    "playwrightVersion": "1.62.1"
+  },
+  "fixture": {
+    "name": "small.png",
+    "generator": "exact SVG generator copied from output/audit/final-smoke.cjs",
+    "format": "png",
+    "width": 96,
+    "height": 72,
+    "bytes": 1335,
+    "sha256": "9ed280bf0bdd79fe09ec39f5881a842e253c341254c0437b5c97c259fc02a6fd"
+  },
+  "differentFixture": {
+    "name": "different.png",
+    "width": 96,
+    "height": 72,
+    "bytes": 1356,
+    "sha256": "702435e9ead2461d5ffa439d471b473cc56a99e020ef18f2ab4adfc78b1bd008"
+  },
+  "preview": {
+    "url": "http://127.0.0.1:4196/ezcrop/",
+    "host": "127.0.0.1",
+    "port": 4196,
+    "status": "ready",
+    "stoppedAt": "2026-09-12T06:20:50.155Z",
+    "closedCheck": "connection-refused",
+    "ready": {
+      "status": 200,
+      "url": "http://127.0.0.1:4196/ezcrop/"
+    }
+  },
+  "exportCapMs": 140000,
+  "runs": [
+    {
+      "name": "1600-square",
+      "target": {
+        "width": 1600,
+        "height": 1600
+      },
+      "freshContext": true,
+      "format": "avif",
+      "requestedQuality": 85,
+      "exportCapMs": 140000,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "assetResponses": [
+        {
+          "at": "2026-09-12T06:19:49.213Z",
+          "url": "http://127.0.0.1:4196/ezcrop/assets/index-DpMNrc5Q.css",
+          "status": 200,
+          "resourceType": "stylesheet"
+        },
+        {
+          "at": "2026-09-12T06:19:49.235Z",
+          "url": "http://127.0.0.1:4196/ezcrop/assets/index-BFCp-Ydj.js",
+          "status": 200,
+          "resourceType": "script"
+        },
+        {
+          "at": "2026-09-12T06:19:49.432Z",
+          "url": "https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@600;700;800&display=swap",
+          "status": 200,
+          "resourceType": "stylesheet"
+        },
+        {
+          "at": "2026-09-12T06:20:02.474Z",
+          "url": "http://127.0.0.1:4196/ezcrop/assets/encode.worker-BdlE4j1e.js",
+          "status": 200,
+          "resourceType": "script"
+        },
+        {
+          "at": "2026-09-12T06:20:02.677Z",
+          "url": "http://127.0.0.1:4196/ezcrop/assets/encode.worker-BdlE4j1e.js",
+          "status": 304,
+          "resourceType": "script"
+        },
+        {
+          "at": "2026-09-12T06:20:02.901Z",
+          "url": "http://127.0.0.1:4196/ezcrop/assets/avif_enc-Co4TcJko.wasm",
+          "status": 200,
+          "resourceType": "fetch"
+        },
+        {
+          "at": "2026-09-12T06:20:47.303Z",
+          "url": "http://127.0.0.1:4196/ezcrop/assets/encode.worker-BdlE4j1e.js",
+          "status": 304,
+          "resourceType": "script"
+        },
+        {
+          "at": "2026-09-12T06:20:47.861Z",
+          "url": "http://127.0.0.1:4196/ezcrop/assets/avif_enc-Co4TcJko.wasm",
+          "status": 304,
+          "resourceType": "fetch"
+        }
+      ],
+      "requestFailures": [],
+      "workerEvents": [
+        {
+          "event": "create",
+          "workerId": 1,
+          "timeMs": 15273,
+          "at": "2026-09-12T06:20:02.400Z",
+          "url": "http://127.0.0.1:4196/ezcrop/assets/encode.worker-BdlE4j1e.js",
+          "options": {
+            "type": "module"
+          }
+        },
+        {
+          "event": "postMessage",
+          "workerId": 1,
+          "timeMs": 15273,
+          "at": "2026-09-12T06:20:02.400Z",
+          "wireType": "APPLY",
+          "messageId": "1fbe34c6295063-1f8336caba5ab3-1c99bc671d61b9-1e20c22bf417fb",
+          "path": [
+            "encodePreview"
+          ]
+        },
+        {
+          "event": "postMessage",
+          "workerId": 1,
+          "timeMs": 15433,
+          "at": "2026-09-12T06:20:02.560Z",
+          "wireType": "RELEASE",
+          "messageId": "e74dbd4d81919-161d829725934a-92ac40424933c-eab77b8a9fd9d",
+          "path": null
+        },
+        {
+          "event": "terminate",
+          "workerId": 1,
+          "timeMs": 15433,
+          "at": "2026-09-12T06:20:02.560Z"
+        },
+        {
+          "event": "create",
+          "workerId": 2,
+          "timeMs": 15454,
+          "at": "2026-09-12T06:20:02.581Z",
+          "url": "http://127.0.0.1:4196/ezcrop/assets/encode.worker-BdlE4j1e.js",
+          "options": {
+            "type": "module"
+          }
+        },
+        {
+          "event": "postMessage",
+          "workerId": 2,
+          "timeMs": 15455,
+          "at": "2026-09-12T06:20:02.582Z",
+          "wireType": "APPLY",
+          "messageId": "3338c465e759d-10943b1e1f2602-80b36be5190f7-81611c010d152",
+          "path": [
+            "resizeAndEncode"
+          ]
+        },
+        {
+          "event": "message",
+          "workerId": 2,
+          "timeMs": 59512,
+          "at": "2026-09-12T06:20:46.639Z",
+          "wireType": "RAW",
+          "messageId": "3338c465e759d-10943b1e1f2602-80b36be5190f7-81611c010d152",
+          "path": null
+        },
+        {
+          "event": "create",
+          "workerId": 3,
+          "timeMs": 60056,
+          "at": "2026-09-12T06:20:47.183Z",
+          "url": "http://127.0.0.1:4196/ezcrop/assets/encode.worker-BdlE4j1e.js",
+          "options": {
+            "type": "module"
+          }
+        },
+        {
+          "event": "postMessage",
+          "workerId": 3,
+          "timeMs": 60056,
+          "at": "2026-09-12T06:20:47.183Z",
+          "wireType": "APPLY",
+          "messageId": "174a2dd8d6eed-18ffef80bd6873-aded2ce7dcd89-135f5a507d8c9d",
+          "path": [
+            "encodePreview"
+          ]
+        },
+        {
+          "event": "postMessage",
+          "workerId": 2,
+          "timeMs": 60961,
+          "at": "2026-09-12T06:20:48.088Z",
+          "wireType": "RELEASE",
+          "messageId": "1fe8d0d33a09a4-3f26bd36863b7-11f91c8956fb5a-d9a9daf4733",
+          "path": null
+        },
+        {
+          "event": "terminate",
+          "workerId": 2,
+          "timeMs": 60961,
+          "at": "2026-09-12T06:20:48.088Z"
+        },
+        {
+          "event": "postMessage",
+          "workerId": 3,
+          "timeMs": 60968,
+          "at": "2026-09-12T06:20:48.095Z",
+          "wireType": "RELEASE",
+          "messageId": "92b66b228592d-17ee5cb03e4062-5a7a2c62a82cd-5cbea33bc1dd1",
+          "path": null
+        },
+        {
+          "event": "terminate",
+          "workerId": 3,
+          "timeMs": 60969,
+          "at": "2026-09-12T06:20:48.096Z"
+        }
+      ],
+      "heartbeatSamples": [
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 14551,
+          "gapMs": 86,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:01.678Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 14804,
+          "gapMs": 253,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:01.931Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 15055,
+          "gapMs": 251,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:02.182Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 15322,
+          "gapMs": 267,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:02.449Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 15581,
+          "gapMs": 259,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:02.708Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 15832,
+          "gapMs": 251,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:02.959Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 16098,
+          "gapMs": 266,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:03.225Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 16364,
+          "gapMs": 266,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:03.491Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 16630,
+          "gapMs": 266,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:03.757Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 16888,
+          "gapMs": 258,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:04.015Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 17151,
+          "gapMs": 263,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:04.278Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 17417,
+          "gapMs": 266,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:04.544Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 17667,
+          "gapMs": 250,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:04.794Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 17933,
+          "gapMs": 266,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:05.060Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 18184,
+          "gapMs": 251,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:05.311Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 18434,
+          "gapMs": 250,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:05.561Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 18685,
+          "gapMs": 251,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:05.812Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 18948,
+          "gapMs": 263,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:06.075Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 19212,
+          "gapMs": 264,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:06.339Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 19479,
+          "gapMs": 267,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:06.606Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 19745,
+          "gapMs": 266,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:06.872Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 20010,
+          "gapMs": 265,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:07.137Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 20272,
+          "gapMs": 262,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:07.399Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 20536,
+          "gapMs": 264,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:07.663Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 20787,
+          "gapMs": 251,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:07.914Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 21039,
+          "gapMs": 252,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:08.166Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 21302,
+          "gapMs": 263,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:08.429Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 21567,
+          "gapMs": 265,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:08.694Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 21832,
+          "gapMs": 265,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:08.959Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 22090,
+          "gapMs": 258,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:09.217Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 22353,
+          "gapMs": 263,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:09.480Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 22613,
+          "gapMs": 260,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:09.740Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 22874,
+          "gapMs": 261,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:10.001Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 23139,
+          "gapMs": 265,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:10.266Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 23400,
+          "gapMs": 261,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:10.527Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 23664,
+          "gapMs": 264,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:10.791Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 23932,
+          "gapMs": 268,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:11.059Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 24198,
+          "gapMs": 266,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:11.325Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 24455,
+          "gapMs": 257,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:11.582Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 24718,
+          "gapMs": 263,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:11.845Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 24980,
+          "gapMs": 262,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:12.107Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 25247,
+          "gapMs": 267,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:12.374Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 25510,
+          "gapMs": 263,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:12.637Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 25774,
+          "gapMs": 264,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:12.901Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 26039,
+          "gapMs": 265,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:13.166Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 26302,
+          "gapMs": 263,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:13.429Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 26584,
+          "gapMs": 282,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:13.711Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 26848,
+          "gapMs": 264,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:13.975Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 27114,
+          "gapMs": 266,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:14.241Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 27376,
+          "gapMs": 262,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:14.503Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 27628,
+          "gapMs": 252,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:14.755Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 27893,
+          "gapMs": 265,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:15.020Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 28143,
+          "gapMs": 250,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:15.270Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 28409,
+          "gapMs": 266,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:15.536Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 28675,
+          "gapMs": 266,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:15.802Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 28940,
+          "gapMs": 265,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:16.067Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 29202,
+          "gapMs": 262,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:16.329Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 29467,
+          "gapMs": 265,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:16.594Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 29718,
+          "gapMs": 251,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:16.845Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 29970,
+          "gapMs": 252,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:17.097Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 30328,
+          "gapMs": 358,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:17.455Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 30665,
+          "gapMs": 337,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:17.792Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 30925,
+          "gapMs": 260,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:18.052Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 31188,
+          "gapMs": 263,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:18.315Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 31450,
+          "gapMs": 262,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:18.577Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 31736,
+          "gapMs": 286,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:18.863Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 32037,
+          "gapMs": 301,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:19.164Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 32301,
+          "gapMs": 264,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:19.428Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 32565,
+          "gapMs": 264,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:19.692Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 32829,
+          "gapMs": 264,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:19.956Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 33168,
+          "gapMs": 339,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:20.295Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 33420,
+          "gapMs": 252,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:20.547Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 33671,
+          "gapMs": 251,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:20.798Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 33937,
+          "gapMs": 266,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:21.064Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 34202,
+          "gapMs": 265,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:21.329Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 34464,
+          "gapMs": 262,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:21.591Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 34729,
+          "gapMs": 265,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:21.856Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 34993,
+          "gapMs": 264,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:22.120Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 35243,
+          "gapMs": 250,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:22.370Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 35507,
+          "gapMs": 264,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:22.634Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 35790,
+          "gapMs": 283,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:22.917Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 36039,
+          "gapMs": 249,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:23.166Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 36305,
+          "gapMs": 266,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:23.432Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 36567,
+          "gapMs": 262,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:23.694Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 36833,
+          "gapMs": 266,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:23.960Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 37096,
+          "gapMs": 263,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:24.223Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 37361,
+          "gapMs": 265,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:24.488Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 37626,
+          "gapMs": 265,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:24.753Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 37892,
+          "gapMs": 266,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:25.019Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 38160,
+          "gapMs": 268,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:25.287Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 38427,
+          "gapMs": 267,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:25.554Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 38692,
+          "gapMs": 265,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:25.819Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 38959,
+          "gapMs": 267,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:26.086Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 39222,
+          "gapMs": 263,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:26.349Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 39486,
+          "gapMs": 264,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:26.613Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 39738,
+          "gapMs": 252,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:26.865Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 40011,
+          "gapMs": 273,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:27.138Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 40271,
+          "gapMs": 260,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:27.398Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 40525,
+          "gapMs": 254,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:27.652Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 40792,
+          "gapMs": 267,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:27.919Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 41054,
+          "gapMs": 262,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:28.181Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 41320,
+          "gapMs": 266,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:28.447Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 41576,
+          "gapMs": 256,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:28.703Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 41842,
+          "gapMs": 266,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:28.969Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 42110,
+          "gapMs": 268,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:29.237Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 42376,
+          "gapMs": 266,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:29.503Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 42638,
+          "gapMs": 262,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:29.765Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 42895,
+          "gapMs": 257,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:30.022Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 43160,
+          "gapMs": 265,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:30.287Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 43428,
+          "gapMs": 268,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:30.555Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 43686,
+          "gapMs": 258,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:30.813Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 43955,
+          "gapMs": 269,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:31.082Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 44215,
+          "gapMs": 260,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:31.342Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 44476,
+          "gapMs": 261,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:31.603Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 44729,
+          "gapMs": 253,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:31.856Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 44993,
+          "gapMs": 264,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:32.120Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 45271,
+          "gapMs": 278,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:32.398Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 45525,
+          "gapMs": 254,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:32.652Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 45779,
+          "gapMs": 254,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:32.906Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 46039,
+          "gapMs": 260,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:33.166Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 46307,
+          "gapMs": 268,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:33.434Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 46570,
+          "gapMs": 263,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:33.697Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 46831,
+          "gapMs": 261,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:33.958Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 47090,
+          "gapMs": 259,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:34.217Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 47344,
+          "gapMs": 254,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:34.471Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 47628,
+          "gapMs": 284,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:34.755Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 47892,
+          "gapMs": 264,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:35.019Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 48152,
+          "gapMs": 260,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:35.279Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 48418,
+          "gapMs": 266,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:35.545Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 48683,
+          "gapMs": 265,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:35.810Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 48943,
+          "gapMs": 260,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:36.070Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 49204,
+          "gapMs": 261,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:36.331Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 49468,
+          "gapMs": 264,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:36.595Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 49723,
+          "gapMs": 255,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:36.850Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 49994,
+          "gapMs": 271,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:37.121Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 50252,
+          "gapMs": 258,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:37.379Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 50502,
+          "gapMs": 250,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:37.629Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 50752,
+          "gapMs": 250,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:37.879Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 51016,
+          "gapMs": 264,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:38.143Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 51266,
+          "gapMs": 250,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:38.393Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 51516,
+          "gapMs": 250,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:38.643Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 51766,
+          "gapMs": 250,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:38.893Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 52032,
+          "gapMs": 266,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:39.159Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 52294,
+          "gapMs": 262,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:39.421Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 52548,
+          "gapMs": 254,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:39.675Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 52798,
+          "gapMs": 250,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:39.925Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 53063,
+          "gapMs": 265,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:40.190Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 53328,
+          "gapMs": 265,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:40.455Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 53592,
+          "gapMs": 264,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:40.719Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 53867,
+          "gapMs": 275,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:40.994Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 54121,
+          "gapMs": 254,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:41.248Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 54384,
+          "gapMs": 263,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:41.511Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 54649,
+          "gapMs": 265,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:41.776Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 54900,
+          "gapMs": 251,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:42.027Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 55166,
+          "gapMs": 266,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:42.293Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 55429,
+          "gapMs": 263,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:42.556Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 55693,
+          "gapMs": 264,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:42.820Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 55945,
+          "gapMs": 252,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:43.072Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 56210,
+          "gapMs": 265,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:43.337Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 56461,
+          "gapMs": 251,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:43.588Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 56730,
+          "gapMs": 269,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:43.857Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 56987,
+          "gapMs": 257,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:44.114Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 57253,
+          "gapMs": 266,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:44.380Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 57506,
+          "gapMs": 253,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:44.633Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 57758,
+          "gapMs": 252,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:44.885Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 58020,
+          "gapMs": 262,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:45.147Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 58284,
+          "gapMs": 264,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:45.411Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 58535,
+          "gapMs": 251,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:45.662Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 58784,
+          "gapMs": 249,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:45.911Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 59035,
+          "gapMs": 251,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:46.162Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 59285,
+          "gapMs": 250,
+          "startedAtMs": 14465,
+          "endedAtMs": null,
+          "at": "2026-09-12T06:20:46.412Z"
+        },
+        {
+          "label": "AVIF selection through first download",
+          "pageMonotonicMs": 59549,
+          "gapMs": 264,
+          "startedAtMs": 14465,
+          "endedAtMs": 59547,
+          "at": "2026-09-12T06:20:46.676Z"
+        }
+      ],
+      "status": "downloaded-valid-avif",
+      "screenshots": {
+        "beforeExport": "firefox-final-before-export.png",
+        "afterExport": "firefox-final-after-export.png"
+      },
+      "navigationStartedAt": "2026-09-12T06:19:46.968Z",
+      "pageReadyAt": "2026-09-12T06:19:50.203Z",
+      "fixtureLoadedAt": "2026-09-12T06:19:51.539Z",
+      "sourceCrop": {
+        "image": {
+          "naturalWidth": 96,
+          "naturalHeight": 72,
+          "displayedWidth": 96,
+          "displayedHeight": 72
+        },
+        "selection": {
+          "displayedX": 15.58331298828125,
+          "displayedY": 3.600006103515625,
+          "displayedWidth": 64.80000305175781,
+          "displayedHeight": 64.79998779296875,
+          "sourceX": 15.58331298828125,
+          "sourceY": 3.600006103515625,
+          "sourceWidth": 64.80000305175781,
+          "sourceHeight": 64.79998779296875
+        }
+      },
+      "qualityControl": "85%",
+      "heartbeatStarted": {
+        "pageMonotonicMs": 14465,
+        "epochMs": 1789194001592
+      },
+      "formatSelectionAt": "2026-09-12T06:20:01.598Z",
+      "cropAtExport": {
+        "image": {
+          "naturalWidth": 96,
+          "naturalHeight": 72,
+          "displayedWidth": 96,
+          "displayedHeight": 72
+        },
+        "selection": {
+          "displayedX": 15.58331298828125,
+          "displayedY": 3.600006103515625,
+          "displayedWidth": 64.80000305175781,
+          "displayedHeight": 64.79998779296875,
+          "sourceX": 15.58331298828125,
+          "sourceY": 3.600006103515625,
+          "sourceWidth": 64.80000305175781,
+          "sourceHeight": 64.79998779296875
+        }
+      },
+      "uiAtExport": {
+        "outputSize": "1600×1600",
+        "quality": "85%",
+        "selectedFormat": [
+          "L",
+          "AVIF"
+        ]
+      },
+      "estimateApply": {
+        "event": "postMessage",
+        "workerId": 1,
+        "timeMs": 15273,
+        "at": "2026-09-12T06:20:02.400Z",
+        "wireType": "APPLY",
+        "messageId": "1fbe34c6295063-1f8336caba5ab3-1c99bc671d61b9-1e20c22bf417fb",
+        "path": [
+          "encodePreview"
+        ]
+      },
+      "estimateApplySeenAt": "2026-09-12T06:20:02.418Z",
+      "exportClickedAt": "2026-09-12T06:20:02.421Z",
+      "estimateWorkerTerminatedAfterClick": true,
+      "downloadObservedAt": "2026-09-12T06:20:46.671Z",
+      "exportElapsedMs": 44250.4,
+      "heartbeatEnded": {
+        "label": "AVIF selection through first download",
+        "startedAtMs": 14465,
+        "endedAtMs": 59547,
+        "epochMs": 1789194046674
+      },
+      "heartbeatStats": {
+        "samples": 171,
+        "medianGapMs": 263,
+        "p95GapMs": 278,
+        "maxGapMs": 358,
+        "gapsOver500ms": 0,
+        "gapsOver1000ms": 0,
+        "gapsOver5000ms": 0
+      },
+      "download": {
+        "path": "output/playwright/repair-firefox-final/firefox-final-avif-1600-square.avif",
+        "suggestedFilename": "small_1600x1600.avif",
+        "magic": {
+          "bytes": 6473,
+          "prefixHex": "00000020667479706176696600000000617669666d696631",
+          "first16Ascii": "... ftypavif....",
+          "avifBrand": "avif",
+          "isAvif": true
+        }
+      },
+      "imageInspection": {
+        "metadata": {
+          "format": "heif",
+          "width": 1600,
+          "height": 1600,
+          "space": "srgb",
+          "hasAlpha": false
+        },
+        "decodeError": null,
+        "pixels": [
+          {
+            "label": "output-center",
+            "includedInCrop": true,
+            "outputPoint": {
+              "x": 800,
+              "y": 800
+            },
+            "rgba": [
+              229,
+              89,
+              40,
+              255
+            ]
+          },
+          {
+            "label": "yellow-circle-center",
+            "includedInCrop": true,
+            "outputPoint": {
+              "x": 257,
+              "y": 503
+            },
+            "rgba": [
+              244,
+              211,
+              95,
+              255
+            ]
+          },
+          {
+            "label": "blue-mountain",
+            "includedInCrop": true,
+            "outputPoint": {
+              "x": 775,
+              "y": 1342
+            },
+            "rgba": [
+              25,
+              91,
+              115,
+              255
+            ]
+          }
+        ]
+      },
+      "exportWorkerFlow": {
+        "estimateWorkerId": 1,
+        "estimateApplyAt": "2026-09-12T06:20:02.400Z",
+        "estimateTerminateAt": "2026-09-12T06:20:02.560Z",
+        "estimateTerminatedBeforeExportApply": true,
+        "resizeAndEncodeApplyCount": 1,
+        "exportWorkerId": 2,
+        "exportApplyAt": "2026-09-12T06:20:02.582Z",
+        "exportReplyAt": "2026-09-12T06:20:46.639Z",
+        "exportReplyMessageId": "3338c465e759d-10943b1e1f2602-80b36be5190f7-81611c010d152",
+        "exportReplyType": "RAW",
+        "exportWorkerElapsedMs": 44057,
+        "exportWorkerTerminatedBeforeReply": false,
+        "completedAfter20SecondsWithoutRestart": true
+      },
+      "endUi": {
+        "alerts": [],
+        "exportButtons": [
+          {
+            "text": "Export Image",
+            "disabled": false
+          }
+        ],
+        "loadingText": null
+      },
+      "secondEstimateApply": {
+        "event": "postMessage",
+        "workerId": 3,
+        "timeMs": 60056,
+        "at": "2026-09-12T06:20:47.183Z",
+        "wireType": "APPLY",
+        "messageId": "174a2dd8d6eed-18ffef80bd6873-aded2ce7dcd89-135f5a507d8c9d",
+        "path": [
+          "encodePreview"
+        ]
+      },
+      "secondEstimatePendingBeforeReset": true,
+      "resetClickedAt": "2026-09-12T06:20:47.310Z",
+      "secondEstimateWorkerTerminated": true,
+      "differentFixture": {
+        "name": "different.png",
+        "width": 96,
+        "height": 72,
+        "bytes": 1356,
+        "sha256": "702435e9ead2461d5ffa439d471b473cc56a99e020ef18f2ab4adfc78b1bd008"
+      },
+      "differentImageLoaded": true,
+      "secondEstimateCancelledInFlight": true,
+      "uploadCancelsPendingEstimate": true,
+      "contextClosedAt": "2026-09-12T06:20:48.908Z"
+    }
+  ],
+  "assetPreflight": {
+    "appScript": {
+      "filename": "index-BFCp-Ydj.js",
+      "url": "http://127.0.0.1:4196/ezcrop/assets/index-BFCp-Ydj.js",
+      "status": 200,
+      "contentType": "text/javascript",
+      "bytes": 284805,
+      "sha256": "ab7ee41db5d9eca836491b0a135108366f70926fe0f7225702ca93bf3609869d",
+      "matchesDist": true
+    },
+    "worker": {
+      "filename": "encode.worker-BdlE4j1e.js",
+      "url": "http://127.0.0.1:4196/ezcrop/assets/encode.worker-BdlE4j1e.js",
+      "status": 200,
+      "contentType": "text/javascript",
+      "bytes": 41943,
+      "sha256": "9d1f30652c3e6a204fcdd8c3a85b689201ab6d88f83dba266cc07c37a1a23a7c",
+      "matchesDist": true
+    }
+  },
+  "finishedAt": "2026-09-12T06:20:50.162Z",
+  "summary": {
+    "firefoxVersion": "153.0",
+    "runStatuses": [
+      {
+        "name": "1600-square",
+        "status": "downloaded-valid-avif",
+        "exportElapsedMs": 44250.4,
+        "uploadCancelsPendingEstimate": true,
+        "exportWorkerFlow": {
+          "estimateWorkerId": 1,
+          "estimateApplyAt": "2026-09-12T06:20:02.400Z",
+          "estimateTerminateAt": "2026-09-12T06:20:02.560Z",
+          "estimateTerminatedBeforeExportApply": true,
+          "resizeAndEncodeApplyCount": 1,
+          "exportWorkerId": 2,
+          "exportApplyAt": "2026-09-12T06:20:02.582Z",
+          "exportReplyAt": "2026-09-12T06:20:46.639Z",
+          "exportReplyMessageId": "3338c465e759d-10943b1e1f2602-80b36be5190f7-81611c010d152",
+          "exportReplyType": "RAW",
+          "exportWorkerElapsedMs": 44057,
+          "exportWorkerTerminatedBeforeReply": false,
+          "completedAfter20SecondsWithoutRestart": true
+        },
+        "heartbeatStats": {
+          "samples": 171,
+          "medianGapMs": 263,
+          "p95GapMs": 278,
+          "maxGapMs": 358,
+          "gapsOver500ms": 0,
+          "gapsOver1000ms": 0,
+          "gapsOver5000ms": 0
+        }
+      }
+    ],
+    "previewClosed": true
+  }
+}

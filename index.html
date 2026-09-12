@@ -33,9 +33,14 @@
   <body>
     <script>
       (function () {
-        var stored = localStorage.getItem('ezcrop-theme');
+        var stored = null;
+        try {
+          stored = localStorage.getItem('ezcrop-theme');
+        } catch (_) {
+          // Use the system preference when browser storage is unavailable.
+        }
         var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        if (stored === 'dark' || (!stored && prefersDark)) {
+        if (stored === 'dark' || (stored !== 'light' && prefersDark)) {
           document.documentElement.classList.add('dark');
         }
       })();

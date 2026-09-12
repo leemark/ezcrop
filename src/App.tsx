@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import type { AppPhase, OutputFormat } from "./types";
 import { useImageLoader } from "./hooks/useImageLoader";
 import { useCropState } from "./hooks/useCropState";
@@ -14,34 +14,48 @@ export default function App() {
   const [isDark, setIsDark] = useState(() =>
     document.documentElement.classList.contains("dark"),
   );
+  const exportSessionRef = useRef(0);
 
   useEffect(() => {
     if (isDark) {
       document.documentElement.classList.add("dark");
-      localStorage.setItem("ezcrop-theme", "dark");
+      try {
+        localStorage.setItem("ezcrop-theme", "dark");
+      } catch {
+        // Theme selection remains active for this session when storage is denied.
+      }
     } else {
       document.documentElement.classList.remove("dark");
-      localStorage.setItem("ezcrop-theme", "light");
+      try {
+        localStorage.setItem("ezcrop-theme", "light");
+      } catch {
+        // Theme selection remains active for this session when storage is denied.
+      }
     }
   }, [isDark]);
 
   const { imageUrl, originalFile, error: loadError, loading, loadFile, reset: resetImage } = useImageLoader();
   const cropState = useCropState();
-  const { exporting, error: exportError, exportImage } = useExportPipeline();
+  const { exporting, error: exportError, cancelExport, exportImage } = useExportPipeline();
 
   const handleFile = useCallback(
     async (file: File) => {
-      await loadFile(file);
+      exportSessionRef.current += 1;
+      cancelExport();
+      setPhase("upload");
+      const loaded = await loadFile(file);
+      if (!loaded) return;
       cropState.resetCrop();
       setPhase("edit");
     },
-    [loadFile, cropState],
+    [cancelExport, loadFile, cropState],
   );
 
   const handleExport = useCallback(() => {
     if (!imageUrl || !originalFile || !cropState.croppedAreaPixels) return;
+    const session = ++exportSessionRef.current;
     setPhase("exporting");
-    exportImage(
+    void exportImage(
       imageUrl,
       originalFile.name,
       cropState.croppedAreaPixels,
@@ -49,7 +63,14 @@ export default function App() {
       cropState.targetHeight,
       format,
       quality,
-    ).finally(() => setPhase("edit"));
+    ).then(
+      () => {
+        if (exportSessionRef.current === session) setPhase("edit");
+      },
+      () => {
+        if (exportSessionRef.current === session) setPhase("edit");
+      },
+    );
   }, [
     imageUrl,
     originalFile,
@@ -62,10 +83,12 @@ export default function App() {
   ]);
 
   const handleReset = useCallback(() => {
+    exportSessionRef.current += 1;
+    cancelExport();
     resetImage();
     cropState.resetCrop();
     setPhase("upload");
-  }, [resetImage, cropState]);
+  }, [cancelExport, resetImage, cropState]);
 
   if (phase === "upload" || !imageUrl) {
     return (
@@ -79,15 +102,23 @@ export default function App() {
 
   return (
     <div className="flex min-h-screen flex-col bg-zinc-50 text-zinc-900 dark:bg-zinc-900 dark:text-zinc-100">
-      <header className="flex items-center justify-between border-b border-zinc-200 px-4 py-2.5 dark:border-zinc-800">
-        <h1 className="font-syne text-base font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
+      <header className="flex items-center justify-between gap-3 border-b border-zinc-200 px-4 py-2.5 dark:border-zinc-800">
+        <h1 className="shrink-0 font-syne text-base font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
           EZCrop
         </h1>
-        <div className="flex items-center gap-3">
-          <div className="text-right">
-            <div className="font-mono text-xs text-zinc-500">{originalFile?.name}</div>
+        <div className="flex min-w-0 flex-1 items-center justify-end gap-3">
+          <div className="min-w-0 flex-1 text-right">
+            {originalFile && (
+              <div
+                className="truncate font-mono text-xs text-zinc-500 dark:text-zinc-400"
+                title={originalFile.name}
+                aria-label={`Image filename: ${originalFile.name}`}
+              >
+                {originalFile.name}
+              </div>
+            )}
             {(cropState.imageDimensions || originalFile) && (
-              <div className="font-mono text-xs text-zinc-500">
+              <div className="truncate font-mono text-xs text-zinc-500 dark:text-zinc-400">
                 {cropState.imageDimensions &&
                   `${cropState.imageDimensions.width} × ${cropState.imageDimensions.height}`}
                 {cropState.imageDimensions && originalFile && " · "}
@@ -153,7 +184,7 @@ function DarkToggle({
     <button
       onClick={onToggle}
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
-      className={`rounded p-1.5 text-zinc-500 transition-colors hover:bg-zinc-100 hover:text-zinc-700 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-200 ${className}`}
+      className={`shrink-0 rounded p-1.5 text-zinc-500 transition-colors hover:bg-zinc-100 hover:text-zinc-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-200 dark:focus-visible:outline-amber-400 ${className}`}
     >
       {isDark ? (
         <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
@@ -178,7 +209,7 @@ function DarkToggle({
 
 function Footer() {
   return (
-    <footer className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 border-t border-zinc-200 px-4 py-2 font-mono text-xs tracking-wider text-zinc-500 dark:border-zinc-800 dark:text-zinc-500">
+    <footer className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 border-t border-zinc-200 px-4 py-2 font-mono text-xs tracking-wider text-zinc-600 dark:border-zinc-800 dark:text-zinc-400">
       <span>All processing happens in your browser — nothing is uploaded.</span>
       <span>
         &copy; {new Date().getFullYear()}{" "}

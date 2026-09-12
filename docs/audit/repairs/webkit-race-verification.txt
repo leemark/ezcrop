@@ -1,0 +1,39 @@
+Browser: webkit 26.5
+✔ F02: replacing an image terminates a held worker and suppresses its download (22114.7147ms)
+✔ F08: clearing during debounce/encoding stays empty; latest valid estimate wins (12983.8893ms)
+✖ F02: stale main-thread successes and errors cannot affect a newer export (2839.1424ms)
+✔ O01/F02: AVIF estimation runs in a worker and stops when exporting or replacing the image (3499.0516ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 3
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 45947.6943
+
+✖ failing tests:
+
+test at tests\regression.test.mjs:267:1
+✖ F02: stale main-thread successes and errors cannot affect a newer export (2839.1424ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    {
+      error: null,
+  +   exporting: false
+  -   exporting: true
+    }
+  
+      at pageFor.url (file:///C:/Users/mark/Documents/EZCrop/tests/regression.test.mjs:274:14)
+      at async pageFor (file:///C:/Users/mark/Documents/EZCrop/tests/regression.test.mjs:37:68)
+      at async TestContext.<anonymous> (file:///C:/Users/mark/Documents/EZCrop/tests/regression.test.mjs:268:3)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { exporting: false, error: null },
+    expected: { exporting: true, error: null },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }

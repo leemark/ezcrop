@@ -1,0 +1,30 @@
+{
+  "file": "output/playwright/regression-webkit/format-transparent_600x600.avif",
+  "metadata": {
+    "format": "heif",
+    "mediaType": "image/avif",
+    "width": 600,
+    "height": 600,
+    "space": "srgb",
+    "channels": 4,
+    "depth": "uchar",
+    "isProgressive": false,
+    "isPalette": false,
+    "bitsPerSample": 8,
+    "pages": 1,
+    "pagePrimary": 0,
+    "compression": "av1",
+    "hasProfile": false,
+    "hasAlpha": true,
+    "autoOrient": {
+      "width": 600,
+      "height": 600
+    }
+  },
+  "corner": [
+    0,
+    0,
+    0,
+    0
+  ]
+}

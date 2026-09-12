@@ -52,6 +52,7 @@ export function Sidebar({
     targetHeight,
     format,
     quality,
+    exporting,
   );
 
   return (
@@ -76,7 +77,7 @@ export function Sidebar({
       />
 
       {exportError && (
-        <p role="alert" className="text-xs text-red-500 dark:text-red-400">{exportError}</p>
+        <p role="alert" className="text-xs text-red-700 dark:text-red-400">{exportError}</p>
       )}
 
       <ExportButton

@@ -1,0 +1,90 @@
+Browser: webkit 26.5
+✔ F01: repeated exports retain the worker connection across garbage collection (19151.1584ms)
+✖ F02: replacing an image terminates a held worker and suppresses its download (22021.1427ms)
+✔ F03/F04: zoom, movement, output resolution and unchanged fields preserve composition (23506.7149ms)
+✔ F04: invalid custom dimensions do not become output; extreme valid ratios encode (28181.6011ms)
+✔ F05/F06/F12: mobile preview is stable, Custom is selected, and names do not overflow (5872.7273ms)
+✔ F11: denied theme storage leaves upload and export usable (9080.0453ms)
+webkit WebP: 2307ms, 1830 bytes
+✔ formats and F14: WebP signature, dimensions, pixels and transparency (9757.6727ms)
+webkit JPEG: 1549ms, 6874 bytes
+✔ formats and F14: JPEG signature, dimensions, pixels and transparency (6741.0169ms)
+✖ formats and F14: AVIF signature, dimensions, pixels and transparency (64864.9873ms)
+✔ F10: worker script failure falls back immediately (7764.5051ms)
+✔ F10: uncached offline AVIF explains recovery without a module URL (12089.5351ms)
+✔ F07: load completion order, stale errors and reset cannot replace the current image (7476.964ms)
+✔ F08: clearing during debounce/encoding stays empty; latest valid estimate wins (9039.533ms)
+✔ F03/F04: geometry round-trips across orientations and fractional source rectangles (13963.1557ms)
+✔ F09: both native encoders reject a PNG fallback requested as WebP (4429.5784ms)
+✔ F06: affected text meets normal-text contrast in light theme (3226.5647ms)
+✔ F06: affected text meets normal-text contrast in dark theme (2352.5477ms)
+✔ F02: stale main-thread successes and errors cannot affect a newer export (2147.1235ms)
+✔ Phone photographs keep all eight EXIF orientations through export (44617.182ms)
+✔ F13: an invalid file gives guidance and a new valid image recovers (3063.2145ms)
+✔ F03/F04: mouse crop movement and crossing a resize edge keep the editor usable (4751.5704ms)
+﹣ F06: Chromium touch emulation moves the crop without changing zoom (1.1976ms) # SKIP
+✖ O01: an AVIF timeout stays cancellable and offers recovery without a main-thread retry (3110.4844ms)
+✖ O01/F02: AVIF estimation runs in a worker and stops when exporting or replacing the image (16971.8411ms)
+ℹ tests 24
+ℹ suites 0
+ℹ pass 19
+ℹ fail 4
+ℹ cancelled 0
+ℹ skipped 1
+ℹ todo 0
+ℹ duration_ms 331740.4547
+
+✖ failing tests:
+
+test at tests\regression.test.mjs:85:1
+✖ F02: replacing an image terminates a held worker and suppresses its download (22021.1427ms)
+  page.waitForFunction: Timeout 15000ms exceeded.
+      at pageFor.init.window.workerCalls (C:\Users\mark\Documents\EZCrop\tests\regression.test.mjs:90:16)
+      at async pageFor (C:\Users\mark\Documents\EZCrop\tests\regression.test.mjs:35:68)
+      at async TestContext.<anonymous> (C:\Users\mark\Documents\EZCrop\tests\regression.test.mjs:86:3) {
+    name: 'TimeoutError',
+    log: []
+  }
+
+test at tests\regression.test.mjs:139:48
+✖ formats and F14: AVIF signature, dimensions, pixels and transparency (64864.9873ms)
+  page.waitForEvent: Timeout 60000ms exceeded while waiting for event "download"
+  =========================== logs ===========================
+  waiting for event "download"
+  ============================================================
+      at download (C:\Users\mark\Documents\EZCrop\tests\regression.test.mjs:59:39)
+      at async file:///C:/Users/mark/Documents/EZCrop/tests/regression.test.mjs:142:20
+      at async pageFor (C:\Users\mark\Documents\EZCrop\tests\regression.test.mjs:35:68)
+      at async TestContext.<anonymous> (C:\Users\mark\Documents\EZCrop\tests\regression.test.mjs:140:3) {
+    name: 'TimeoutError',
+    log: []
+  }
+
+test at tests\regression.test.mjs:307:1
+✖ O01: an AVIF timeout stays cancellable and offers recovery without a main-thread retry (3110.4844ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(await page.evaluate(()=>window.workerTerminations>0))
+  
+      at file:///C:/Users/mark/Documents/EZCrop/tests/regression.test.mjs:316:12
+      at async pageFor (file:///C:/Users/mark/Documents/EZCrop/tests/regression.test.mjs:35:68)
+      at async TestContext.<anonymous> (file:///C:/Users/mark/Documents/EZCrop/tests/regression.test.mjs:308:3)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests\regression.test.mjs:323:1
+✖ O01/F02: AVIF estimation runs in a worker and stops when exporting or replacing the image (16971.8411ms)
+  page.waitForFunction: Timeout 15000ms exceeded.
+      at pageFor.init.window.workerApplies (C:\Users\mark\Documents\EZCrop\tests\regression.test.mjs:326:16)
+      at async pageFor (C:\Users\mark\Documents\EZCrop\tests\regression.test.mjs:35:68)
+      at async TestContext.<anonymous> (C:\Users\mark\Documents\EZCrop\tests\regression.test.mjs:324:3) {
+    name: 'TimeoutError',
+    log: []
+  }

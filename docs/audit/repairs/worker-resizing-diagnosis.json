@@ -1,0 +1,84 @@
+{
+  "errors": [],
+  "responses": [
+    {
+      "url": "http://127.0.0.1:4197/ezcrop/assets/index-DpMNrc5Q.css",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4197/ezcrop/assets/index-BFCp-Ydj.js",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4197/ezcrop/assets/encode.worker-BdlE4j1e.js",
+      "status": 200
+    }
+  ],
+  "requestsFailed": [
+    {
+      "url": "https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@600;700;800&display=swap",
+      "error": {
+        "errorText": "net::ERR_FAILED"
+      }
+    }
+  ],
+  "outcome": {
+    "status": "alert",
+    "message": "AVIF export couldn't finish. Reconnect and retry, or choose JPEG or WebP."
+  },
+  "elapsed": 1536,
+  "trace": [
+    {
+      "event": "create",
+      "tag": 0,
+      "url": "http://127.0.0.1:4197/ezcrop/assets/encode.worker-BdlE4j1e.js",
+      "at": 1789193966108
+    },
+    {
+      "event": "APPLY",
+      "tag": 0,
+      "path": [
+        "resizeAndEncode"
+      ],
+      "at": 1789193966154
+    },
+    {
+      "event": "reply",
+      "tag": 0,
+      "type": "HANDLER",
+      "value": {
+        "isError": true,
+        "value": {
+          "message": "Pica: cannot use getImageData on canvas, make sure fingerprinting protection isn't enabled",
+          "name": "Error",
+          "stack": "Error: Pica: cannot use getImageData on canvas, make sure fingerprinting protection isn't enabled\n    at http://127.0.0.1:4197/ezcrop/assets/encode.worker-BdlE4j1e.js:2:9398\n    at async Object.Se [as resizeAndEncode] (http://127.0.0.1:4197/ezcrop/assets/encode.worker-BdlE4j1e.js:2:12308)"
+        }
+      },
+      "at": 1789193966345
+    },
+    {
+      "event": "RELEASE",
+      "tag": 0,
+      "at": 1789193966345
+    },
+    {
+      "event": "terminate",
+      "tag": 0,
+      "at": 1789193966346
+    },
+    {
+      "event": "create",
+      "tag": 1,
+      "url": "http://127.0.0.1:4197/ezcrop/assets/encode.worker-BdlE4j1e.js",
+      "at": 1789193966878
+    },
+    {
+      "event": "APPLY",
+      "tag": 1,
+      "path": [
+        "encodePreview"
+      ],
+      "at": 1789193966878
+    }
+  ]
+}

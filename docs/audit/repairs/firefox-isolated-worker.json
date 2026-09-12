@@ -1,0 +1,1319 @@
+{
+  "schemaVersion": 1,
+  "audit": "Firefox worker-only AVIF encoding isolation",
+  "startedAt": "2026-09-12T05:55:04.236Z",
+  "browser": {
+    "name": "Firefox",
+    "version": "153.0",
+    "playwrightVersion": "1.62.1",
+    "headless": true
+  },
+  "fixture": {
+    "name": "small.png",
+    "generator": "exact SVG generator copied from output/audit/final-smoke.cjs",
+    "format": "png",
+    "width": 96,
+    "height": 72,
+    "bytes": 1335,
+    "sha256": "9ed280bf0bdd79fe09ec39f5881a842e253c341254c0437b5c97c259fc02a6fd"
+  },
+  "target": {
+    "width": 1600,
+    "height": 1600,
+    "quality": 85
+  },
+  "workerCapMs": 90000,
+  "browserNavigationCapMs": 30000,
+  "app": {
+    "url": "http://127.0.0.1:4196/ezcrop/",
+    "intentionallyEmpty": true
+  },
+  "workerAsset": {
+    "filename": "encode.worker-DVY8EH5y.js",
+    "url": "http://127.0.0.1:4196/ezcrop/assets/encode.worker-DVY8EH5y.js",
+    "bytes": 41887,
+    "sha256": "da938d14042bae47d85dc502b2cf4483d6e20fba4cb3025c54bf11bcab7a3868",
+    "preflight": {
+      "status": 200,
+      "contentType": "text/javascript",
+      "bytes": 41887,
+      "sha256": "da938d14042bae47d85dc502b2cf4483d6e20fba4cb3025c54bf11bcab7a3868",
+      "matchesDist": true
+    }
+  },
+  "preview": {
+    "host": "127.0.0.1",
+    "port": 4196,
+    "status": "ready",
+    "stoppedAt": "2026-09-12T05:56:05.337Z",
+    "closedCheck": "connection-refused",
+    "ready": {
+      "status": 200,
+      "url": "http://127.0.0.1:4196/ezcrop/"
+    }
+  },
+  "pageErrors": [],
+  "consoleErrors": [],
+  "assetResponses": [
+    {
+      "at": "2026-09-12T05:55:20.491Z",
+      "url": "http://127.0.0.1:4196/ezcrop/assets/encode.worker-DVY8EH5y.js",
+      "status": 200,
+      "resourceType": "script"
+    },
+    {
+      "at": "2026-09-12T05:55:21.263Z",
+      "url": "http://127.0.0.1:4196/ezcrop/assets/avif_enc-Co4TcJko.wasm",
+      "status": 200,
+      "resourceType": "fetch"
+    }
+  ],
+  "requestFailures": [],
+  "playwrightWorkers": [
+    {
+      "at": "2026-09-12T05:55:20.428Z",
+      "url": "http://127.0.0.1:4196/ezcrop/assets/encode.worker-DVY8EH5y.js"
+    }
+  ],
+  "workerEvents": [
+    {
+      "event": "APPLY",
+      "timeMs": 3358,
+      "at": "2026-09-12T05:55:20.364Z",
+      "messageId": "e7afe0ad-9359-4f8d-a93d-812a28784cef",
+      "path": [
+        "resizeAndEncode"
+      ],
+      "format": "avif",
+      "quality": 85,
+      "target": {
+        "width": 1600,
+        "height": 1600
+      },
+      "imageData": {
+        "width": 65,
+        "height": 65,
+        "bytes": 16900
+      },
+      "crop": {
+        "x": 15.600000000000001,
+        "y": 3.6000000000000014,
+        "width": 64.8,
+        "height": 64.8
+      },
+      "receivedAt": "2026-09-12T05:55:20.405Z",
+      "receivedMonotonicMs": 19239.69
+    },
+    {
+      "event": "reply",
+      "timeMs": 34981,
+      "at": "2026-09-12T05:55:51.987Z",
+      "messageId": "e7afe0ad-9359-4f8d-a93d-812a28784cef",
+      "type": "RAW",
+      "matchingId": true,
+      "receivedAt": "2026-09-12T05:55:53.338Z",
+      "receivedMonotonicMs": 52172.67
+    },
+    {
+      "event": "worker-end",
+      "timeMs": 34994,
+      "at": "2026-09-12T05:55:52.000Z",
+      "status": "success",
+      "elapsedMs": 31636,
+      "receivedAt": "2026-09-12T05:55:53.342Z",
+      "receivedMonotonicMs": 52176.68
+    }
+  ],
+  "heartbeats": [
+    {
+      "pageMonotonicMs": 3418,
+      "gapMs": 253,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:20.456Z",
+      "receivedMonotonicMs": 19290.12
+    },
+    {
+      "pageMonotonicMs": 3671,
+      "gapMs": 253,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:20.853Z",
+      "receivedMonotonicMs": 19687.75
+    },
+    {
+      "pageMonotonicMs": 3924,
+      "gapMs": 253,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:20.947Z",
+      "receivedMonotonicMs": 19781.47
+    },
+    {
+      "pageMonotonicMs": 4175,
+      "gapMs": 251,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:21.219Z",
+      "receivedMonotonicMs": 20053.65
+    },
+    {
+      "pageMonotonicMs": 4430,
+      "gapMs": 255,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:21.465Z",
+      "receivedMonotonicMs": 20299.68
+    },
+    {
+      "pageMonotonicMs": 4685,
+      "gapMs": 255,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:21.693Z",
+      "receivedMonotonicMs": 20527.15
+    },
+    {
+      "pageMonotonicMs": 4936,
+      "gapMs": 251,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:21.945Z",
+      "receivedMonotonicMs": 20779.13
+    },
+    {
+      "pageMonotonicMs": 5187,
+      "gapMs": 251,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:22.196Z",
+      "receivedMonotonicMs": 21030.66
+    },
+    {
+      "pageMonotonicMs": 5437,
+      "gapMs": 250,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:22.452Z",
+      "receivedMonotonicMs": 21286.21
+    },
+    {
+      "pageMonotonicMs": 5692,
+      "gapMs": 255,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:22.701Z",
+      "receivedMonotonicMs": 21535.3
+    },
+    {
+      "pageMonotonicMs": 5948,
+      "gapMs": 256,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:22.957Z",
+      "receivedMonotonicMs": 21791.29
+    },
+    {
+      "pageMonotonicMs": 6200,
+      "gapMs": 252,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:23.208Z",
+      "receivedMonotonicMs": 22042.85
+    },
+    {
+      "pageMonotonicMs": 6458,
+      "gapMs": 258,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:23.467Z",
+      "receivedMonotonicMs": 22301.13
+    },
+    {
+      "pageMonotonicMs": 6719,
+      "gapMs": 261,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:23.726Z",
+      "receivedMonotonicMs": 22560.92
+    },
+    {
+      "pageMonotonicMs": 6978,
+      "gapMs": 259,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:23.986Z",
+      "receivedMonotonicMs": 22820.54
+    },
+    {
+      "pageMonotonicMs": 7264,
+      "gapMs": 286,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:24.272Z",
+      "receivedMonotonicMs": 23106.07
+    },
+    {
+      "pageMonotonicMs": 7526,
+      "gapMs": 262,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:24.689Z",
+      "receivedMonotonicMs": 23523.22
+    },
+    {
+      "pageMonotonicMs": 7784,
+      "gapMs": 258,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:24.793Z",
+      "receivedMonotonicMs": 23627.09
+    },
+    {
+      "pageMonotonicMs": 8036,
+      "gapMs": 252,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:25.044Z",
+      "receivedMonotonicMs": 23878.8
+    },
+    {
+      "pageMonotonicMs": 8297,
+      "gapMs": 261,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:25.305Z",
+      "receivedMonotonicMs": 24139.89
+    },
+    {
+      "pageMonotonicMs": 8549,
+      "gapMs": 252,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:25.558Z",
+      "receivedMonotonicMs": 24392.82
+    },
+    {
+      "pageMonotonicMs": 8965,
+      "gapMs": 416,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:25.974Z",
+      "receivedMonotonicMs": 24808.11
+    },
+    {
+      "pageMonotonicMs": 9224,
+      "gapMs": 259,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:26.232Z",
+      "receivedMonotonicMs": 25066.29
+    },
+    {
+      "pageMonotonicMs": 9477,
+      "gapMs": 253,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:26.485Z",
+      "receivedMonotonicMs": 25319.81
+    },
+    {
+      "pageMonotonicMs": 9738,
+      "gapMs": 261,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:26.747Z",
+      "receivedMonotonicMs": 25581.66
+    },
+    {
+      "pageMonotonicMs": 10019,
+      "gapMs": 281,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:27.027Z",
+      "receivedMonotonicMs": 25861.72
+    },
+    {
+      "pageMonotonicMs": 10287,
+      "gapMs": 268,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:27.295Z",
+      "receivedMonotonicMs": 26129.54
+    },
+    {
+      "pageMonotonicMs": 10545,
+      "gapMs": 258,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:27.557Z",
+      "receivedMonotonicMs": 26391.96
+    },
+    {
+      "pageMonotonicMs": 10798,
+      "gapMs": 253,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:27.863Z",
+      "receivedMonotonicMs": 26697.82
+    },
+    {
+      "pageMonotonicMs": 11075,
+      "gapMs": 277,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:28.083Z",
+      "receivedMonotonicMs": 26917.19
+    },
+    {
+      "pageMonotonicMs": 11331,
+      "gapMs": 256,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:28.340Z",
+      "receivedMonotonicMs": 27174.24
+    },
+    {
+      "pageMonotonicMs": 11586,
+      "gapMs": 255,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:28.593Z",
+      "receivedMonotonicMs": 27427.77
+    },
+    {
+      "pageMonotonicMs": 11845,
+      "gapMs": 259,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:28.853Z",
+      "receivedMonotonicMs": 27687.11
+    },
+    {
+      "pageMonotonicMs": 12117,
+      "gapMs": 272,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:29.124Z",
+      "receivedMonotonicMs": 27959.03
+    },
+    {
+      "pageMonotonicMs": 12367,
+      "gapMs": 250,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:29.375Z",
+      "receivedMonotonicMs": 28209.91
+    },
+    {
+      "pageMonotonicMs": 12620,
+      "gapMs": 253,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:29.628Z",
+      "receivedMonotonicMs": 28462.18
+    },
+    {
+      "pageMonotonicMs": 12881,
+      "gapMs": 261,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:29.911Z",
+      "receivedMonotonicMs": 28745.17
+    },
+    {
+      "pageMonotonicMs": 13134,
+      "gapMs": 253,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.187Z",
+      "receivedMonotonicMs": 51021.48
+    },
+    {
+      "pageMonotonicMs": 13385,
+      "gapMs": 251,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.197Z",
+      "receivedMonotonicMs": 51031.38
+    },
+    {
+      "pageMonotonicMs": 13645,
+      "gapMs": 260,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.200Z",
+      "receivedMonotonicMs": 51034.68
+    },
+    {
+      "pageMonotonicMs": 13895,
+      "gapMs": 250,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.201Z",
+      "receivedMonotonicMs": 51035.13
+    },
+    {
+      "pageMonotonicMs": 14167,
+      "gapMs": 272,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.201Z",
+      "receivedMonotonicMs": 51035.57
+    },
+    {
+      "pageMonotonicMs": 14475,
+      "gapMs": 308,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.201Z",
+      "receivedMonotonicMs": 51036.03
+    },
+    {
+      "pageMonotonicMs": 14732,
+      "gapMs": 257,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.202Z",
+      "receivedMonotonicMs": 51036.59
+    },
+    {
+      "pageMonotonicMs": 14987,
+      "gapMs": 255,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.204Z",
+      "receivedMonotonicMs": 51038.17
+    },
+    {
+      "pageMonotonicMs": 15251,
+      "gapMs": 264,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.204Z",
+      "receivedMonotonicMs": 51038.87
+    },
+    {
+      "pageMonotonicMs": 15501,
+      "gapMs": 250,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.214Z",
+      "receivedMonotonicMs": 51048.26
+    },
+    {
+      "pageMonotonicMs": 15751,
+      "gapMs": 250,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.214Z",
+      "receivedMonotonicMs": 51048.8
+    },
+    {
+      "pageMonotonicMs": 16006,
+      "gapMs": 255,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.223Z",
+      "receivedMonotonicMs": 51057.99
+    },
+    {
+      "pageMonotonicMs": 16261,
+      "gapMs": 255,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.224Z",
+      "receivedMonotonicMs": 51058.46
+    },
+    {
+      "pageMonotonicMs": 16511,
+      "gapMs": 250,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.224Z",
+      "receivedMonotonicMs": 51058.98
+    },
+    {
+      "pageMonotonicMs": 16766,
+      "gapMs": 255,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.227Z",
+      "receivedMonotonicMs": 51061.31
+    },
+    {
+      "pageMonotonicMs": 17024,
+      "gapMs": 258,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.232Z",
+      "receivedMonotonicMs": 51066.61
+    },
+    {
+      "pageMonotonicMs": 17286,
+      "gapMs": 262,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.232Z",
+      "receivedMonotonicMs": 51067.03
+    },
+    {
+      "pageMonotonicMs": 17552,
+      "gapMs": 266,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.233Z",
+      "receivedMonotonicMs": 51067.46
+    },
+    {
+      "pageMonotonicMs": 17805,
+      "gapMs": 253,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.233Z",
+      "receivedMonotonicMs": 51067.94
+    },
+    {
+      "pageMonotonicMs": 18075,
+      "gapMs": 270,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.234Z",
+      "receivedMonotonicMs": 51068.41
+    },
+    {
+      "pageMonotonicMs": 18349,
+      "gapMs": 274,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.235Z",
+      "receivedMonotonicMs": 51069.07
+    },
+    {
+      "pageMonotonicMs": 18614,
+      "gapMs": 265,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.235Z",
+      "receivedMonotonicMs": 51069.63
+    },
+    {
+      "pageMonotonicMs": 18894,
+      "gapMs": 280,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.235Z",
+      "receivedMonotonicMs": 51070.01
+    },
+    {
+      "pageMonotonicMs": 19163,
+      "gapMs": 269,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.238Z",
+      "receivedMonotonicMs": 51072.46
+    },
+    {
+      "pageMonotonicMs": 19428,
+      "gapMs": 265,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.238Z",
+      "receivedMonotonicMs": 51073.01
+    },
+    {
+      "pageMonotonicMs": 19685,
+      "gapMs": 257,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.245Z",
+      "receivedMonotonicMs": 51080.02
+    },
+    {
+      "pageMonotonicMs": 19946,
+      "gapMs": 261,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.247Z",
+      "receivedMonotonicMs": 51081.56
+    },
+    {
+      "pageMonotonicMs": 20202,
+      "gapMs": 256,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.248Z",
+      "receivedMonotonicMs": 51082.03
+    },
+    {
+      "pageMonotonicMs": 20453,
+      "gapMs": 251,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.248Z",
+      "receivedMonotonicMs": 51082.64
+    },
+    {
+      "pageMonotonicMs": 20708,
+      "gapMs": 255,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.251Z",
+      "receivedMonotonicMs": 51085.21
+    },
+    {
+      "pageMonotonicMs": 20959,
+      "gapMs": 251,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.251Z",
+      "receivedMonotonicMs": 51085.88
+    },
+    {
+      "pageMonotonicMs": 21211,
+      "gapMs": 252,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.252Z",
+      "receivedMonotonicMs": 51086.7
+    },
+    {
+      "pageMonotonicMs": 21471,
+      "gapMs": 260,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.253Z",
+      "receivedMonotonicMs": 51087.12
+    },
+    {
+      "pageMonotonicMs": 21727,
+      "gapMs": 256,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.695Z",
+      "receivedMonotonicMs": 51529.11
+    },
+    {
+      "pageMonotonicMs": 22007,
+      "gapMs": 280,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.695Z",
+      "receivedMonotonicMs": 51529.76
+    },
+    {
+      "pageMonotonicMs": 22283,
+      "gapMs": 276,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.696Z",
+      "receivedMonotonicMs": 51530.43
+    },
+    {
+      "pageMonotonicMs": 22563,
+      "gapMs": 280,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.697Z",
+      "receivedMonotonicMs": 51531.09
+    },
+    {
+      "pageMonotonicMs": 22813,
+      "gapMs": 250,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.752Z",
+      "receivedMonotonicMs": 51586.69
+    },
+    {
+      "pageMonotonicMs": 23064,
+      "gapMs": 251,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.767Z",
+      "receivedMonotonicMs": 51601.93
+    },
+    {
+      "pageMonotonicMs": 23314,
+      "gapMs": 250,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.769Z",
+      "receivedMonotonicMs": 51603.05
+    },
+    {
+      "pageMonotonicMs": 23565,
+      "gapMs": 251,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.771Z",
+      "receivedMonotonicMs": 51605.96
+    },
+    {
+      "pageMonotonicMs": 23814,
+      "gapMs": 249,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.781Z",
+      "receivedMonotonicMs": 51615.26
+    },
+    {
+      "pageMonotonicMs": 24065,
+      "gapMs": 251,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.782Z",
+      "receivedMonotonicMs": 51616.48
+    },
+    {
+      "pageMonotonicMs": 24316,
+      "gapMs": 251,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.783Z",
+      "receivedMonotonicMs": 51617.16
+    },
+    {
+      "pageMonotonicMs": 24566,
+      "gapMs": 250,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.783Z",
+      "receivedMonotonicMs": 51617.79
+    },
+    {
+      "pageMonotonicMs": 24819,
+      "gapMs": 253,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.784Z",
+      "receivedMonotonicMs": 51618.33
+    },
+    {
+      "pageMonotonicMs": 25070,
+      "gapMs": 251,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.784Z",
+      "receivedMonotonicMs": 51618.76
+    },
+    {
+      "pageMonotonicMs": 25320,
+      "gapMs": 250,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.821Z",
+      "receivedMonotonicMs": 51655.58
+    },
+    {
+      "pageMonotonicMs": 25571,
+      "gapMs": 251,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.822Z",
+      "receivedMonotonicMs": 51656.04
+    },
+    {
+      "pageMonotonicMs": 25823,
+      "gapMs": 252,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.828Z",
+      "receivedMonotonicMs": 51662.9
+    },
+    {
+      "pageMonotonicMs": 26073,
+      "gapMs": 250,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.829Z",
+      "receivedMonotonicMs": 51663.9
+    },
+    {
+      "pageMonotonicMs": 26324,
+      "gapMs": 251,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.830Z",
+      "receivedMonotonicMs": 51664.72
+    },
+    {
+      "pageMonotonicMs": 26575,
+      "gapMs": 251,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.831Z",
+      "receivedMonotonicMs": 51665.22
+    },
+    {
+      "pageMonotonicMs": 26826,
+      "gapMs": 251,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.831Z",
+      "receivedMonotonicMs": 51665.67
+    },
+    {
+      "pageMonotonicMs": 27076,
+      "gapMs": 250,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.831Z",
+      "receivedMonotonicMs": 51666.01
+    },
+    {
+      "pageMonotonicMs": 27326,
+      "gapMs": 250,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.832Z",
+      "receivedMonotonicMs": 51666.35
+    },
+    {
+      "pageMonotonicMs": 27577,
+      "gapMs": 251,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.832Z",
+      "receivedMonotonicMs": 51666.68
+    },
+    {
+      "pageMonotonicMs": 27828,
+      "gapMs": 251,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.832Z",
+      "receivedMonotonicMs": 51667
+    },
+    {
+      "pageMonotonicMs": 28082,
+      "gapMs": 254,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.833Z",
+      "receivedMonotonicMs": 51667.33
+    },
+    {
+      "pageMonotonicMs": 28333,
+      "gapMs": 251,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.846Z",
+      "receivedMonotonicMs": 51680.8
+    },
+    {
+      "pageMonotonicMs": 28591,
+      "gapMs": 258,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.847Z",
+      "receivedMonotonicMs": 51681.66
+    },
+    {
+      "pageMonotonicMs": 28843,
+      "gapMs": 252,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.971Z",
+      "receivedMonotonicMs": 51805.9
+    },
+    {
+      "pageMonotonicMs": 29092,
+      "gapMs": 249,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.975Z",
+      "receivedMonotonicMs": 51810.03
+    },
+    {
+      "pageMonotonicMs": 29344,
+      "gapMs": 252,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.977Z",
+      "receivedMonotonicMs": 51811.61
+    },
+    {
+      "pageMonotonicMs": 29598,
+      "gapMs": 254,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.978Z",
+      "receivedMonotonicMs": 51812.26
+    },
+    {
+      "pageMonotonicMs": 29849,
+      "gapMs": 251,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.978Z",
+      "receivedMonotonicMs": 51813.02
+    },
+    {
+      "pageMonotonicMs": 30100,
+      "gapMs": 251,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.981Z",
+      "receivedMonotonicMs": 51815.28
+    },
+    {
+      "pageMonotonicMs": 30350,
+      "gapMs": 250,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.984Z",
+      "receivedMonotonicMs": 51818.86
+    },
+    {
+      "pageMonotonicMs": 30600,
+      "gapMs": 250,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:52.985Z",
+      "receivedMonotonicMs": 51819.47
+    },
+    {
+      "pageMonotonicMs": 30851,
+      "gapMs": 251,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:53.000Z",
+      "receivedMonotonicMs": 51834.57
+    },
+    {
+      "pageMonotonicMs": 31102,
+      "gapMs": 251,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:53.001Z",
+      "receivedMonotonicMs": 51835.27
+    },
+    {
+      "pageMonotonicMs": 31352,
+      "gapMs": 250,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:53.002Z",
+      "receivedMonotonicMs": 51836.7
+    },
+    {
+      "pageMonotonicMs": 31611,
+      "gapMs": 259,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:53.004Z",
+      "receivedMonotonicMs": 51839.01
+    },
+    {
+      "pageMonotonicMs": 31861,
+      "gapMs": 250,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:53.012Z",
+      "receivedMonotonicMs": 51846.72
+    },
+    {
+      "pageMonotonicMs": 32111,
+      "gapMs": 250,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:53.014Z",
+      "receivedMonotonicMs": 51848.17
+    },
+    {
+      "pageMonotonicMs": 32362,
+      "gapMs": 251,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:53.014Z",
+      "receivedMonotonicMs": 51848.83
+    },
+    {
+      "pageMonotonicMs": 32612,
+      "gapMs": 250,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:53.015Z",
+      "receivedMonotonicMs": 51849.41
+    },
+    {
+      "pageMonotonicMs": 32863,
+      "gapMs": 251,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:53.015Z",
+      "receivedMonotonicMs": 51849.9
+    },
+    {
+      "pageMonotonicMs": 33114,
+      "gapMs": 251,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:53.332Z",
+      "receivedMonotonicMs": 52166.29
+    },
+    {
+      "pageMonotonicMs": 33365,
+      "gapMs": 251,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:53.332Z",
+      "receivedMonotonicMs": 52166.69
+    },
+    {
+      "pageMonotonicMs": 33615,
+      "gapMs": 250,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:53.333Z",
+      "receivedMonotonicMs": 52167.11
+    },
+    {
+      "pageMonotonicMs": 33866,
+      "gapMs": 251,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:53.335Z",
+      "receivedMonotonicMs": 52169.28
+    },
+    {
+      "pageMonotonicMs": 34117,
+      "gapMs": 251,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:53.335Z",
+      "receivedMonotonicMs": 52169.82
+    },
+    {
+      "pageMonotonicMs": 34370,
+      "gapMs": 253,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:53.336Z",
+      "receivedMonotonicMs": 52170.61
+    },
+    {
+      "pageMonotonicMs": 34624,
+      "gapMs": 254,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:53.337Z",
+      "receivedMonotonicMs": 52171.14
+    },
+    {
+      "pageMonotonicMs": 34875,
+      "gapMs": 251,
+      "exportStartMs": 3358,
+      "exportEndMs": null,
+      "receivedAt": "2026-09-12T05:55:53.337Z",
+      "receivedMonotonicMs": 52172
+    },
+    {
+      "pageMonotonicMs": 35125,
+      "gapMs": 250,
+      "exportStartMs": 3358,
+      "exportEndMs": 34994,
+      "receivedAt": "2026-09-12T05:55:53.344Z",
+      "receivedMonotonicMs": 52178.04
+    }
+  ],
+  "heartbeatStats": {
+    "samples": 123,
+    "medianGapMs": 253,
+    "p95GapMs": 280,
+    "maxGapMs": 416,
+    "gapsOver500ms": 0,
+    "gapsOver1000ms": 0,
+    "gapsOver5000ms": 0
+  },
+  "status": "valid-avif",
+  "navigationStartedAt": "2026-09-12T05:55:16.993Z",
+  "pageReadyAt": "2026-09-12T05:55:18.625Z",
+  "emptyAppState": {
+    "title": "EZCrop — Free Online Image Crop & Resize Tool",
+    "imageSourcePresent": false,
+    "fileInputPresent": true,
+    "visibleText": "EZCrop\n\nCROP · RESIZE · DOWNLOAD\n\nDrop an image here\n\nor click to browse\n\nJPEG · PNG · WEBP · AVIF · GIF · BMP · TIFF (BROWSER-DEPENDENT)\n\nAll processing happens in your browser — nothing is uploaded.\n© 2026 Mark Lee - github:leemark/ezcrop"
+  },
+  "emptyAppScreenshot": "firefox-worker-only-empty-app.png",
+  "request": {
+    "status": "apply-sent",
+    "applyId": "e7afe0ad-9359-4f8d-a93d-812a28784cef",
+    "crop": {
+      "x": 15.600000000000001,
+      "y": 3.6000000000000014,
+      "width": 64.8,
+      "height": 64.8
+    },
+    "imageData": {
+      "width": 65,
+      "height": 65,
+      "bytes": 16900
+    },
+    "applyStartedAtMs": 3358
+  },
+  "exportStartedAt": "2026-09-12T05:55:20.421Z",
+  "workerOutcome": {
+    "status": "success",
+    "replyAtMs": 34981,
+    "workerElapsedMs": 31623,
+    "blobType": "image/avif",
+    "blobSize": 6473,
+    "resultWidth": 1600,
+    "resultHeight": 1600,
+    "crop": {
+      "x": 15.600000000000001,
+      "y": 3.6000000000000014,
+      "width": 64.8,
+      "height": 64.8
+    },
+    "imageData": {
+      "width": 65,
+      "height": 65
+    },
+    "applyId": "e7afe0ad-9359-4f8d-a93d-812a28784cef",
+    "applyStartedAtMs": 3358,
+    "endedAtMs": 34994
+  },
+  "download": {
+    "path": "output/playwright/repair-firefox-worker-only/firefox-worker-only-avif-1600-square.avif",
+    "bytes": 6473
+  },
+  "imageInspection": {
+    "magic": {
+      "bytes": 6473,
+      "prefixHex": "00000020667479706176696600000000617669666d696631",
+      "brand": "avif",
+      "isAvif": true
+    },
+    "metadata": {
+      "format": "heif",
+      "width": 1600,
+      "height": 1600,
+      "space": "srgb",
+      "hasAlpha": false
+    },
+    "decodeError": null,
+    "pixels": [
+      {
+        "label": "output-center",
+        "includedInCrop": true,
+        "outputPoint": {
+          "x": 800,
+          "y": 800
+        },
+        "rgba": [
+          229,
+          89,
+          40,
+          255
+        ]
+      },
+      {
+        "label": "yellow-circle-center",
+        "includedInCrop": true,
+        "outputPoint": {
+          "x": 257,
+          "y": 503
+        },
+        "rgba": [
+          244,
+          211,
+          95,
+          255
+        ]
+      },
+      {
+        "label": "blue-mountain",
+        "includedInCrop": true,
+        "outputPoint": {
+          "x": 775,
+          "y": 1342
+        },
+        "rgba": [
+          25,
+          91,
+          115,
+          255
+        ]
+      }
+    ]
+  },
+  "endMarker": {
+    "pageMonotonicMs": 34994,
+    "epochMs": 1789192552000
+  },
+  "heartbeatWindow": {
+    "startedAtMs": 3358,
+    "endedAtMs": 34994
+  },
+  "pageWorkerEvents": [],
+  "workerStillPresentAtEnd": true,
+  "finalPageWorkerEvents": [],
+  "finishedAt": "2026-09-12T05:56:05.345Z",
+  "summary": {
+    "browser": {
+      "name": "Firefox",
+      "version": "153.0",
+      "playwrightVersion": "1.62.1",
+      "headless": true
+    },
+    "workerAsset": {
+      "filename": "encode.worker-DVY8EH5y.js",
+      "url": "http://127.0.0.1:4196/ezcrop/assets/encode.worker-DVY8EH5y.js",
+      "bytes": 41887,
+      "sha256": "da938d14042bae47d85dc502b2cf4483d6e20fba4cb3025c54bf11bcab7a3868",
+      "preflight": {
+        "status": 200,
+        "contentType": "text/javascript",
+        "bytes": 41887,
+        "sha256": "da938d14042bae47d85dc502b2cf4483d6e20fba4cb3025c54bf11bcab7a3868",
+        "matchesDist": true
+      }
+    },
+    "status": "valid-avif",
+    "workerOutcome": {
+      "status": "success",
+      "workerElapsedMs": 31623,
+      "blobSize": 6473,
+      "resultWidth": 1600,
+      "resultHeight": 1600
+    },
+    "workerEvents": [
+      {
+        "event": "APPLY",
+        "at": "2026-09-12T05:55:20.364Z",
+        "messageId": "e7afe0ad-9359-4f8d-a93d-812a28784cef"
+      },
+      {
+        "event": "reply",
+        "type": "RAW",
+        "at": "2026-09-12T05:55:51.987Z",
+        "messageId": "e7afe0ad-9359-4f8d-a93d-812a28784cef",
+        "matchingId": true
+      },
+      {
+        "event": "worker-end",
+        "at": "2026-09-12T05:55:52.000Z"
+      }
+    ],
+    "heartbeatStats": {
+      "samples": 123,
+      "medianGapMs": 253,
+      "p95GapMs": 280,
+      "maxGapMs": 416,
+      "gapsOver500ms": 0,
+      "gapsOver1000ms": 0,
+      "gapsOver5000ms": 0
+    },
+    "imageMetadata": {
+      "format": "heif",
+      "width": 1600,
+      "height": 1600,
+      "space": "srgb",
+      "hasAlpha": false
+    },
+    "previewClosed": true
+  }
+}

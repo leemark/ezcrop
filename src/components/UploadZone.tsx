@@ -78,7 +78,7 @@ export function UploadZone({ onFile, loading, error }: UploadZoneProps) {
         role="button"
         tabIndex={0}
         aria-label="Upload image"
-        className={`group relative flex w-full max-w-sm cursor-pointer flex-col items-center justify-center gap-5 px-12 py-14 transition-colors hover:bg-amber-500/5 ${
+        className={`group relative flex w-full max-w-sm cursor-pointer flex-col items-center justify-center gap-5 px-12 py-14 transition-colors hover:bg-amber-500/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-700 dark:focus-visible:outline-amber-400 ${
           dragging ? "bg-amber-500/5" : ""
         }`}
       >
@@ -120,7 +120,7 @@ export function UploadZone({ onFile, loading, error }: UploadZoneProps) {
         </div>
 
         {loading ? (
-          <p aria-live="polite" className="font-mono text-xs text-zinc-400">Loading image…</p>
+          <p aria-live="polite" className="font-mono text-xs text-zinc-600 dark:text-zinc-400">Loading image…</p>
         ) : (
           <>
             <div className="text-center">
@@ -131,8 +131,8 @@ export function UploadZone({ onFile, loading, error }: UploadZoneProps) {
                 or click to browse
               </p>
             </div>
-            <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-300 dark:text-zinc-700">
-              JPEG · PNG · WebP · AVIF · GIF · BMP · TIFF
+            <p className="text-center font-mono text-[10px] uppercase tracking-widest text-zinc-600 dark:text-zinc-400">
+              JPEG · PNG · WebP · AVIF · GIF · BMP · TIFF (browser-dependent)
             </p>
           </>
         )}

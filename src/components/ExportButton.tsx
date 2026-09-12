@@ -13,7 +13,7 @@ export function ExportButton({
     <button
       onClick={onClick}
       disabled={disabled || exporting}
-      className="w-full rounded-xl bg-amber-500 px-4 py-3 font-syne text-sm font-bold tracking-wide text-white shadow-sm transition-all hover:bg-amber-600 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40 dark:hover:bg-amber-400"
+      className="w-full rounded-xl bg-amber-500 px-4 py-3 font-syne text-sm font-bold tracking-wide text-zinc-900 shadow-sm transition-all hover:bg-amber-600 active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700 disabled:cursor-not-allowed disabled:opacity-40 dark:text-zinc-900 dark:hover:bg-amber-400 dark:focus-visible:outline-amber-400"
     >
       {exporting ? (
         <span className="flex items-center justify-center gap-2">

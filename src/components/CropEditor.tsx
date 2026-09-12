@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import ReactCrop, { type PixelCrop, type PercentCrop } from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 
@@ -21,24 +21,11 @@ export function CropEditor({
   onZoomChange,
   onImageLoad,
 }: CropEditorProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [containerHeight, setContainerHeight] = useState<number | null>(null);
   const [fitToHeight, setFitToHeight] = useState(false);
-
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-    const ro = new ResizeObserver((entries) => {
-      setContainerHeight(entries[0].contentRect.height);
-    });
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, []);
 
   return (
     <div className="relative flex flex-1 flex-col items-center">
       <div
-        ref={containerRef}
         className="flex flex-1 items-center justify-center p-4"
       >
         <ReactCrop
@@ -53,8 +40,9 @@ export function CropEditor({
             onLoad={onImageLoad}
             className="block max-w-full rounded-lg"
             style={
-              fitToHeight && containerHeight
-                ? { maxHeight: containerHeight - 32 }
+              fitToHeight
+                // Reserve stable viewport space for the app header, editor toolbar, footer, and preview padding.
+                ? { maxHeight: "calc(100dvh - 180px)" }
                 : { maxHeight: "70vh" }
             }
             alt="Crop source"
@@ -83,10 +71,10 @@ export function CropEditor({
           aria-label={fitToHeight ? "Switch to fit width" : "Switch to fit height"}
           aria-pressed={fitToHeight}
           title={fitToHeight ? "Fit to width" : "Fit to height"}
-          className={`rounded p-1 transition-colors ${
+          className={`flex h-8 w-8 shrink-0 items-center justify-center rounded transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700 dark:focus-visible:outline-amber-400 ${
             fitToHeight
-              ? "text-amber-500"
-              : "text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300"
+              ? "text-amber-700 dark:text-amber-300"
+              : "text-zinc-600 hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-300"
           }`}
         >
           <svg

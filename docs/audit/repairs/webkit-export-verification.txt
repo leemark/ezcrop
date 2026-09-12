@@ -1,0 +1,52 @@
+Browser: webkit 26.5
+✖ F02: replacing an image terminates a held worker and suppresses its download (30663.514ms)
+webkit WebP: 3514ms, 1830 bytes
+✔ formats and F14: WebP signature, dimensions, pixels and transparency (16210.2245ms)
+webkit JPEG: 4600ms, 6874 bytes
+✔ formats and F14: JPEG signature, dimensions, pixels and transparency (16163.0172ms)
+webkit AVIF: 13351ms, 1144 bytes
+✔ formats and F14: AVIF signature, dimensions, pixels and transparency (23575.9883ms)
+✖ F02: stale main-thread successes and errors cannot affect a newer export (18275.8012ms)
+✔ O01: an AVIF timeout stays cancellable and offers recovery without a main-thread retry (13378.6782ms)
+✔ O01/F02: AVIF estimation runs in a worker and stops when exporting or replacing the image (14526.2595ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 5
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 168628.2469
+
+✖ failing tests:
+
+test at tests\regression.test.mjs:101:1
+✖ F02: replacing an image terminates a held worker and suppresses its download (30663.514ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at pageFor.init.window.workerCalls (file:///C:/Users/mark/Documents/EZCrop/tests/regression.test.mjs:111:12)
+      at async pageFor (file:///C:/Users/mark/Documents/EZCrop/tests/regression.test.mjs:36:68)
+      at async TestContext.<anonymous> (file:///C:/Users/mark/Documents/EZCrop/tests/regression.test.mjs:102:3)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\regression.test.mjs:265:1
+✖ F02: stale main-thread successes and errors cannot affect a newer export (18275.8012ms)
+  page.goto: Timeout 15000ms exceeded.
+  Call log:
+    - navigating to "http://127.0.0.1:5187/ezcrop/tests/harness.html", waiting until "networkidle"
+  
+      at pageFor (C:\Users\mark\Documents\EZCrop\tests\regression.test.mjs:36:20)
+      at async TestContext.<anonymous> (C:\Users\mark\Documents\EZCrop\tests\regression.test.mjs:266:3) {
+    name: 'TimeoutError',
+    log: [ '  - navigating to "http://127.0.0.1:5187/ezcrop/tests/harness.html", waiting until "networkidle"' ]
+  }
