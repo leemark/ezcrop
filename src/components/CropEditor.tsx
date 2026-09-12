@@ -10,6 +10,7 @@ interface CropEditorProps {
   onCropChange: (pixelCrop: PixelCrop, percentCrop: PercentCrop) => void;
   onZoomChange: (zoom: number) => void;
   onImageLoad: (e: React.SyntheticEvent<HTMLImageElement>) => void;
+  isFreeform?: boolean;
 }
 
 export function CropEditor({
@@ -20,6 +21,7 @@ export function CropEditor({
   onCropChange,
   onZoomChange,
   onImageLoad,
+  isFreeform = false,
 }: CropEditorProps) {
   const [fitToHeight, setFitToHeight] = useState(false);
 
@@ -50,22 +52,30 @@ export function CropEditor({
         </ReactCrop>
       </div>
       <div className="flex w-full items-center gap-3 border-t border-zinc-100 px-4 py-3 dark:border-zinc-800">
-        <label className="font-syne text-xs font-bold uppercase tracking-[0.15em] text-zinc-500 dark:text-zinc-400">
-          Zoom
-        </label>
-        <input
-          type="range"
-          min={1}
-          max={3}
-          step={0.01}
-          value={zoom}
-          aria-label="Zoom"
-          onChange={(e) => onZoomChange(Number(e.target.value))}
-          className="h-1.5 flex-1 cursor-pointer appearance-none rounded-full bg-zinc-200 dark:bg-zinc-700"
-        />
-        <span className="w-10 text-right font-mono text-xs tabular-nums text-zinc-500 dark:text-zinc-400">
-          {zoom.toFixed(1)}×
-        </span>
+        {isFreeform ? (
+          <p className="min-w-0 flex-1 text-xs text-zinc-500 dark:text-zinc-400">
+            Output matches the selected source pixels, up to 7,680 px per side. Larger crops are scaled down proportionally.
+          </p>
+        ) : (
+          <>
+            <label className="font-syne text-xs font-bold uppercase tracking-[0.15em] text-zinc-500 dark:text-zinc-400">
+              Zoom
+            </label>
+            <input
+              type="range"
+              min={1}
+              max={3}
+              step={0.01}
+              value={zoom}
+              aria-label="Zoom"
+              onChange={(e) => onZoomChange(Number(e.target.value))}
+              className="h-1.5 flex-1 cursor-pointer appearance-none rounded-full bg-zinc-200 dark:bg-zinc-700"
+            />
+            <span className="w-10 text-right font-mono text-xs tabular-nums text-zinc-500 dark:text-zinc-400">
+              {zoom.toFixed(1)}×
+            </span>
+          </>
+        )}
         <button
           onClick={() => setFitToHeight((v) => !v)}
           aria-label={fitToHeight ? "Switch to fit width" : "Switch to fit height"}

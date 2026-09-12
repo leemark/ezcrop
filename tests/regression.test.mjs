@@ -88,6 +88,47 @@ async function download(page, format = 'WebP', label = 'export') {
   return { ...decoded, bytes: bytes.length, filename: d.suggestedFilename(), elapsed: Date.now() - start };
 }
 const crop = page => page.locator('.ReactCrop__crop-selection').getAttribute('style');
+test('Freeform preserves selection, changes one edge independently, and exports source dimensions', async () => {
+  await pageFor(async page => {
+    await upload(page, 'freeform.png'); await size(page, 400, 200); await waitForCropAspect(page, 2);
+    const before = await crop(page);
+    await page.getByRole('button', { name: 'Freeform', exact: true }).click();
+    assert.equal(await crop(page), before);
+    assert.equal(await page.getByRole('button', { name: 'Freeform', exact: true }).getAttribute('aria-pressed'), 'true');
+    assert.equal(await page.getByRole('slider', { name: 'Zoom', exact: true }).count(), 0);
+    const handle = page.locator('.ReactCrop__drag-handle.ord-e'); await handle.scrollIntoViewIfNeeded();
+    const h = await handle.boundingBox();
+    await page.mouse.move(h.x + h.width / 2, h.y + h.height / 2); await page.mouse.down();
+    await page.mouse.move(h.x + h.width / 2 - 60, h.y + h.height / 2, { steps: 8 }); await page.mouse.up();
+    const source = await page.locator('.ReactCrop__crop-selection').evaluate(el => ({ width: Math.round(parseFloat(el.style.width) * 4), height: Math.round(parseFloat(el.style.height) * 2) }));
+    assert.ok(source.width < 390); assert.equal(source.height, 200);
+    await page.getByText(`${source.width}×${source.height}`, { exact: true }).waitFor();
+    const result = await download(page, 'JPEG', 'freeform');
+    assert.equal(result.width, source.width); assert.equal(result.height, source.height);
+    assert.equal(result.filename, `freeform_${source.width}x${source.height}.jpg`);
+    await page.getByRole('button', { name: 'Square Small (600×600)', exact: true }).click(); await waitForCropAspect(page, 1);
+    assert.equal(await page.getByRole('slider', { name: 'Zoom', exact: true }).isVisible(), true);
+    await page.getByText('600×600', { exact: true }).waitFor();
+    await page.getByRole('button', { name: 'Custom size', exact: true }).click(); await waitForCropAspect(page, 2);
+    assert.equal(await page.getByRole('spinbutton', { name: 'Width in pixels' }).inputValue(), '400');
+  });
+});
+
+test('Freeform caps large source selections proportionally and fits the mobile layout', async () => {
+  await pageFor(async page => {
+    await upload(page, 'wide.png', 8000, 80); await size(page, 100, 1); await waitForCropAspect(page, 100);
+    await page.getByRole('button', { name: 'Freeform', exact: true }).click();
+    await page.getByText('7680×77', { exact: true }).waitFor();
+    const result = await download(page, 'JPEG', 'freeform-large');
+    assert.equal(result.width, 7680); assert.equal(result.height, 77);
+    await page.getByRole('button', { name: 'Upload a different image', exact: true }).click();
+    await upload(page, 'mobile-freeform.png', 400, 200);
+    await page.getByRole('button', { name: 'Freeform', exact: true }).click();
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+    assert.equal(await page.getByRole('button', { name: 'Switch to fit height', exact: true }).isVisible(), true);
+    await page.screenshot({ path: path.join(output, 'freeform-mobile.png'), fullPage: true });
+  }, { mobile: true });
+});
 async function waitForCropAspect(page, aspect) {
   // Preset changes refit the selection in a React effect. Observe that visible
   // update before recording a selection for later preservation comparisons.
@@ -235,14 +276,62 @@ test('F03/F04: geometry round-trips across orientations and fractional source re
         const image = {width:w,height:h}; const baseline = createBaselineCrop(image,aspect);
         for (const zoom of [1,2,3]) { const crop = getCropAtZoom(baseline,image,zoom,{x:w*.9,y:h*.1}); rows.push({zoom,inverse:getZoomForCrop(crop,baseline),ratio:crop.width/crop.height,aspect,inside:crop.x>=0&&crop.y>=0&&crop.x+crop.width<=w+1e-6&&crop.y+crop.height<=h+1e-6}); }
       }
+      const bounds = [
+        {image:{width:1200,height:800},aspect:1},
+        {image:{width:1200,height:800},aspect:2},
+        {image:{width:1200,height:800},aspect:1.5},
+      ].map(({image,aspect}) => {
+        const baseline = createBaselineCrop(image,aspect);
+        const atMinimumZoom = getCropAtZoom(baseline,image,1);
+        return {image,aspect,baseline,atMinimumZoom,zoom:getZoomForCrop(atMinimumZoom,baseline)};
+      });
       const { getCroppedCanvas } = await import('/ezcrop/src/lib/cropUtils.ts');
       const image = document.querySelector('img[alt="Crop source"]');
       const narrow = getCroppedCanvas(image,{x:600,y:0,width:.1,height:800});
       let invalidRejected = false; try { getCroppedCanvas(image,{x:0,y:0,width:0,height:1}); } catch { invalidRejected=true; }
-      return {rows,raster:[narrow.width,narrow.height],invalidRejected};
+      return {rows,bounds,raster:[narrow.width,narrow.height],invalidRejected};
     });
     for (const row of checks.rows) { assert.ok(Math.abs(row.zoom-row.inverse)<1e-6); assert.ok(Math.abs(row.ratio-row.aspect)<1e-6); assert.equal(row.inside,true); }
+    const [fullHeight, fullWidth, matchingAspect] = checks.bounds;
+    assert.deepEqual([fullHeight.baseline.x,fullHeight.baseline.y,fullHeight.baseline.width,fullHeight.baseline.height],[200,0,800,800]);
+    assert.deepEqual([fullWidth.baseline.x,fullWidth.baseline.y,fullWidth.baseline.width,fullWidth.baseline.height],[0,100,1200,600]);
+    assert.deepEqual([matchingAspect.baseline.x,matchingAspect.baseline.y,matchingAspect.baseline.width,matchingAspect.baseline.height],[0,0,1200,800]);
+    for (const {baseline,atMinimumZoom,zoom} of checks.bounds) { assert.deepEqual(atMinimumZoom,baseline); assert.equal(zoom,1); }
     assert.deepEqual(checks.raster,[1,800]); assert.equal(checks.invalidRejected,true);
+  }, { url: devUrl });
+});
+
+test('F03: dragging a resize handle can restore matching-aspect full source bounds', async () => {
+  await pageFor(async page => {
+    await upload(page,'portrait.png',800,1200);
+    await size(page,2,3);
+    await waitForCropAspect(page,2/3);
+    const zoom=page.getByRole('slider',{name:'Zoom',exact:true});await zoom.focus();await page.keyboard.press('End');
+    const image=await page.getByAltText('Crop source').boundingBox();
+    const selection=page.locator('.ReactCrop__crop-selection');
+    const initial=await selection.boundingBox();
+    const moveX=image.x+image.width-initial.width-initial.x;
+    const moveY=image.y+image.height-initial.height-initial.y;
+    await page.mouse.move(initial.x+initial.width/2,initial.y+initial.height/2);
+    await page.mouse.down();
+    await page.mouse.move(initial.x+initial.width/2+moveX,initial.y+initial.height/2+moveY,{steps:12});
+    await page.mouse.up();
+    const bottomRight=await selection.boundingBox();
+    assert.ok(Math.abs(bottomRight.x+bottomRight.width-(image.x+image.width))<2);
+    assert.ok(Math.abs(bottomRight.y+bottomRight.height-(image.y+image.height))<2);
+
+    const handle=page.locator('.ReactCrop__drag-handle.ord-nw');
+    const handleBox=await handle.boundingBox();
+    await page.mouse.move(handleBox.x+handleBox.width/2,handleBox.y+handleBox.height/2);
+    await page.mouse.down();
+    await page.mouse.move(image.x,image.y,{steps:12});
+    await page.mouse.up();
+    await page.waitForFunction(() => Number(document.querySelector('input[aria-label="Zoom"]').value)===1);
+    const fullBounds=await selection.boundingBox();
+    assert.ok(Math.abs(fullBounds.x-image.x)<2);
+    assert.ok(Math.abs(fullBounds.y-image.y)<2);
+    assert.ok(Math.abs(fullBounds.width-image.width)<2);
+    assert.ok(Math.abs(fullBounds.height-image.height)<2);
   }, { url: devUrl });
 });
 test('F09: both native encoders reject a PNG fallback requested as WebP', async () => {

@@ -14,4 +14,5 @@ export const presets: Preset[] = [
   { id: "vert-narrow", label: "Vertical Narrow (800\u00d71920)", width: 800, height: 1920 },
 
   { id: "custom", label: "Custom", width: 800, height: 600 },
+  { id: "freeform", label: "Freeform", width: 800, height: 600 },
 ];

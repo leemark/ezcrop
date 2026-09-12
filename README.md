@@ -7,8 +7,8 @@ Crop, resize, and download one image at a time, entirely in your browser.
 ## Prepare an image
 
 1. Click the upload area or drop a file onto it. JPEG, PNG, WebP, AVIF, GIF, and BMP depend on your browser's decoder; TIFF support varies. If a file cannot be opened, try a JPEG or PNG copy.
-2. Choose a preset or enter a **Custom** output width and height. Dimensions must be whole numbers from **1 to 7,680 pixels**. The crop stays locked to that output aspect ratio; export resizes the selected area to your chosen dimensions.
-3. Drag the selection or its handles to compose the crop. Use the arrow keys to move a focused selection and the zoom slider to change its size. Moving the crop, blurring an unchanged size field, or changing only output resolution at the same aspect keeps your composition.
+2. Choose a preset, enter a **Custom** output size, or select **Freeform**. Presets and Custom keep the crop locked to the output proportions; custom dimensions must be whole numbers from **1 to 7,680 pixels**. Freeform keeps your current selection and lets you adjust each edge independently. Its output dimensions follow the selected source pixels, with proportional reduction only when a side exceeds 7,680 pixels.
+3. Drag the selection or its handles to compose the crop. Use the arrow keys to move a focused selection. Presets and Custom also provide a zoom slider: at 1× the crop can reach the full source width or height, and matching proportions allow the whole image. Freeform uses the crop handles instead of a zoom slider. Moving the crop, blurring an unchanged custom field, or changing only output resolution at the same aspect keeps your composition.
 4. Choose WebP, JPEG, or AVIF and a quality from 60–100. Start around 80–85, then compare your result. File size depends on the image, format, and settings; the preview is an estimate.
 5. Select **Export Image**. The download is named `{original-name}_{width}x{height}.{extension}`. For example: `photo_1200x630.webp`.
 

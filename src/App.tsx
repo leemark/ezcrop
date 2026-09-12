@@ -141,6 +141,7 @@ export default function App() {
           crop={cropState.crop}
           zoom={cropState.zoom}
           aspect={cropState.aspect}
+          isFreeform={cropState.isFreeform}
           onCropChange={cropState.onCropChange}
           onZoomChange={cropState.setCropForZoom}
           onImageLoad={cropState.onImageLoad}

@@ -1,0 +1,13 @@
+Browser: webkit 26.5
+✔ Freeform preserves selection, changes one edge independently, and exports source dimensions (5320.6386ms)
+✔ Freeform caps large source selections proportionally and fits the mobile layout (4196.22ms)
+✔ F03/F04: geometry round-trips across orientations and fractional source rectangles (4106.7249ms)
+✔ F03: dragging a resize handle can restore matching-aspect full source bounds (2945.6513ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 18251.5575

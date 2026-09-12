@@ -68,7 +68,15 @@ The Edge/Firefox/WebKit rows combine the complete initial scenario run with focu
 
 [Install](docs/audit/repairs/install.txt), [lint](docs/audit/repairs/lint.txt), [TypeScript/build](docs/audit/repairs/build.txt), [complete dependency audit](docs/audit/repairs/dependency-audit.json), and [340 UI checks](docs/audit/repairs/ui-verification.json) are archived alongside the browser results. Generated downloads and fuller local traces remain under ignored `output/`; the maintained suite reproduces the regression scenarios.
 
-## Publishing record
+## Follow-up: full-source bounds and Freeform
+
+User testing identified that the 90% initial baseline also limited the maximum crop after the zoom repair. The baseline now uses the full source bounds: at 1× a fixed-aspect crop reaches the full width or height, and a matching aspect can include the whole image. Regression checks cover all three cases and expansion back to the complete source with a resize handle.
+
+The requested **Freeform** mode sits beside Custom. Entering it preserves the selection, independent edge dragging changes its proportions, and the output follows the selected source dimensions. Selections larger than 7,680 pixels on either side are reduced proportionally; raster dimensions are rounded to whole pixels. Freeform hides the fixed-mode zoom slider while retaining fit controls, and switching back to presets or Custom restores their locked output behavior around the current crop center.
+
+Verification: lint and the TypeScript/production build pass; the complete Chromium suite passes **27/27**, and WebKit passes **4/4** focused Freeform/full-boundary checks. These checks include real JPEG downloads, matching output dimensions and filenames, an 8,000×80 source reduced to 7,680×77, mode switching, unchanged Custom values, and mobile layout. The mobile screenshot was visually inspected. The first new mobile test omitted the existing replacement-image action; correcting that test sequence resolved its file-input timeout without changing application behavior. [Chromium results](docs/audit/repairs/freeform-chromium.txt), [WebKit results](docs/audit/repairs/freeform-webkit.txt), and [mobile preview](docs/audit/repairs/freeform-mobile.png) preserve the follow-up evidence. Physical-device limitations below still apply.
+
+## Original audit repair publishing record
 
 The application repairs are in [commit 330353e](https://github.com/leemark/ezcrop/commit/330353e3e38b902b34b1e0c8e76edf78a95d3e6a). The released revision [b29c705](https://github.com/leemark/ezcrop/commit/b29c705267c9b55cd76b8c4aaef49197a06c860b) also corrects a test timing assumption. [GitHub Actions run 34679323184](https://github.com/leemark/ezcrop/actions/runs/34679323184) passed locked installation, lint, TypeScript/build, and **24/24 Chromium regressions**, then successfully deployed at 2026-09-12 06:55 UTC. See the archived [workflow result](docs/audit/repairs/release-workflow.json) and [CI test log](docs/audit/repairs/ci-regressions.txt).
 

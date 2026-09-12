@@ -38,7 +38,7 @@ function assertValidImageAndAspect(
 export function createBaselineCrop(
   image: ImageSize,
   aspect: number,
-  boundsFraction = 0.9,
+  boundsFraction = 1,
 ): CropArea {
   assertValidImageAndAspect(image, aspect);
   if (!isPositiveFinite(boundsFraction) || boundsFraction > 1) {
