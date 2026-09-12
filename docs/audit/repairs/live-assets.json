@@ -1,0 +1,108 @@
+{
+  "checkedAt": "2026-09-12T06:56:21.054Z",
+  "codeCommit": "330353e3e38b902b34b1e0c8e76edf78a95d3e6a",
+  "base": "https://leemark.github.io/ezcrop/",
+  "assets": [
+    {
+      "name": "avif_dec-B7YOdlSS.wasm",
+      "status": 200,
+      "contentType": "application/wasm",
+      "bytes": 1170930,
+      "sha256": "5c35dde23dfd862088a49a6b8a9fe81f9f9a1a46aaa27de7efd7baa7611c4b47",
+      "matchesLocalBuild": true
+    },
+    {
+      "name": "avif_enc-Co4TcJko.wasm",
+      "status": 200,
+      "contentType": "application/wasm",
+      "bytes": 3485872,
+      "sha256": "d9f2a95164362af48558d176e619becfd49dd97b50b86c679b47100860522b3d",
+      "matchesLocalBuild": true
+    },
+    {
+      "name": "avif_enc-DzETXbOZ.js",
+      "status": 200,
+      "contentType": "application/javascript; charset=utf-8",
+      "bytes": 19091,
+      "sha256": "2e6aebbc0d9639aafcd1526549f854eacf833e6d789772b2d2cfadd1fceb430a",
+      "matchesLocalBuild": true
+    },
+    {
+      "name": "avif_enc_mt-CotiS4tO.js",
+      "status": 200,
+      "contentType": "application/javascript; charset=utf-8",
+      "bytes": 26399,
+      "sha256": "292b3406fa1847d74855b7e21e06d995dae3614c32fe6d63b213f54c422bcd46",
+      "matchesLocalBuild": true
+    },
+    {
+      "name": "avif_enc_mt-DFoVXd45.wasm",
+      "status": 200,
+      "contentType": "application/wasm",
+      "bytes": 3534665,
+      "sha256": "202d7ec9fb7d658df7cbf17fd85d83da724ac9551818c2d5161c858353a683a4",
+      "matchesLocalBuild": true
+    },
+    {
+      "name": "avif_enc_mt-KOYYu3T_.js",
+      "status": 200,
+      "contentType": "application/javascript; charset=utf-8",
+      "bytes": 26453,
+      "sha256": "dd6db0e7b059569f1f2e01c87631405efeaf0ae03cf259c832039f1d51b7007e",
+      "matchesLocalBuild": true
+    },
+    {
+      "name": "avif_enc_mt.worker-C-5TmijJ.js",
+      "status": 200,
+      "contentType": "application/javascript; charset=utf-8",
+      "bytes": 1497,
+      "sha256": "577ba291c2c665f4496b38d46c1464c2a8ac2fa733f295e32c8f1559e6d3ad17",
+      "matchesLocalBuild": true
+    },
+    {
+      "name": "encode.worker-BYKxhH77.js",
+      "status": 200,
+      "contentType": "application/javascript; charset=utf-8",
+      "bytes": 41988,
+      "sha256": "7e0a4d15a08fab2af8e453da194cbfaf94b0a55670a8cce63d360a1d1fe5129b",
+      "matchesLocalBuild": true
+    },
+    {
+      "name": "index-BGVvrU0A.js",
+      "status": 200,
+      "contentType": "application/javascript; charset=utf-8",
+      "bytes": 19411,
+      "sha256": "c17d5bf6ccbf3035fc44964a98fa50c07a6ce172c4b5af1793fa1d990196ba51",
+      "matchesLocalBuild": true
+    },
+    {
+      "name": "index-BKVHhjtu.js",
+      "status": 200,
+      "contentType": "application/javascript; charset=utf-8",
+      "bytes": 19474,
+      "sha256": "2ef31b8e105fcd07a8d8f1b057cbcce66da039d6ed52754be6c8386776d68807",
+      "matchesLocalBuild": true
+    },
+    {
+      "name": "index-CxaF1RK3.js",
+      "status": 200,
+      "contentType": "application/javascript; charset=utf-8",
+      "bytes": 285440,
+      "sha256": "db066d88f91150861af7bd7347c53414b94ced46810a7e9cd6ebabc35bb75efb",
+      "matchesLocalBuild": true
+    },
+    {
+      "name": "index-DpMNrc5Q.css",
+      "status": 200,
+      "contentType": "text/css; charset=utf-8",
+      "bytes": 29912,
+      "sha256": "e29061573745097ada8267bf7f308f7a7ea586b7e0fe4e5fc13cf95c09f423d4",
+      "matchesLocalBuild": true
+    }
+  ],
+  "html": {
+    "status": 200,
+    "contentType": "text/html; charset=utf-8",
+    "entry": "/ezcrop/assets/index-CxaF1RK3.js"
+  }
+}

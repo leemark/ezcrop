@@ -1,0 +1,68 @@
+build	Run npm test	﻿2026-09-12T06:49:58.3645245Z ##[group]Run npm test
+build	Run npm test	2026-09-12T06:49:58.3645549Z ^[[36;1mnpm test^[[0m
+build	Run npm test	2026-09-12T06:49:58.3686757Z shell: /usr/bin/bash -e {0}
+build	Run npm test	2026-09-12T06:49:58.3687250Z ##[endgroup]
+build	Run npm test	2026-09-12T06:49:58.4736212Z 
+build	Run npm test	2026-09-12T06:49:58.4736784Z > ezcrop@0.0.0 test
+build	Run npm test	2026-09-12T06:49:58.4737339Z > node --test tests/regression.test.mjs
+build	Run npm test	2026-09-12T06:49:58.4737691Z 
+build	Run npm test	2026-09-12T06:50:01.1269702Z Browser: chromium 151.0.7922.34
+build	Run npm test	2026-09-12T06:50:02.4162944Z ✔ F01: repeated exports retain the worker connection across garbage collection (3499.513207ms)
+build	Run npm test	2026-09-12T06:50:03.5351853Z ✔ F02: replacing an image terminates a held worker and suppresses its download (1120.407454ms)
+build	Run npm test	2026-09-12T06:50:04.3614451Z ✖ F03/F04: zoom, movement, output resolution and unchanged fields preserve composition (825.025714ms)
+build	Run npm test	2026-09-12T06:50:05.5771188Z ✔ F04: invalid custom dimensions do not become output; extreme valid ratios encode (1216.974472ms)
+build	Run npm test	2026-09-12T06:50:07.0924897Z ✔ F05/F06/F12: mobile preview is stable, Custom is selected, and names do not overflow (1515.00024ms)
+build	Run npm test	2026-09-12T06:50:07.9327320Z ✔ F11: denied theme storage leaves upload and export usable (840.357583ms)
+build	Run npm test	2026-09-12T06:50:08.8652528Z chromium WebP: 164ms, 1830 bytes
+build	Run npm test	2026-09-12T06:50:08.8709617Z ✔ formats and F14: WebP signature, dimensions, pixels and transparency (938.365553ms)
+build	Run npm test	2026-09-12T06:50:09.7748736Z chromium JPEG: 140ms, 6874 bytes
+build	Run npm test	2026-09-12T06:50:09.7836520Z ✔ formats and F14: JPEG signature, dimensions, pixels and transparency (911.088944ms)
+build	Run npm test	2026-09-12T06:50:11.2122391Z chromium AVIF: 660ms, 1144 bytes
+build	Run npm test	2026-09-12T06:50:11.2200104Z ✔ formats and F14: AVIF signature, dimensions, pixels and transparency (1437.539388ms)
+build	Run npm test	2026-09-12T06:50:12.0606765Z ✔ F10: worker script failure falls back immediately (840.5743ms)
+build	Run npm test	2026-09-12T06:50:12.8689412Z ✔ F10: uncached offline AVIF explains recovery without a module URL (808.173719ms)
+build	Run npm test	2026-09-12T06:50:13.8333528Z ✔ F07: load completion order, stale errors and reset cannot replace the current image (963.573244ms)
+build	Run npm test	2026-09-12T06:50:16.7201633Z ✔ F08: clearing during debounce/encoding stays empty; latest valid estimate wins (2885.590925ms)
+build	Run npm test	2026-09-12T06:50:17.6726566Z ✔ F03/F04: geometry round-trips across orientations and fractional source rectangles (954.289107ms)
+build	Run npm test	2026-09-12T06:50:18.3197778Z ✔ F09: both native encoders reject a PNG fallback requested as WebP (646.698417ms)
+build	Run npm test	2026-09-12T06:50:19.0123507Z ✔ F06: affected text meets normal-text contrast in light theme (692.72912ms)
+build	Run npm test	2026-09-12T06:50:19.6969421Z ✔ F06: affected text meets normal-text contrast in dark theme (684.47793ms)
+build	Run npm test	2026-09-12T06:50:20.3609480Z ✔ F02: stale main-thread successes and errors cannot affect a newer export (663.560495ms)
+build	Run npm test	2026-09-12T06:50:26.9289487Z ✔ Phone photographs keep all eight EXIF orientations through export (6567.503889ms)
+build	Run npm test	2026-09-12T06:50:27.7893315Z ✔ F13: an invalid file gives guidance and a new valid image recovers (860.693926ms)
+build	Run npm test	2026-09-12T06:50:29.0435497Z ✔ F03/F04: mouse crop movement and crossing a resize edge keep the editor usable (1254.42948ms)
+build	Run npm test	2026-09-12T06:50:29.9050468Z ✔ F06: Chromium touch emulation moves the crop without changing zoom (861.393871ms)
+build	Run npm test	2026-09-12T06:50:30.7718256Z ✔ O01: an AVIF timeout stays cancellable and offers recovery without a main-thread retry (865.483503ms)
+build	Run npm test	2026-09-12T06:50:32.1758267Z ✔ O01/F02: AVIF estimation runs in a worker and stops when exporting or replacing the image (1404.994518ms)
+build	Run npm test	2026-09-12T06:50:32.2550972Z ℹ tests 24
+build	Run npm test	2026-09-12T06:50:32.2551377Z ℹ suites 0
+build	Run npm test	2026-09-12T06:50:32.2551611Z ℹ pass 23
+build	Run npm test	2026-09-12T06:50:32.2551834Z ℹ fail 1
+build	Run npm test	2026-09-12T06:50:32.2552063Z ℹ cancelled 0
+build	Run npm test	2026-09-12T06:50:32.2552316Z ℹ skipped 0
+build	Run npm test	2026-09-12T06:50:32.2552542Z ℹ todo 0
+build	Run npm test	2026-09-12T06:50:32.2552808Z ℹ duration_ms 33747.717244
+build	Run npm test	2026-09-12T06:50:32.2562303Z 
+build	Run npm test	2026-09-12T06:50:32.2562738Z ✖ failing tests:
+build	Run npm test	2026-09-12T06:50:32.2562976Z 
+build	Run npm test	2026-09-12T06:50:32.2563288Z test at tests/regression.test.mjs:122:1
+build	Run npm test	2026-09-12T06:50:32.2564578Z ✖ F03/F04: zoom, movement, output resolution and unchanged fields preserve composition (825.025714ms)
+build	Run npm test	2026-09-12T06:50:32.2566517Z   AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+build	Run npm test	2026-09-12T06:50:32.2567684Z   + actual - expected
+build	Run npm test	2026-09-12T06:50:32.2568139Z   
+build	Run npm test	2026-09-12T06:50:32.2568594Z   + 'top: 35%; left: 40.1058%; width: 20%; height: 30%;'
+build	Run npm test	2026-09-12T06:50:32.2569379Z   - 'top: 35%; left: 45.9392%; width: 8.33333%; height: 30%;'
+build	Run npm test	2026-09-12T06:50:32.2569935Z   
+build	Run npm test	2026-09-12T06:50:32.2570549Z       at file:///home/runner/work/ezcrop/ezcrop/tests/regression.test.mjs:131:146
+build	Run npm test	2026-09-12T06:50:32.2571792Z       at async pageFor (file:///home/runner/work/ezcrop/ezcrop/tests/regression.test.mjs:37:68)
+build	Run npm test	2026-09-12T06:50:32.2573041Z       at async TestContext.<anonymous> (file:///home/runner/work/ezcrop/ezcrop/tests/regression.test.mjs:123:3)
+build	Run npm test	2026-09-12T06:50:32.2574066Z       at async Test.run (node:internal/test_runner/test:1404:7)
+build	Run npm test	2026-09-12T06:50:32.2574917Z       at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+build	Run npm test	2026-09-12T06:50:32.2575636Z     generatedMessage: true,
+build	Run npm test	2026-09-12T06:50:32.2576059Z     code: 'ERR_ASSERTION',
+build	Run npm test	2026-09-12T06:50:32.2576615Z     actual: 'top: 35%; left: 40.1058%; width: 20%; height: 30%;',
+build	Run npm test	2026-09-12T06:50:32.2577366Z     expected: 'top: 35%; left: 45.9392%; width: 8.33333%; height: 30%;',
+build	Run npm test	2026-09-12T06:50:32.2577963Z     operator: 'strictEqual',
+build	Run npm test	2026-09-12T06:50:32.2578327Z     diff: 'simple'
+build	Run npm test	2026-09-12T06:50:32.2578602Z   }
+build	Run npm test	2026-09-12T06:50:32.2717043Z ##[error]Process completed with exit code 1.

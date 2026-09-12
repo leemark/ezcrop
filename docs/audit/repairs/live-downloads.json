@@ -1,0 +1,125 @@
+{
+  "checkedAt": "2026-09-12T06:57:36.088Z",
+  "source": "https://leemark.github.io/ezcrop/",
+  "browser": "Chrome 151.0.7922.176",
+  "independentDecoder": "Sharp 0.35.4",
+  "downloads": [
+    {
+      "filename": "transparent_600x600.webp",
+      "bytes": 1830,
+      "sha256": "d956babe301a3b8b90692352ea327306f55dcee78755ea1802d3159076fa7c09",
+      "width": 600,
+      "height": 600,
+      "corner": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "quadrants": [
+        [
+          222,
+          40,
+          51,
+          255
+        ],
+        [
+          39,
+          181,
+          81,
+          255
+        ],
+        [
+          40,
+          92,
+          220,
+          255
+        ],
+        [
+          240,
+          199,
+          40,
+          255
+        ]
+      ]
+    },
+    {
+      "filename": "transparent_600x600.jpg",
+      "bytes": 6874,
+      "sha256": "6a87daf22454498087141a7d8a9b2987301cefd20dbee629a18d0fd93869334f",
+      "width": 600,
+      "height": 600,
+      "corner": [
+        0,
+        0,
+        0,
+        255
+      ],
+      "quadrants": [
+        [
+          220,
+          40,
+          51,
+          255
+        ],
+        [
+          40,
+          180,
+          81,
+          255
+        ],
+        [
+          40,
+          91,
+          219,
+          255
+        ],
+        [
+          240,
+          200,
+          40,
+          255
+        ]
+      ]
+    },
+    {
+      "filename": "transparent_600x600.avif",
+      "bytes": 1144,
+      "sha256": "0444bc670c631d4d31d5d1d06397e9b4a7e2ea991187ce4f18aade909f24a362",
+      "width": 600,
+      "height": 600,
+      "corner": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "quadrants": [
+        [
+          220,
+          40,
+          51,
+          255
+        ],
+        [
+          40,
+          180,
+          81,
+          255
+        ],
+        [
+          40,
+          91,
+          219,
+          255
+        ],
+        [
+          240,
+          200,
+          40,
+          255
+        ]
+      ]
+    }
+  ]
+}

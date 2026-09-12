@@ -1,0 +1,10 @@
+Browser: chromium 151.0.7922.34
+✔ F03/F04: zoom, movement, output resolution and unchanged fields preserve composition (6594.516ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 12537.7435

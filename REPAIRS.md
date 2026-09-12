@@ -2,7 +2,7 @@
 
 This report follows the [complete audit baseline](AUDIT_AND_REPAIR_PLAN.md), which reviewed all 37 original tracked files at `f4c39b9be2f0e6da76d6e4db40f71488bc763511`. The baseline was preserved in commit `981e3f2`. There were no upstream source changes to reconcile when implementation began.
 
-Verification date: 2026-09-12 UTC. Status: repairs and local verification complete; the publishing record is added after the release workflow finishes.
+Verification date: 2026-09-12 UTC. Status: repairs implemented, verified, and published to GitHub Pages; release and live-site evidence are recorded below.
 
 ## Repairs against the audit
 
@@ -39,7 +39,7 @@ The [baseline tracked-file checklist](AUDIT_AND_REPAIR_PLAN.md#appendix-a--track
 | Layout and accessibility | Chrome and WebKit, 1280×900 and 390×844, light/dark, landscape/portrait, fit stability, long names, focus, sampled text/icon contrast and touch targets. |
 | Asynchronous failures | Forced GC, controlled old image/estimate callbacks, worker failure, held export cancellation, stale fallback completion, offline AVIF, and denied storage. |
 | Dependencies and build | Locked dependency install, full audit including development dependencies, lint, TypeScript, production assets and worker/WASM base paths. |
-| Deployment | GitHub Actions now installs the test browser and runs lint/build/regressions before its existing Pages deployment. Exact release result is recorded below after publishing. |
+| Deployment | GitHub Actions installs the test browser and runs lint/build/regressions before Pages deployment. The release passed all 24 CI scenarios; live assets and downloads were independently verified. |
 
 The maintained suite is [tests/regression.test.mjs](tests/regression.test.mjs). It starts/stops its own loopback development and production servers and uses the project's locked Playwright dependency. `npm run check` runs lint, build, and the default Chromium suite. Browser selection and setup are documented in the README. Controlled fault injection is explicitly separate from naturally occurring browser failures.
 
@@ -70,7 +70,13 @@ The Edge/Firefox/WebKit rows combine the complete initial scenario run with focu
 
 ## Publishing record
 
-The verified repair is ready for its commit and the gated GitHub Pages workflow. The exact code release, workflow outcome, and live checks are recorded here after publishing.
+The application repairs are in [commit 330353e](https://github.com/leemark/ezcrop/commit/330353e3e38b902b34b1e0c8e76edf78a95d3e6a). The released revision [b29c705](https://github.com/leemark/ezcrop/commit/b29c705267c9b55cd76b8c4aaef49197a06c860b) also corrects a test timing assumption. [GitHub Actions run 34679323184](https://github.com/leemark/ezcrop/actions/runs/34679323184) passed locked installation, lint, TypeScript/build, and **24/24 Chromium regressions**, then successfully deployed at 2026-09-12 06:55 UTC. See the archived [workflow result](docs/audit/repairs/release-workflow.json) and [CI test log](docs/audit/repairs/ci-regressions.txt).
+
+The first CI attempt passed 23 scenarios and stopped publication because the composition test captured the old narrow crop before the square preset's React effect updated the selection. The test now observes the requested crop aspect before recording its comparison state. No product code changed for this correction. The [initial failure](docs/audit/repairs/ci-initial-failure.txt), [focused local pass](docs/audit/repairs/ci-preset-verification.txt), and successful full CI run preserve the evidence.
+
+The published [EZCrop application](https://leemark.github.io/ezcrop/) was checked after deployment. Its HTML references `index-CxaF1RK3.js`; all **12 JavaScript, CSS, and WASM assets** returned HTTP 200, correct content types, and SHA-256 hashes matching the locally verified build, including `encode.worker-BYKxhH77.js` and `avif_enc-Co4TcJko.wasm`. The [asset verification](docs/audit/repairs/live-assets.json) records each file.
+
+Real Chrome downloads from the live site passed **3/3 format checks**. WebP (1,830 bytes), JPEG (6,874 bytes), and AVIF (1,144 bytes) each decoded at 600×600 with the expected filename and file signature. Independent Sharp decoding confirmed all four color regions, transparent WebP/AVIF corners, and the documented opaque black JPEG corner. See the [live browser test log](docs/audit/repairs/live-formats.txt) and [download hashes and pixel samples](docs/audit/repairs/live-downloads.json). The documentation commit that records this release does not change the verified application assets.
 
 ## Limits
 

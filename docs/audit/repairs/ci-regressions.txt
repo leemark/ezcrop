@@ -1,0 +1,44 @@
+build	Run npm test	﻿2026-09-12T06:54:45.8848103Z ##[group]Run npm test
+build	Run npm test	2026-09-12T06:54:45.8848424Z ^[[36;1mnpm test^[[0m
+build	Run npm test	2026-09-12T06:54:45.8884001Z shell: /usr/bin/bash -e {0}
+build	Run npm test	2026-09-12T06:54:45.8884469Z ##[endgroup]
+build	Run npm test	2026-09-12T06:54:46.0021196Z 
+build	Run npm test	2026-09-12T06:54:46.0021712Z > ezcrop@0.0.0 test
+build	Run npm test	2026-09-12T06:54:46.0022114Z > node --test tests/regression.test.mjs
+build	Run npm test	2026-09-12T06:54:46.0022336Z 
+build	Run npm test	2026-09-12T06:54:46.9728151Z Browser: chromium 151.0.7922.34
+build	Run npm test	2026-09-12T06:54:48.2447627Z ✔ F01: repeated exports retain the worker connection across garbage collection (1758.146336ms)
+build	Run npm test	2026-09-12T06:54:49.3185484Z ✔ F02: replacing an image terminates a held worker and suppresses its download (1074.686313ms)
+build	Run npm test	2026-09-12T06:54:50.2639605Z ✔ F03/F04: zoom, movement, output resolution and unchanged fields preserve composition (945.31415ms)
+build	Run npm test	2026-09-12T06:54:51.5076292Z ✔ F04: invalid custom dimensions do not become output; extreme valid ratios encode (1243.229321ms)
+build	Run npm test	2026-09-12T06:54:53.0215029Z ✔ F05/F06/F12: mobile preview is stable, Custom is selected, and names do not overflow (1514.062433ms)
+build	Run npm test	2026-09-12T06:54:53.8314198Z ✔ F11: denied theme storage leaves upload and export usable (809.63178ms)
+build	Run npm test	2026-09-12T06:54:54.7603280Z chromium WebP: 160ms, 1830 bytes
+build	Run npm test	2026-09-12T06:54:54.7679868Z ✔ formats and F14: WebP signature, dimensions, pixels and transparency (935.687117ms)
+build	Run npm test	2026-09-12T06:54:55.6692238Z chromium JPEG: 135ms, 6874 bytes
+build	Run npm test	2026-09-12T06:54:55.6762993Z ✔ formats and F14: JPEG signature, dimensions, pixels and transparency (909.156283ms)
+build	Run npm test	2026-09-12T06:54:57.0701358Z chromium AVIF: 601ms, 1144 bytes
+build	Run npm test	2026-09-12T06:54:57.0761682Z ✔ formats and F14: AVIF signature, dimensions, pixels and transparency (1399.505751ms)
+build	Run npm test	2026-09-12T06:54:57.9092847Z ✔ F10: worker script failure falls back immediately (832.968718ms)
+build	Run npm test	2026-09-12T06:54:58.7520903Z ✔ F10: uncached offline AVIF explains recovery without a module URL (842.23892ms)
+build	Run npm test	2026-09-12T06:54:59.7170138Z ✔ F07: load completion order, stale errors and reset cannot replace the current image (964.928255ms)
+build	Run npm test	2026-09-12T06:55:02.6020301Z ✔ F08: clearing during debounce/encoding stays empty; latest valid estimate wins (2885.467008ms)
+build	Run npm test	2026-09-12T06:55:03.5774303Z ✔ F03/F04: geometry round-trips across orientations and fractional source rectangles (974.424973ms)
+build	Run npm test	2026-09-12T06:55:04.2134068Z ✔ F09: both native encoders reject a PNG fallback requested as WebP (636.531266ms)
+build	Run npm test	2026-09-12T06:55:04.9024641Z ✔ F06: affected text meets normal-text contrast in light theme (689.300607ms)
+build	Run npm test	2026-09-12T06:55:05.5882299Z ✔ F06: affected text meets normal-text contrast in dark theme (684.93981ms)
+build	Run npm test	2026-09-12T06:55:06.2508034Z ✔ F02: stale main-thread successes and errors cannot affect a newer export (663.300087ms)
+build	Run npm test	2026-09-12T06:55:12.9641176Z ✔ Phone photographs keep all eight EXIF orientations through export (6713.281673ms)
+build	Run npm test	2026-09-12T06:55:13.7995531Z ✔ F13: an invalid file gives guidance and a new valid image recovers (835.243364ms)
+build	Run npm test	2026-09-12T06:55:15.0456617Z ✔ F03/F04: mouse crop movement and crossing a resize edge keep the editor usable (1245.963304ms)
+build	Run npm test	2026-09-12T06:55:15.9232050Z ✔ F06: Chromium touch emulation moves the crop without changing zoom (877.11808ms)
+build	Run npm test	2026-09-12T06:55:16.7901580Z ✔ O01: an AVIF timeout stays cancellable and offers recovery without a main-thread retry (867.129936ms)
+build	Run npm test	2026-09-12T06:55:18.1940611Z ✔ O01/F02: AVIF estimation runs in a worker and stops when exporting or replacing the image (1403.522282ms)
+build	Run npm test	2026-09-12T06:55:18.2712989Z ℹ tests 24
+build	Run npm test	2026-09-12T06:55:18.2713460Z ℹ suites 0
+build	Run npm test	2026-09-12T06:55:18.2713825Z ℹ pass 24
+build	Run npm test	2026-09-12T06:55:18.2714146Z ℹ fail 0
+build	Run npm test	2026-09-12T06:55:18.2714371Z ℹ cancelled 0
+build	Run npm test	2026-09-12T06:55:18.2714614Z ℹ skipped 0
+build	Run npm test	2026-09-12T06:55:18.2714826Z ℹ todo 0
+build	Run npm test	2026-09-12T06:55:18.2715085Z ℹ duration_ms 32234.610526
