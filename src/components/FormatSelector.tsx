@@ -21,10 +21,11 @@ export function FormatSelector({ format, onChange }: FormatSelectorProps) {
         {formats.map((f) => (
           <button
             key={f.value}
+            type="button"
             onClick={() => onChange(f.value)}
             title={f.hint}
             aria-pressed={format === f.value}
-            className={`flex flex-1 flex-col items-center rounded-lg py-2 transition-colors ${
+            className={`flex min-h-11 flex-1 flex-col items-center justify-center rounded-lg py-2 transition-colors ${
               format === f.value
                 ? "bg-amber-500 text-zinc-900 shadow-sm"
                 : "bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-400 dark:hover:bg-zinc-700"
@@ -34,8 +35,14 @@ export function FormatSelector({ format, onChange }: FormatSelectorProps) {
           </button>
         ))}
       </div>
+      <p className="text-xs text-zinc-600 dark:text-zinc-400" aria-live="polite">
+        Selected: {formats.find((f) => f.value === format)?.hint}.
+      </p>
       <p className="text-xs text-zinc-600 dark:text-zinc-400">
         JPEG turns transparent areas black. Choose WebP or AVIF to keep transparency.
+      </p>
+      <p className="text-xs text-zinc-600 dark:text-zinc-400">
+        Animated images export as a single still frame.
       </p>
     </div>
   );

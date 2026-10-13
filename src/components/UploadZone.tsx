@@ -47,6 +47,8 @@ export function UploadZone({ onFile, loading, error }: UploadZoneProps) {
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const file = e.target.files?.[0];
+      // Clear the native input so choosing the same file after an error retries.
+      e.currentTarget.value = "";
       if (file) onFile(file);
     },
     [onFile],
@@ -57,7 +59,7 @@ export function UploadZone({ onFile, loading, error }: UploadZoneProps) {
     : "border-zinc-300 dark:border-zinc-600 group-hover:border-amber-400 dark:group-hover:border-amber-400";
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center gap-10 p-4">
+    <div className="upload-page flex flex-col items-center justify-center gap-8 p-4">
       {/* App branding */}
       <div className="text-center">
         <h1 className="font-syne text-4xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
@@ -75,6 +77,7 @@ export function UploadZone({ onFile, loading, error }: UploadZoneProps) {
         onDragLeave={handleDragLeave}
         onClick={handleClick}
         onKeyDown={handleKeyDown}
+        id="upload-image"
         role="button"
         tabIndex={0}
         aria-label="Upload image"
@@ -138,7 +141,7 @@ export function UploadZone({ onFile, loading, error }: UploadZoneProps) {
         )}
 
         {error && (
-          <p role="alert" className="text-center text-xs text-red-500 dark:text-red-400">
+          <p role="alert" className="text-center text-xs text-red-700 dark:text-red-400">
             {error}
           </p>
         )}
@@ -146,11 +149,14 @@ export function UploadZone({ onFile, loading, error }: UploadZoneProps) {
         <input
           ref={inputRef}
           type="file"
-          accept="image/*"
+          accept="image/jpeg,image/png,image/webp,image/avif,image/gif,image/bmp,image/tiff,.jpg,.jpeg,.png,.webp,.avif,.gif,.bmp,.tif,.tiff"
           onChange={handleChange}
           className="hidden"
         />
       </div>
+      <p className="text-center font-mono text-xs text-zinc-500 dark:text-zinc-400">
+        Images stay on your device. If your phone uses HEIC, choose a JPEG or PNG copy.
+      </p>
     </div>
   );
 }

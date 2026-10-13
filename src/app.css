@@ -21,6 +21,33 @@ input[type="range"]::-webkit-slider-thumb {
   transition: transform 0.1s ease;
 }
 
+/* Keep a comfortable keyboard/touch target while drawing a compact track. */
+input[type="range"].range-control {
+  appearance: none;
+  -webkit-appearance: none;
+  height: 44px;
+  min-width: 0;
+  margin: 0;
+  background: transparent;
+}
+
+input[type="range"].range-control::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 9999px;
+  background: #e4e4e7;
+}
+
+input[type="range"].range-control::-moz-range-track {
+  height: 6px;
+  border-radius: 9999px;
+  background: #e4e4e7;
+}
+
+.dark input[type="range"].range-control::-webkit-slider-runnable-track,
+.dark input[type="range"].range-control::-moz-range-track {
+  background: #3f3f46;
+}
+
 input[type="range"]::-webkit-slider-thumb:hover {
   transform: scale(1.2);
 }
@@ -42,6 +69,58 @@ input[type="range"]::-moz-range-thumb {
 .dark input[type="range"]::-moz-range-thumb {
   border-color: #18181b;
   background: #d97706;
+}
+
+/* Desktop editor layout: the preview and settings share the viewport. */
+.editor-shell {
+  display: flex;
+  height: 100dvh;
+  min-height: 100dvh;
+  flex-direction: column;
+}
+
+.editor-header,
+.app-footer {
+  flex: 0 0 auto;
+}
+
+.editor-main {
+  display: grid;
+  min-height: 0;
+  flex: 1 1 auto;
+  grid-template-columns: minmax(0, 1fr) minmax(18rem, 20rem);
+}
+
+.crop-editor {
+  min-height: 0;
+  min-width: 0;
+}
+
+.editor-preview {
+  min-height: 0;
+  min-width: 0;
+}
+
+.crop-options {
+  display: flex;
+  height: 100%;
+  min-height: 0;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.crop-settings {
+  min-height: 0;
+  flex: 1 1 auto;
+  overflow-y: auto;
+}
+
+.export-actions {
+  flex: 0 0 auto;
+}
+
+.upload-page {
+  flex: 1 1 auto;
 }
 
 /* ReactCrop: amber accent overrides */
@@ -70,4 +149,76 @@ input:focus-visible {
 .dark [role="button"]:focus-visible,
 .dark input:focus-visible {
   outline-color: #fbbf24;
+}
+
+@media (max-width: 767px) {
+  .editor-shell {
+    height: auto;
+    min-height: 100dvh;
+    padding-bottom: calc(var(--export-actions-height, 11rem) + 1rem);
+  }
+
+  .editor-main {
+    display: flex;
+    min-height: auto;
+    flex-direction: column;
+  }
+
+  .crop-editor {
+    flex: 0 0 auto;
+  }
+
+  .zoom-controls {
+    flex-basis: 100%;
+  }
+
+  .editor-actions {
+    flex: 1 1 auto;
+  }
+
+  .editor-preview {
+    max-height: min(45dvh, 420px);
+    min-height: 180px;
+  }
+
+  .crop-options {
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+  }
+
+  .crop-settings {
+    overflow: visible;
+  }
+
+  .export-actions {
+    position: fixed;
+    z-index: 30;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    border-top: 1px solid rgb(228 228 231);
+    background: rgb(250 250 250 / 0.96);
+    padding: 0.625rem 1rem calc(0.625rem + env(safe-area-inset-bottom));
+  }
+
+  .dark .export-actions {
+    border-top-color: rgb(63 63 70);
+    background: rgb(24 24 27 / 0.96);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ReactCrop__crop-selection {
+    animation: none !important;
+    background-image: none !important;
+  }
+
+  .animate-spin,
+  input[type="range"]::-webkit-slider-thumb {
+    animation: none !important;
+    transition: none !important;
+  }
 }

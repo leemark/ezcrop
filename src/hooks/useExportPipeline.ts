@@ -9,22 +9,52 @@ import { encodeCanvas } from "../lib/encoding";
 import { assertValidOutputDimensions } from "../lib/exportValidation";
 import Pica from "pica";
 
-let picaInstance = new Pica();
+type PagePica = ReturnType<typeof Pica>;
+
+function createPagePica(): PagePica {
+  // The page-side resize path must not create Pica's implicit blob worker.
+  // WebKit can leave that worker pending when its supporting assets are not
+  // cached, which prevents the dedicated encoder worker from ever starting.
+  return new Pica({ features: ["js", "wasm"] });
+}
+
+let picaInstance = createPagePica();
 let picaUsageCount = 0;
 const PICA_RESET_INTERVAL = 5; // Reset pica every 5 exports
 const WORKER_TIMEOUT_MS = 20000;
 const AVIF_WORKER_TIMEOUT_MS = 120000;
+const IMAGE_LOAD_TIMEOUT_MS = 20000;
+const RESIZE_TIMEOUT_MS = 20000;
+const ENCODE_TIMEOUT_MS = 20000;
 const WORKER_RESET_INTERVAL = 2;
 const CANCELLED = Symbol("export cancelled");
 const AVIF_EXPORT_ERROR =
   "AVIF export couldn't finish. Reconnect and retry, or choose JPEG or WebP.";
 const AVIF_TIMEOUT_ERROR =
   "AVIF is taking too long. Try a smaller output size, or choose JPEG or WebP.";
+const PREPARATION_TIMEOUT_ERROR =
+  "Export couldn't prepare the image in time. Reconnect and retry, or choose JPEG or WebP.";
+
+export type CompletedExport = {
+  blob: Blob;
+  filename: string;
+  width: number;
+  height: number;
+  format: OutputFormat;
+  quality: number;
+};
 
 class WorkerTimeoutError extends Error {
   constructor() {
     super("Worker timed out");
     this.name = "WorkerTimeoutError";
+  }
+}
+
+class ExportPreparationTimeoutError extends Error {
+  constructor() {
+    super(PREPARATION_TIMEOUT_ERROR);
+    this.name = "ExportPreparationTimeoutError";
   }
 }
 
@@ -55,7 +85,7 @@ function supportsOffscreenCanvas(): boolean {
 function getPicaInstance() {
   picaUsageCount++;
   if (picaUsageCount >= PICA_RESET_INTERVAL) {
-    picaInstance = new Pica();
+    picaInstance = createPagePica();
     picaUsageCount = 0;
   }
   return picaInstance;
@@ -68,7 +98,11 @@ function loadImageForExport(
 ): Promise<boolean> {
   return new Promise((resolve, reject) => {
     let settled = false;
+    const timeoutId = setTimeout(() => {
+      finishError(new ExportPreparationTimeoutError());
+    }, IMAGE_LOAD_TIMEOUT_MS);
     const cleanup = () => {
+      clearTimeout(timeoutId);
       image.onload = null;
       image.onerror = null;
     };
@@ -78,24 +112,23 @@ function loadImageForExport(
       cleanup();
       resolve(complete);
     };
-
-    image.onload = () => finish(true);
-    image.onerror = () => {
+    const finishError = (error: unknown) => {
       if (settled) return;
       settled = true;
       cleanup();
-      reject(new Error("Failed to load image for export"));
+      reject(error);
+    };
+
+    image.onload = () => finish(true);
+    image.onerror = () => {
+      finishError(new Error("Failed to load image for export"));
     };
     void job.cancelled.then(() => finish(false));
 
     try {
       image.src = imageUrl;
     } catch {
-      if (!settled) {
-        settled = true;
-        cleanup();
-        reject(new Error("Failed to load image for export"));
-      }
+      finishError(new Error("Failed to load image for export"));
     }
   });
 }
@@ -103,6 +136,7 @@ function loadImageForExport(
 export function useExportPipeline() {
   const [exporting, setExporting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [lastExport, setLastExport] = useState<CompletedExport | null>(null);
   const workerRef = useRef<Worker | null>(null);
   const workerApiRef = useRef<WorkerProxy | null>(null);
   const workerUseCountRef = useRef(0);
@@ -141,6 +175,10 @@ export function useExportPipeline() {
     setExporting(false);
     setError(null);
   }, [invalidateCurrentJob]);
+
+  const clearLastExport = useCallback(() => {
+    setLastExport(null);
+  }, []);
 
   useEffect(() => {
     return () => invalidateCurrentJob();
@@ -190,6 +228,7 @@ export function useExportPipeline() {
             targetWidth,
             targetHeight,
             isCurrentJob,
+            job.cancelled,
           );
           if (resizedCanvas === CANCELLED) return false;
 
@@ -304,6 +343,7 @@ export function useExportPipeline() {
               format,
               quality,
               isCurrentJob,
+              job.cancelled,
             );
             if (result === CANCELLED || !isCurrentJob()) return false;
           }
@@ -315,6 +355,7 @@ export function useExportPipeline() {
             format,
             quality,
             isCurrentJob,
+            job.cancelled,
           );
           if (result === CANCELLED || !isCurrentJob()) return false;
         }
@@ -327,6 +368,15 @@ export function useExportPipeline() {
           format,
         );
         downloadBlob(result.blob, filename);
+        if (!isCurrentJob()) return false;
+        setLastExport({
+          blob: result.blob,
+          filename,
+          width: result.width,
+          height: result.height,
+          format,
+          quality,
+        });
         return true;
       } catch (e) {
         if (isCurrentJob()) {
@@ -344,7 +394,14 @@ export function useExportPipeline() {
     [invalidateCurrentJob, resetWorker],
   );
 
-  return { exporting, error, exportImage, cancelExport };
+  return {
+    exporting,
+    error,
+    exportImage,
+    cancelExport,
+    lastExport,
+    clearLastExport,
+  };
 }
 
 function cleanupExport(canvas: HTMLCanvasElement): void {
@@ -366,18 +423,26 @@ async function mainThreadExport(
   format: OutputFormat,
   quality: number,
   isCurrentJob: () => boolean,
+  cancelled: Promise<void>,
 ): Promise<EncodeResult | typeof CANCELLED> {
   const resizedCanvas = await resizeCanvasForExport(
     croppedCanvas,
     targetWidth,
     targetHeight,
     isCurrentJob,
+    cancelled,
   );
   if (resizedCanvas === CANCELLED) return CANCELLED;
 
   try {
     if (!isCurrentJob()) return CANCELLED;
-    const blob = await encodeCanvas(resizedCanvas, format, quality);
+    const encoded = await awaitPreparationResult(
+      encodeCanvas(resizedCanvas, format, quality),
+      ENCODE_TIMEOUT_MS,
+      cancelled,
+    );
+    if (encoded === CANCELLED) return CANCELLED;
+    const blob = encoded;
     if (!isCurrentJob()) return CANCELLED;
     return { blob, width: targetWidth, height: targetHeight };
   } finally {
@@ -390,6 +455,7 @@ async function resizeCanvasForExport(
   targetWidth: number,
   targetHeight: number,
   isCurrentJob: () => boolean,
+  cancelled: Promise<void>,
 ): Promise<HTMLCanvasElement | typeof CANCELLED> {
   assertValidOutputDimensions(targetWidth, targetHeight);
   if (!isCurrentJob()) return CANCELLED;
@@ -404,11 +470,20 @@ async function resizeCanvasForExport(
 
     if (isDownscale) {
       const pica = getPicaInstance();
-      await pica.resize(croppedCanvas, resizedCanvas, {
+      const resize = pica.resize(croppedCanvas, resizedCanvas, {
         unsharpAmount: 80,
         unsharpRadius: 0.6,
         unsharpThreshold: 2,
       });
+      const resizeResult = await awaitPreparationResult(
+        resize,
+        RESIZE_TIMEOUT_MS,
+        cancelled,
+      );
+      if (resizeResult === CANCELLED) {
+        cleanupExport(resizedCanvas);
+        return CANCELLED;
+      }
     } else {
       const ctx = resizedCanvas.getContext("2d");
       if (!ctx) throw new Error("Failed to get canvas context");
@@ -426,6 +501,34 @@ async function resizeCanvasForExport(
     cleanupExport(resizedCanvas);
     throw error;
   }
+}
+
+function awaitPreparationResult<T>(
+  request: Promise<T>,
+  timeoutMs: number,
+  cancelled: Promise<void>,
+): Promise<T | typeof CANCELLED> {
+  return new Promise((resolve, reject) => {
+    let settled = false;
+    const timeoutId = setTimeout(() => {
+      if (settled) return;
+      settled = true;
+      reject(new ExportPreparationTimeoutError());
+    }, timeoutMs);
+
+    const finish = (action: () => void) => {
+      if (settled) return;
+      settled = true;
+      clearTimeout(timeoutId);
+      action();
+    };
+
+    void cancelled.then(() => finish(() => resolve(CANCELLED)));
+    request.then(
+      (value) => finish(() => resolve(value)),
+      (reason: unknown) => finish(() => reject(reason)),
+    );
+  });
 }
 
 function awaitWorkerResult<T>(

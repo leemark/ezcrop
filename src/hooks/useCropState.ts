@@ -10,6 +10,8 @@ import {
   type ImageSize,
 } from "../lib/cropGeometry";
 
+const customPreset = presets.find((preset) => preset.id === "custom")!;
+
 function toSourceCrop(percentCrop: PercentCrop, image: ImageSize): CropArea {
   return {
     x: (percentCrop.x / 100) * image.width,
@@ -46,11 +48,15 @@ export function useCropState() {
   const [activePreset, setActivePreset] = useState<Preset>(presets[0]);
   const [customWidth, setCustomWidth] = useState(800);
   const [customHeight, setCustomHeight] = useState(600);
+  const [customDimensionsValid, setCustomDimensionsValid] = useState(true);
+  const [customAspectLocked, setCustomAspectLocked] = useState(false);
+  const [customDimensionsRevision, setCustomDimensionsRevision] = useState(0);
   const isFreeform = activePreset.id === "freeform";
   const imageRef = useRef<HTMLImageElement | null>(null);
   const baselineCropRef = useRef<CropArea | null>(null);
   const currentCropRef = useRef<CropArea | null>(null);
   const zoomRef = useRef(1);
+  const wholeImageSelectionRef = useRef(false);
 
   // Custom dimensions set their locked crop ratio; Freeform follows its source rectangle.
   const freeformCrop = isFreeform ? croppedAreaPixels : null;
@@ -142,6 +148,14 @@ export function useCropState() {
     const img = imageRef.current;
     if (!img || !img.naturalWidth || !img.naturalHeight) return;
     const image = { width: img.naturalWidth, height: img.naturalHeight };
+    if (wholeImageSelectionRef.current) {
+      const wholeImage = { x: 0, y: 0, width: image.width, height: image.height };
+      baselineCropRef.current = wholeImage;
+      zoomRef.current = 1;
+      applyCrop(wholeImage, image);
+      wholeImageSelectionRef.current = false;
+      return;
+    }
     const nextBaseline = createBaselineCrop(image, aspect ?? image.width / image.height);
     const currentCrop = currentCropRef.current;
     const center = currentCrop
@@ -169,8 +183,12 @@ export function useCropState() {
         setZoom(nextZoom);
       }
     }
+    wholeImageSelectionRef.current = false;
+    if (!(activePreset.id === "custom" && preset.id === "custom")) {
+      setCustomDimensionsValid(true);
+    }
     setActivePreset(preset);
-  }, [customHeight, customWidth, isFreeform]);
+  }, [activePreset.id, customHeight, customWidth, isFreeform]);
 
   const updateCustomDimensions = useCallback(
     (width: number, height: number) => {
@@ -181,6 +199,54 @@ export function useCropState() {
     },
     [customWidth, customHeight],
   );
+
+  const useEntireImage = useCallback(() => {
+    const image = imageDimensions;
+    if (!image) return;
+
+    const scale = Math.min(1, 7680 / Math.max(image.width, image.height));
+    const width = Math.max(1, Math.min(7680, Math.round(image.width * scale)));
+    const height = Math.max(1, Math.min(7680, Math.round(image.height * scale)));
+    const wholeImage = { x: 0, y: 0, width: image.width, height: image.height };
+
+    setCustomWidth(width);
+    setCustomHeight(height);
+    setCustomDimensionsRevision((revision) => revision + 1);
+    setCustomDimensionsValid(true);
+    setCustomAspectLocked(true);
+    setActivePreset(customPreset);
+    // The direct crop update is enough when the current aspect already matches
+    // the source. When the aspect prop changes, let the next effect preserve
+    // the full source after ReactCrop receives the new constraint.
+    wholeImageSelectionRef.current = aspect === undefined ||
+      Math.abs(aspect - width / height) > Number.EPSILON;
+    zoomRef.current = 1;
+    setZoom(1);
+    applyCrop(wholeImage, image);
+  }, [applyCrop, aspect, imageDimensions]);
+
+  const resetSelection = useCallback(() => {
+    const img = imageRef.current;
+    if (!img?.naturalWidth || !img.naturalHeight) {
+      setCustomDimensionsValid(true);
+      wholeImageSelectionRef.current = false;
+      zoomRef.current = 1;
+      setZoom(1);
+      return;
+    }
+
+    const image = { width: img.naturalWidth, height: img.naturalHeight };
+    const nextCrop = isFreeform
+      ? { x: 0, y: 0, width: image.width, height: image.height }
+      : createBaselineCrop(image, aspect ?? image.width / image.height);
+    baselineCropRef.current = nextCrop;
+    setCustomDimensionsRevision((revision) => revision + 1);
+    wholeImageSelectionRef.current = false;
+    zoomRef.current = 1;
+    setZoom(1);
+    setCustomDimensionsValid(true);
+    applyCrop(nextCrop, image);
+  }, [applyCrop, aspect, isFreeform]);
 
   const resetCrop = useCallback(() => {
     setCrop(undefined);
@@ -193,8 +259,14 @@ export function useCropState() {
     setActivePreset(presets[0]);
     setCustomWidth(800);
     setCustomHeight(600);
+    setCustomDimensionsRevision((revision) => revision + 1);
+    setCustomDimensionsValid(true);
+    setCustomAspectLocked(false);
+    wholeImageSelectionRef.current = false;
     imageRef.current = null;
   }, []);
+
+  const isOutputValid = activePreset.id !== "custom" || customDimensionsValid;
 
   return {
     crop,
@@ -209,10 +281,18 @@ export function useCropState() {
     customWidth,
     customHeight,
     updateCustomDimensions,
+    customDimensionsValid,
+    setCustomDimensionsValid,
+    customDimensionsRevision,
+    isOutputValid,
+    customAspectLocked,
+    setCustomAspectLocked,
     targetWidth,
     targetHeight,
     isFreeform,
     resetCrop,
+    useEntireImage,
+    resetSelection,
     imageDimensions,
   };
 }

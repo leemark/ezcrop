@@ -8,13 +8,13 @@ Crop, resize, and download one image at a time, entirely in your browser.
 
 1. Click the upload area or drop a file onto it. JPEG, PNG, WebP, AVIF, GIF, and BMP depend on your browser's decoder; TIFF support varies. If a file cannot be opened, try a JPEG or PNG copy.
 2. Choose a preset, enter a **Custom** output size, or select **Freeform**. Presets and Custom keep the crop locked to the output proportions; custom dimensions must be whole numbers from **1 to 7,680 pixels**. Freeform keeps your current selection and lets you adjust each edge independently. Its output dimensions follow the selected source pixels, with proportional reduction only when a side exceeds 7,680 pixels.
-3. Drag the selection or its handles to compose the crop. Use the arrow keys to move a focused selection. Presets and Custom also provide a zoom slider: at 1× the crop can reach the full source width or height, and matching proportions allow the whole image. Freeform uses the crop handles instead of a zoom slider. Moving the crop, blurring an unchanged custom field, or changing only output resolution at the same aspect keeps your composition.
+3. Drag the selection or its handles to compose the crop. Use the arrow keys to move a focused selection. **Use entire image** selects the full source, switches to Custom, and enables **Keep proportions**, so changing one output dimension calculates the other. **Reset crop** restores the current mode's initial selection. Presets and Custom provide a 1×–3× zoom slider; Freeform uses the crop handles instead. Moving the crop, blurring an unchanged custom field, or changing only output resolution at the same aspect keeps your composition.
 4. Choose WebP, JPEG, or AVIF and a quality from 60–100. Start around 80–85, then compare your result. File size depends on the image, format, and settings; the preview is an estimate.
-5. Select **Export Image**. The download is named `{original-name}_{width}x{height}.{extension}`. For example: `photo_1200x630.webp`.
+5. Select **Export Image**. Invalid Custom entries disable export until corrected. The download is named `{original-name}_{width}x{height}.{extension}`. For example: `photo_1200x630.webp`. After export, the actual file size and **Preview downloaded image** let you inspect the encoded result. Export again to compare changed settings. Some browsers can create an AVIF file but need another viewer to display it.
 
-Selecting **Upload a different image** cancels the pending export. A previous image must never download after you switch to a new one.
+You can keep editing during an export; its status identifies the dimensions, format, and quality captured when it started. Changes apply to the next export. **Cancel export** stops the job and keeps your image and crop. **Upload a different image** opens the chooser while preserving your work. Choosing a new file cancels a pending export, and the image is replaced only after the new file opens successfully. Cancelling the chooser or choosing an unreadable file preserves the current edit.
 
-The mobile editor has width/height fit modes and supports touch crop movement. Theme selection follows your system initially and is saved when browser storage is available.
+The editor fits the image within the available view by default, with a width-fit option for a larger preview. On narrow screens the Export controls stay at the bottom while settings scroll. Touch and keyboard crop movement are supported, and reduced-motion preferences stop the animated selection border. Theme selection follows your system initially and is saved when browser storage is available.
 
 ## Choosing a format
 
@@ -38,7 +38,7 @@ Keep the page open for offline work. The worker and AVIF encoder are loaded when
 
 Use a recent browser. The repair report records the exact Chrome, Edge, Firefox, and Playwright WebKit versions and scenarios tested. Automated WebKit and mobile viewport/touch emulation do not prove behavior on physical Safari/iOS or Android devices. Device-specific image formats, very large outputs, memory limits, and encoding speeds can vary.
 
-The original findings and evidence are in [the audit baseline](AUDIT_AND_REPAIR_PLAN.md); implementation and verification results are recorded in [the repair report](REPAIRS.md).
+The original findings and evidence are in [the audit baseline](AUDIT_AND_REPAIR_PLAN.md) and [the original repair report](REPAIRS.md). The October follow-up is recorded in [the UX audit](docs/UX_AUDIT_2026-10-12.md) and [the UX repair report](docs/UX_REPAIRS_2026-10-12.md).
 
 ## Development and verification
 

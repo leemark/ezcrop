@@ -18,7 +18,7 @@ export function ExportPreview({
   estimating,
 }: ExportPreviewProps) {
   return (
-    <div className="rounded-lg border border-zinc-100 bg-zinc-50 px-3 py-2.5 dark:border-zinc-700/50 dark:bg-zinc-800/40">
+    <div role="group" aria-label="Output summary" className="rounded-lg border border-zinc-100 bg-zinc-50 px-3 py-2.5 dark:border-zinc-700/50 dark:bg-zinc-800/40">
       <div className="flex items-baseline justify-between">
         <span className="font-syne text-[10px] font-bold uppercase tracking-[0.15em] text-zinc-500 dark:text-zinc-400">
           Output
@@ -36,9 +36,10 @@ export function ExportPreview({
             ? "…"
             : estimatedSize !== null
               ? `~${formatBytes(estimatedSize)}`
-              : "—"}
+              : "Unavailable"}
         </span>
       </div>
+      <p className="mt-2 text-xs leading-relaxed text-zinc-600 dark:text-zinc-400">Approximate size. The actual size and image preview appear after export.</p>
     </div>
   );
 }

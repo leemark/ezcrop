@@ -23,7 +23,7 @@ export function QualitySlider({ quality, onChange }: QualitySliderProps) {
         aria-label="Quality"
         aria-valuetext={quality + "%"}
         onChange={(e) => onChange(Number(e.target.value))}
-        className="h-1.5 w-full cursor-pointer appearance-none rounded-full bg-zinc-200 dark:bg-zinc-700"
+        className="range-control w-full cursor-pointer"
       />
       <p className="font-mono text-xs text-zinc-500 dark:text-zinc-400">
         Recommended: 80–85%

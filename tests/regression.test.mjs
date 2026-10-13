@@ -48,6 +48,7 @@ async function upload(page, name = 'quadrants.png', width = 400, height = 200, t
   }, { width, height, transparent });
   await page.locator('input[type=file]').setInputFiles({ name, mimeType: 'image/png', buffer: Buffer.from(png, 'base64') });
   await page.getByAltText('Crop source').waitFor();
+  await page.locator('header').getByText(name, { exact: true }).waitFor();
   await page.waitForFunction(() => Array.from(document.querySelectorAll('button')).some(button => button.textContent.includes('Export Image') && !button.disabled));
 }
 async function size(page, width, height) {
@@ -59,13 +60,17 @@ async function size(page, width, height) {
 async function download(page, format = 'WebP', label = 'export') {
   await page.getByRole('button', { name: format, exact: true }).click();
   const start = Date.now();
+  const pendingDownload = page.waitForEvent('download', { timeout: 60000 });
+  // Begin the new attempt before watching errors; a previous failed attempt's
+  // alert is intentionally visible until this click clears it.
+  await page.getByRole('button', { name: 'Export Image', exact: true }).click();
   const outcome = Promise.race([
-    page.waitForEvent('download', { timeout: 60000 }),
+    pendingDownload,
     page.getByRole('alert').waitFor({ timeout: 60000 }).then(async () => {
       throw new Error(`Export error: ${await page.getByRole('alert').innerText()}`);
     }),
   ]);
-  const [d] = await Promise.all([outcome, page.getByRole('button', { name: 'Export Image', exact: true }).click()]);
+  const d = await outcome;
   const bytes = await fs.readFile(await d.path());
   await fs.writeFile(path.join(output, label + '-' + d.suggestedFilename()), bytes);
   const expected = format === 'JPEG' ? bytes.subarray(0, 2).toString('hex') === 'ffd8' : format === 'WebP' ? bytes.subarray(8, 12).toString() === 'WEBP' : bytes.subarray(4, 12).toString() === 'ftypavif';
@@ -108,7 +113,7 @@ test('Freeform preserves selection, changes one edge independently, and exports 
     assert.equal(result.filename, `freeform_${source.width}x${source.height}.jpg`);
     await page.getByRole('button', { name: 'Square Small (600×600)', exact: true }).click(); await waitForCropAspect(page, 1);
     assert.equal(await page.getByRole('slider', { name: 'Zoom', exact: true }).isVisible(), true);
-    await page.getByText('600×600', { exact: true }).waitFor();
+    await page.getByRole('group', { name: 'Output summary' }).getByText('600×600', { exact: true }).waitFor();
     await page.getByRole('button', { name: 'Custom size', exact: true }).click(); await waitForCropAspect(page, 2);
     assert.equal(await page.getByRole('spinbutton', { name: 'Width in pixels' }).inputValue(), '400');
   });
@@ -125,7 +130,7 @@ test('Freeform caps large source selections proportionally and fits the mobile l
     await upload(page, 'mobile-freeform.png', 400, 200);
     await page.getByRole('button', { name: 'Freeform', exact: true }).click();
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
-    assert.equal(await page.getByRole('button', { name: 'Switch to fit height', exact: true }).isVisible(), true);
+    assert.equal(await page.getByRole('button', { name: 'Fit image to width', exact: true }).isVisible(), true);
     await page.screenshot({ path: path.join(output, 'freeform-mobile.png'), fullPage: true });
   }, { mobile: true });
 });
@@ -190,7 +195,12 @@ test('F03/F04: zoom, movement, output resolution and unchanged fields preserve c
 test('F04: invalid custom dimensions do not become output; extreme valid ratios encode', { timeout: 120000 }, async () => {
   await pageFor(async page => {
     await upload(page); await size(page, 600, 600); const width = page.getByRole('spinbutton', { name: 'Width in pixels' });
-    for (const value of ['0', '-1', '600.5', '7681', '']) { await width.fill(value); await width.blur(); assert.match(await page.getByRole('complementary', { name: 'Crop options' }).innerText(), /600×600/); }
+    for (const value of ['0', '-1', '600.5', '7681', '']) {
+      await width.fill(value);
+      assert.equal(await page.getByRole('button', { name: 'Export Image', exact: true }).isEnabled(), false);
+      await width.blur();
+      assert.match(await page.getByRole('complementary', { name: 'Crop options' }).innerText(), /600×600/);
+    }
     for (const [w, h] of [[1, 7680], [7680, 1], [1, 1]]) { await size(page, w, h); const result = await download(page, 'JPEG', `extreme-${w}-${h}`); assert.equal(result.width, w); assert.equal(result.height, h); }
   });
 });
@@ -198,7 +208,7 @@ test('F05/F06/F12: mobile preview is stable, Custom is selected, and names do no
   await pageFor(async page => {
     await upload(page, 'x'.repeat(180) + '.png', 1200, 800);
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
-    await page.getByRole('button', { name: 'Switch to fit height', exact: true }).click();
+    await page.getByRole('button', { name: 'Fit image to width', exact: true }).click();
     await page.waitForTimeout(300); const a = await page.getByAltText('Crop source').boundingBox(); await page.waitForTimeout(400); const b = await page.getByAltText('Crop source').boundingBox();
     assert.ok(a.height > 100); assert.ok(Math.abs(a.height - b.height) < 1);
     await page.getByRole('button', { name: 'Custom size', exact: true }).click(); assert.equal(await page.getByRole('button', { name: 'Custom size', exact: true }).getAttribute('aria-pressed'), 'true');
@@ -361,8 +371,11 @@ for(const theme of ['light','dark']) test(`F06: affected text meets normal-text 
     });}
     assert.ok(await contrast(page.getByText(/JPEG · PNG · WebP · AVIF · GIF · BMP/).first())>=4.5);
     assert.ok(await contrast(page.locator('footer span').first())>=4.5);
+    await page.locator('input[type=file]').setInputFiles({name:'unsupported.txt',mimeType:'text/plain',buffer:Buffer.from('not an image')});
+    await page.getByRole('alert').waitFor();
+    assert.ok(await contrast(page.getByRole('alert'))>=4.5, 'Upload errors must retain readable contrast');
     await upload(page);
-    for(const locator of [page.getByRole('button',{name:'Export Image',exact:true}),page.getByRole('button',{name:'WebP',exact:true}).locator('span'),page.getByRole('button',{name:'Square Small (600×600)',exact:true}).locator('span'),page.getByRole('button',{name:'Square Large (1600×1600)',exact:true}).locator('span'),page.getByText('Output',{exact:true}),page.getByText('Est. size',{exact:true})]) assert.ok(await contrast(locator)>=4.5);
+    for(const locator of [page.getByRole('button',{name:'Export Image',exact:true}),page.getByRole('button',{name:'WebP',exact:true}).locator('span'),page.getByRole('button',{name:'Square Small (600×600)',exact:true}).locator('span').first(),page.getByRole('button',{name:'Square Large (1600×1600)',exact:true}).locator('span').first(),page.getByText('Output',{exact:true}),page.getByText('Est. size',{exact:true})]) assert.ok(await contrast(locator)>=4.5);
   },{theme});
 });
 
@@ -459,5 +472,182 @@ test('O01/F02: AVIF estimation runs in a worker and stops when exporting or repl
   },{init:()=>{
     window.workerApplies=0;window.workerTerminations=0;
     const NativeWorker=window.Worker;window.Worker=class extends EventTarget{constructor(url,options){super();if(!String(url).includes('encode.worker'))return new NativeWorker(url,options);}postMessage(message){if(message.type==='APPLY')window.workerApplies++;}terminate(){window.workerTerminations++;}};
+  }});
+});
+
+
+test('UX01: a valid draft clicked directly into Export uses its new dimensions and exposes the actual result', async () => {
+  await pageFor(async page => {
+    await upload(page, 'draft.png', 1200, 800); await size(page, 800, 600);
+    await page.getByRole('button', {name:'JPEG',exact:true}).click();
+    const width = page.getByRole('spinbutton', {name:'Width in pixels'});
+    await width.fill('8000');
+    assert.equal(await page.getByRole('button', {name:'Export Image',exact:true}).isEnabled(), false);
+    await width.fill('720');
+    const completed = page.waitForEvent('download');
+    await page.getByRole('button', {name:'Export Image',exact:true}).click();
+    const d = await completed;
+    assert.equal(d.suggestedFilename(), 'draft_720x600.jpg');
+    const bytes = await fs.readFile(await d.path());
+    await page.getByRole('status').filter({hasText:'Download started: draft_720x600.jpg'}).waitFor();
+    assert.match(await page.getByRole('status').innerText(), new RegExp(bytes.length.toLocaleString() + ' bytes'));
+    await page.getByText('Preview downloaded image', {exact:true}).click();
+    await page.waitForFunction(() => {
+      const img = document.querySelector('img[alt="Last exported image"]');
+      return img?.naturalWidth === 720 && img.naturalHeight === 600;
+    });
+    await page.screenshot({path:path.join(output,'actual-export-preview.png'),fullPage:true});
+  });
+});
+
+test('UX02: whole-image resizing links dimensions, guards derived bounds, and resets crop without replacing the image', async () => {
+  await pageFor(async page => {
+    await upload(page, 'whole.png', 1200, 800);
+    await page.getByRole('button', {name:'Use entire image',exact:true}).click();
+    const width=page.getByRole('spinbutton',{name:'Width in pixels'});
+    const height=page.getByRole('spinbutton',{name:'Height in pixels'});
+    assert.equal(await width.inputValue(),'1200'); assert.equal(await height.inputValue(),'800');
+    assert.equal(await page.getByRole('checkbox',{name:'Keep proportions'}).isChecked(),true);
+    assert.match(await crop(page),/width: 100%;/); assert.match(await crop(page),/height: 100%;/);
+    await width.fill('720'); await width.blur();
+    assert.equal(await height.inputValue(),'480');
+    await height.fill('7680');
+    assert.equal(await width.inputValue(),'11520');
+    assert.equal(await page.getByRole('button',{name:'Export Image',exact:true}).isEnabled(),false);
+    await page.getByRole('button',{name:'Use entire image',exact:true}).click();
+    assert.equal(await width.inputValue(),'1200'); assert.equal(await height.inputValue(),'800');
+    // The same committed dimensions must also clear an invalid local draft.
+    await width.fill('0');
+    await page.getByRole('button',{name:'Use entire image',exact:true}).click();
+    assert.equal(await width.inputValue(),'1200');
+    assert.equal(await page.getByRole('button',{name:'Export Image',exact:true}).isEnabled(),true);
+    const zoom=page.getByRole('slider',{name:'Zoom',exact:true});
+    await zoom.focus(); await page.keyboard.press('End');
+    await page.getByRole('button',{name:'Reset crop',exact:true}).click();
+    assert.equal(await zoom.inputValue(),'1'); assert.match(await crop(page),/width: 100%;/);
+    await page.getByRole('button',{name:'Freeform',exact:true}).click();
+    await page.locator('.ReactCrop__drag-handle.ord-e').focus(); await page.keyboard.press('ArrowLeft');
+    assert.doesNotMatch(await crop(page),/width: 100%;/);
+    await page.getByRole('button',{name:'Reset crop',exact:true}).click();
+    assert.match(await crop(page),/width: 100%;/); assert.match(await crop(page),/height: 100%;/);
+    const result=await download(page,'JPEG','whole-reset');assert.equal(result.width,1200);assert.equal(result.height,800);
+  });
+});
+
+test('UX03: cancelling or failing a replacement keeps the image and crop; an accepted replacement receives focus', async () => {
+  await pageFor(async page => {
+    await upload(page,'keep.png',1200,800);
+    assert.equal(await page.getByRole('heading',{name:'EZCrop image editor'}).evaluate(el=>el===document.activeElement),true);
+    const zoom=page.getByRole('slider',{name:'Zoom',exact:true});await zoom.focus();await page.keyboard.press('End');
+    const selection=await crop(page);
+    const chooser=page.waitForEvent('filechooser');
+    await page.getByRole('button',{name:'Upload a different image',exact:true}).click();
+    await (await chooser).setFiles([]);
+    assert.equal(await crop(page),selection);
+    await page.locator('input[type=file]').setInputFiles({name:'broken.png',mimeType:'image/png',buffer:Buffer.from('broken')});
+    await page.getByRole('alert').filter({hasText:'Your current crop is unchanged'}).waitFor();
+    assert.equal(await crop(page),selection);
+    assert.equal(await page.locator('header').getByText('keep.png',{exact:true}).isVisible(),true);
+    assert.equal(await page.getByRole('button',{name:'Export Image',exact:true}).isEnabled(),true);
+    await upload(page,'replacement.png',600,900);
+    assert.equal(await page.getByRole('alert').count(),0);
+    assert.equal(await page.getByRole('heading',{name:'EZCrop image editor'}).evaluate(el=>el===document.activeElement),true);
+    assert.equal(await zoom.inputValue(),'1');
+  });
+});
+
+test('UX04: pending settings stay explicit and cancellation preserves composition without a stale download', async () => {
+  await pageFor(async page => {
+    const downloads=[];page.on('download',d=>downloads.push(d.suggestedFilename()));
+    await upload(page,'pending.png');await size(page,600,600);
+    const selection=await crop(page);
+    await page.getByRole('button',{name:'AVIF',exact:true}).click();
+    await page.getByRole('button',{name:'Export Image',exact:true}).click();
+    await page.getByRole('button',{name:'Cancel export',exact:true}).waitFor();
+    await page.getByRole('button',{name:'JPEG',exact:true}).click();
+    await page.getByRole('button',{name:'Square Medium (1000×1000)',exact:true}).click();
+    assert.match(await page.getByRole('status').innerText(),/Exporting 600 × 600 AVIF at 85%/);
+    assert.match(await page.getByRole('status').innerText(),/next export/);
+    await page.getByRole('button',{name:'Cancel export',exact:true}).click();
+    await page.getByRole('status').filter({hasText:'Export cancelled'}).waitFor();
+    assert.equal(await crop(page),selection);
+    assert.equal(await page.getByRole('button',{name:'Export Image',exact:true}).isEnabled(),true);
+    await page.waitForFunction(()=>document.activeElement?.textContent.includes('Export Image'));
+    await page.waitForTimeout(100);assert.deepEqual(downloads,[]);
+  },{init:()=>{
+    const NativeWorker=window.Worker;
+    window.Worker=class extends EventTarget{
+      constructor(url,options){super();if(!String(url).includes('encode.worker'))return new NativeWorker(url,options);}
+      postMessage(){} terminate(){}
+    };
+  }});
+});
+
+test('UX05: viewport fitting, mobile actions and larger controls remain reachable across narrow and short screens', async () => {
+  await pageFor(async page => {
+    await upload(page,'layout.png',800,1200);
+    for(const [width,height] of [[1440,900],[844,390],[390,844],[320,568]]) {
+      await page.setViewportSize({width,height}); await page.evaluate(()=>scrollTo(0,0));
+      await page.waitForFunction(()=>{
+        const i=document.querySelector('img[alt="Crop source"]')?.getBoundingClientRect();
+        const f=document.querySelector('.editor-preview')?.getBoundingClientRect();
+        return i&&f&&i.height<=f.height&&i.width<=f.width;
+      });
+      assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
+      const bounds=await page.evaluate(()=>{
+        const rect=selector=>{const r=document.querySelector(selector).getBoundingClientRect();return {top:r.top,bottom:r.bottom,height:r.height};};
+        return {image:rect('img[alt="Crop source"]'),toolbar:rect('.editor-toolbar'),actions:rect('.export-actions'),zoom:rect('input[aria-label="Zoom"]')};
+      });
+      assert.ok(bounds.image.top>=0 && bounds.image.bottom<=height,'Default fit keeps the image in the initial viewport');
+      assert.ok(bounds.toolbar.bottom<=height,'Crop toolbar remains visible');
+      assert.ok(bounds.actions.bottom<=height+1 && bounds.actions.top>=0,'Export stays on screen');
+      assert.ok(bounds.zoom.height>=44);
+      if(width<768){
+        await page.evaluate(()=>scrollTo(0,document.documentElement.scrollHeight));
+        assert.ok((await page.locator('.export-actions').boundingBox()).y>=0);
+      }
+      await page.screenshot({path:path.join(output,`layout-${width}x${height}.png`),fullPage:false});
+    }
+  });
+});
+
+test('UX06: keyboard edge instructions and reduced motion match the rendered controls', async () => {
+  await pageFor(async page => {
+    await page.emulateMedia({reducedMotion:'reduce'});
+    await upload(page);await page.getByRole('button',{name:'Freeform',exact:true}).click();
+    for(const selector of ['.ReactCrop__drag-handle.ord-e','.ReactCrop__drag-handle.ord-w'])assert.match(await page.locator(selector).getAttribute('aria-label'),/left and right/);
+    assert.equal(await page.locator('.ReactCrop__crop-selection').evaluate(el=>getComputedStyle(el).animationName),'none');
+    await page.getByRole('button',{name:'Use entire image',exact:true}).click();
+    await page.getByRole('button',{name:'Fit image to width',exact:true}).click();
+    const before=await crop(page);
+    await page.getByRole('button',{name:'Fit image to view',exact:true}).click();
+    assert.equal(await crop(page),before);
+    await page.setViewportSize({width:844,height:390});
+    await page.getByRole('button',{name:'Fit image to width',exact:true}).click();
+    await page.waitForFunction(()=>{
+      const image=document.querySelector('img[alt="Crop source"]').getBoundingClientRect();
+      const frame=document.querySelector('.editor-preview').getBoundingClientRect();
+      return image.top>=frame.top && image.bottom>frame.bottom;
+    });
+    await page.locator('.editor-preview').evaluate(el=>{el.scrollTop=el.scrollHeight;});
+    const reachable=await page.evaluate(()=>document.querySelector('img[alt="Crop source"]').getBoundingClientRect().bottom<=document.querySelector('.editor-preview').getBoundingClientRect().bottom);
+    assert.equal(reachable,true,'Width-fit preview can scroll all the way to the bottom');
+  });
+});
+
+test('UX07: a stalled export image decode times out with recovery and leaves the editor usable', async () => {
+  await pageFor(async page => {
+    await upload(page);await size(page,100,100);
+    await page.evaluate(()=>{window.holdExportImage=true;});
+    await page.getByRole('button',{name:'Export Image',exact:true}).click();
+    await page.getByRole('alert').filter({hasText:/prepare|time|JPEG|WebP/i}).waitFor();
+    assert.equal(await page.getByRole('button',{name:'Export Image',exact:true}).isEnabled(),true);
+    await page.evaluate(()=>{window.holdExportImage=false;});
+    assert.equal((await download(page,'JPEG','decode-timeout-recovery')).width,100);
+  },{init:()=>{
+    const NativeImage=window.Image;
+    window.Image=class extends NativeImage{set src(value){if(!window.holdExportImage)super.src=value;}get src(){return super.src;}};
+    const schedule=window.setTimeout.bind(window);
+    window.setTimeout=(handler,delay,...args)=>schedule(handler,window.holdExportImage&&delay===20000?100:delay,...args);
   }});
 });

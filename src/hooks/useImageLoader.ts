@@ -43,19 +43,17 @@ export function useImageLoader() {
   const loadFile = useCallback(
     async (file: File): Promise<boolean> => {
       const request = ++requestRef.current;
-      cleanup();
 
       if (!ACCEPTED_TYPES.includes(file.type)) {
-        setState({
-          imageUrl: null,
-          originalFile: null,
+        setState(previous => ({
+          ...previous,
           error: "This file type isn't supported. Try a JPEG, PNG, WebP, AVIF, GIF, or BMP image. TIFF support depends on your browser.",
           loading: false,
-        });
+        }));
         return false;
       }
 
-      setState({ imageUrl: null, originalFile: file, error: null, loading: true });
+      setState(previous => ({ ...previous, error: null, loading: true }));
 
       const url = URL.createObjectURL(file);
       objectUrlsRef.current.add(url);
@@ -72,23 +70,30 @@ export function useImageLoader() {
         });
 
         if (request !== requestRef.current) return false;
+        // Retain the previous image until its replacement has decoded. A failed
+        // or cancelled chooser must not destroy the current editing session.
+        for (const previousUrl of objectUrlsRef.current) {
+          if (previousUrl !== url) {
+            URL.revokeObjectURL(previousUrl);
+            objectUrlsRef.current.delete(previousUrl);
+          }
+        }
         setState({ imageUrl: url, originalFile: file, error: null, loading: false });
         return true;
       } catch (e) {
         if (objectUrlsRef.current.delete(url)) URL.revokeObjectURL(url);
         if (request !== requestRef.current) return false;
-        setState({
-          imageUrl: null,
-          originalFile: null,
+        setState(previous => ({
+          ...previous,
           error: e instanceof Error ? e.message : "Failed to load image",
           loading: false,
-        });
+        }));
         return false;
       } finally {
         if (request !== requestRef.current && objectUrlsRef.current.delete(url)) URL.revokeObjectURL(url);
       }
     },
-    [cleanup],
+    [],
   );
 
   const reset = useCallback(() => {

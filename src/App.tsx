@@ -15,6 +15,10 @@ export default function App() {
     document.documentElement.classList.contains("dark"),
   );
   const exportSessionRef = useRef(0);
+  const replacementInputRef = useRef<HTMLInputElement>(null);
+  const editorHeadingRef = useRef<HTMLHeadingElement>(null);
+  const [pendingExport, setPendingExport] = useState<string | null>(null);
+  const [exportStatus, setExportStatus] = useState("");
 
   useEffect(() => {
     if (isDark) {
@@ -34,27 +38,36 @@ export default function App() {
     }
   }, [isDark]);
 
-  const { imageUrl, originalFile, error: loadError, loading, loadFile, reset: resetImage } = useImageLoader();
+  const { imageUrl, originalFile, error: loadError, loading, loadFile } = useImageLoader();
   const cropState = useCropState();
-  const { exporting, error: exportError, cancelExport, exportImage } = useExportPipeline();
+  const { exporting, error: exportError, cancelExport, exportImage, lastExport, clearLastExport } = useExportPipeline();
+
+  useEffect(() => {
+    if (imageUrl) editorHeadingRef.current?.focus();
+  }, [imageUrl]);
 
   const handleFile = useCallback(
     async (file: File) => {
       exportSessionRef.current += 1;
       cancelExport();
-      setPhase("upload");
+      setPendingExport(null);
+      setExportStatus("");
+      if (imageUrl) setPhase("edit");
       const loaded = await loadFile(file);
       if (!loaded) return;
       cropState.resetCrop();
+      clearLastExport();
       setPhase("edit");
     },
-    [cancelExport, loadFile, cropState],
+    [cancelExport, loadFile, cropState, imageUrl, clearLastExport],
   );
 
   const handleExport = useCallback(() => {
-    if (!imageUrl || !originalFile || !cropState.croppedAreaPixels) return;
+    if (!imageUrl || !originalFile || !cropState.croppedAreaPixels || !cropState.isOutputValid || loading || exporting) return;
     const session = ++exportSessionRef.current;
     setPhase("exporting");
+    setExportStatus("");
+    setPendingExport(`Exporting ${cropState.targetWidth} × ${cropState.targetHeight} ${format.toUpperCase()} at ${quality}% quality. Changes apply to your next export.`);
     void exportImage(
       imageUrl,
       originalFile.name,
@@ -64,11 +77,18 @@ export default function App() {
       format,
       quality,
     ).then(
-      () => {
-        if (exportSessionRef.current === session) setPhase("edit");
+      (success) => {
+        if (exportSessionRef.current === session) {
+          setPhase("edit");
+          setPendingExport(null);
+          setExportStatus(success ? "Download started." : "");
+        }
       },
       () => {
-        if (exportSessionRef.current === session) setPhase("edit");
+        if (exportSessionRef.current === session) {
+          setPhase("edit");
+          setPendingExport(null);
+        }
       },
     );
   }, [
@@ -77,22 +97,25 @@ export default function App() {
     cropState.croppedAreaPixels,
     cropState.targetWidth,
     cropState.targetHeight,
+    cropState.isOutputValid,
+    loading,
+    exporting,
     format,
     quality,
     exportImage,
   ]);
 
-  const handleReset = useCallback(() => {
+  const handleCancel = useCallback(() => {
     exportSessionRef.current += 1;
     cancelExport();
-    resetImage();
-    cropState.resetCrop();
-    setPhase("upload");
-  }, [cancelExport, resetImage, cropState]);
+    setPendingExport(null);
+    setExportStatus("Export cancelled. Your crop is unchanged.");
+    setPhase("edit");
+  }, [cancelExport]);
 
   if (phase === "upload" || !imageUrl) {
     return (
-      <div className="relative min-h-screen bg-zinc-50 text-zinc-900 dark:bg-zinc-900 dark:text-zinc-100">
+      <div className="upload-page relative flex min-h-dvh flex-col bg-zinc-50 text-zinc-900 dark:bg-zinc-900 dark:text-zinc-100">
         <DarkToggle isDark={isDark} onToggle={() => setIsDark((d) => !d)} className="absolute right-4 top-4" />
         <UploadZone onFile={handleFile} loading={loading} error={loadError} />
         <Footer />
@@ -101,9 +124,9 @@ export default function App() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col bg-zinc-50 text-zinc-900 dark:bg-zinc-900 dark:text-zinc-100">
-      <header className="flex items-center justify-between gap-3 border-b border-zinc-200 px-4 py-2.5 dark:border-zinc-800">
-        <h1 className="shrink-0 font-syne text-base font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
+    <div className="editor-shell flex min-h-dvh flex-col bg-zinc-50 text-zinc-900 dark:bg-zinc-900 dark:text-zinc-100">
+      <header className="editor-header flex items-center justify-between gap-3 border-b border-zinc-200 px-4 py-2.5 dark:border-zinc-800">
+        <h1 ref={editorHeadingRef} tabIndex={-1} aria-label="EZCrop image editor" className="shrink-0 rounded font-syne text-base font-bold tracking-tight text-zinc-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-amber-700 dark:text-zinc-100">
           EZCrop
         </h1>
         <div className="flex min-w-0 flex-1 items-center justify-end gap-3">
@@ -135,7 +158,19 @@ export default function App() {
         </div>
       </header>
 
-      <main className="flex flex-1 flex-col md:flex-row">
+      <input
+        ref={replacementInputRef}
+        type="file"
+        accept="image/jpeg,image/png,image/webp,image/avif,image/gif,image/bmp,image/tiff"
+        className="hidden"
+        aria-label="Choose a replacement image"
+        onChange={event => {
+          const file = event.target.files?.[0];
+          event.target.value = "";
+          if (file) void handleFile(file);
+        }}
+      />
+      <main className="editor-main flex flex-1 flex-col md:flex-row">
         <CropEditor
           imageUrl={imageUrl}
           crop={cropState.crop}
@@ -145,6 +180,8 @@ export default function App() {
           onCropChange={cropState.onCropChange}
           onZoomChange={cropState.setCropForZoom}
           onImageLoad={cropState.onImageLoad}
+          onUseEntireImage={cropState.useEntireImage}
+          onResetSelection={cropState.resetSelection}
         />
         <Sidebar
           imageUrl={imageUrl}
@@ -152,7 +189,12 @@ export default function App() {
           onPresetSelect={cropState.selectPreset}
           customWidth={cropState.customWidth}
           customHeight={cropState.customHeight}
+          customDimensionsRevision={cropState.customDimensionsRevision}
           onCustomChange={cropState.updateCustomDimensions}
+          onCustomValidityChange={cropState.setCustomDimensionsValid}
+          isOutputValid={cropState.isOutputValid}
+          aspectLocked={cropState.customAspectLocked}
+          onAspectLockChange={cropState.setCustomAspectLocked}
           targetWidth={cropState.targetWidth}
           targetHeight={cropState.targetHeight}
           format={format}
@@ -162,8 +204,14 @@ export default function App() {
           croppedAreaPixels={cropState.croppedAreaPixels}
           exporting={exporting || phase === "exporting"}
           onExport={handleExport}
-          onReset={handleReset}
+          onReplace={() => replacementInputRef.current?.click()}
+          onCancel={handleCancel}
           exportError={exportError}
+          loadError={loadError}
+          loading={loading}
+          pendingExport={pendingExport}
+          exportStatus={exportStatus}
+          lastExport={lastExport}
         />
       </main>
 
@@ -185,7 +233,7 @@ function DarkToggle({
     <button
       onClick={onToggle}
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
-      className={`shrink-0 rounded p-1.5 text-zinc-500 transition-colors hover:bg-zinc-100 hover:text-zinc-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-200 dark:focus-visible:outline-amber-400 ${className}`}
+      className={`flex h-11 w-11 shrink-0 items-center justify-center rounded text-zinc-500 transition-colors hover:bg-zinc-100 hover:text-zinc-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-200 dark:focus-visible:outline-amber-400 ${className}`}
     >
       {isDark ? (
         <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
@@ -210,7 +258,7 @@ function DarkToggle({
 
 function Footer() {
   return (
-    <footer className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 border-t border-zinc-200 px-4 py-2 font-mono text-xs tracking-wider text-zinc-600 dark:border-zinc-800 dark:text-zinc-400">
+    <footer className="app-footer flex flex-wrap items-center justify-between gap-x-4 gap-y-1 border-t border-zinc-200 px-4 py-2 font-mono text-xs tracking-wider text-zinc-600 dark:border-zinc-800 dark:text-zinc-400">
       <span>All processing happens in your browser — nothing is uploaded.</span>
       <span>
         &copy; {new Date().getFullYear()}{" "}
