@@ -13,6 +13,7 @@ input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   width: 14px;
   height: 14px;
+  margin-top: -4px; /* Center the 14px thumb on the 6px track. */
   border-radius: 9999px;
   background: #f59e0b; /* amber-400 */
   cursor: pointer;
